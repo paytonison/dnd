@@ -1,5 +1,23 @@
 # Local macOS packaging
 
+## Installed command-line tool
+
+The Qt-free CLI can be installed separately from the desktop bundle using the configured build:
+
+```sh
+cmake --build build --target dnd-cli
+cmake --install build --component cli --prefix /chosen/install/prefix
+/chosen/install/prefix/bin/dnd-cli evaluate character.dnd.json
+```
+
+For a multi-configuration build, supply the same `--config` to the build and installation commands. The installation contains `bin/dnd-cli` (`dnd-cli.exe` on Windows), content under `share/dungeoning-a-dragon/packs`, and application/content license metadata. Move the entire prefix together. The CLI locates this data relative to its actual executable, including when invoked through `PATH` from another directory. It remains independent of Qt.
+
+An explicit final pack-directory argument to `evaluate`, `sheet`, `preview`, or `apply` always takes precedence. Only the original executable in its configured development build can fall back to checkout data. A relocated installation with absent packs or a missing saved pack version reports the missing exact version; it does not substitute checkout data or a newer installed version.
+
+The registered `installed-cli` CTest installs the CLI component, relocates the prefix, and invokes the actual executable through `PATH`. It verifies evaluation and HTML export of the preserved version-1 Wizard fixture, explicit-directory precedence, action failure without output writes, exact-version rejection, and saved-file preservation. This is separate from the macOS app ZIP workflow below.
+
+## Desktop app archive
+
 Run `./scripts/package-macos.sh` from any directory on a Mac with CMake, a C++20 toolchain, Qt 6 (including `qmake` and `macdeployqt`), Python 3.9+, and nlohmann/json. The first run also needs network access to cache the license texts from the exact Qt release's source repository. The application itself remains offline and account-free.
 
 The script builds current sources in Release mode, copies the character content packs, runs `macdeployqt`, and inspects every deployed Mach-O file. It rejects unresolved library references, non-system absolute dependency paths, and mismatched architectures; removes redundant build-machine search paths; and checks the resulting code signature. It then extracts the actual ZIP into a temporary directory outside the checkout and runs the strict character/save/reopen/PDF smoke workflow with Qt and dynamic-linker overrides unset. Both Cocoa and the matching offscreen platform plugin are bundled.

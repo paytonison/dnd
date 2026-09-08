@@ -1,0 +1,111 @@
+# Exercise the installed executable and real content resolver, with no Qt or
+# scripting runtime dependency. Each run owns this directory under its build tree.
+set(test_root "${DND_BINARY_DIR}/installed-cli-test")
+file(REMOVE_RECURSE "${test_root}")
+file(MAKE_DIRECTORY "${test_root}/working")
+set(staged "${test_root}/staged")
+set(relocated "${test_root}/relocated prefix")
+execute_process(COMMAND "${CMAKE_COMMAND}" --install "${DND_BINARY_DIR}"
+  --config "${DND_CONFIG}" --component cli --prefix "${staged}"
+  RESULT_VARIABLE install_status OUTPUT_VARIABLE install_output ERROR_VARIABLE install_error)
+if(NOT install_status EQUAL 0)
+  message(FATAL_ERROR "CLI installation failed: ${install_output}\n${install_error}")
+endif()
+file(RENAME "${staged}" "${relocated}")
+set(packs "${relocated}/share/dungeoning-a-dragon/packs")
+set(character "${test_root}/working/wizard.dnd.json")
+file(COPY_FILE "${DND_SOURCE_DIR}/tests/fixtures/srd55-v1-wizard3.json" "${character}")
+file(SHA256 "${character}" original_hash)
+if(WIN32)
+  set(path_separator ";")
+else()
+  set(path_separator ":")
+endif()
+set(invocation_path "${relocated}/bin${path_separator}$ENV{PATH}")
+
+function(run_cli expected_status)
+  execute_process(COMMAND "${CMAKE_COMMAND}" -E env "PATH=${invocation_path}"
+    "${DND_CLI_NAME}" ${ARGN}
+    WORKING_DIRECTORY "${test_root}/working"
+    RESULT_VARIABLE cli_status OUTPUT_VARIABLE cli_output ERROR_VARIABLE cli_error)
+  if(NOT cli_status EQUAL expected_status)
+    message(FATAL_ERROR "CLI ${ARGN}: expected ${expected_status}, got ${cli_status}\n${cli_output}\n${cli_error}")
+  endif()
+  set(report "${cli_output}" PARENT_SCOPE)
+endfunction()
+
+function(require_missing_pack report)
+  string(JSON complete GET "${report}" complete)
+  if(complete OR NOT report MATCHES "pack.missing")
+    message(FATAL_ERROR "Expected an incomplete exact-pack failure: ${report}")
+  endif()
+endfunction()
+
+# The preserved level-3 Wizard fixture independently expects AC 11 and 23 HP.
+# Invoking by bare filename from another working directory exercises PATH lookup.
+run_cli(0 evaluate "${character}")
+string(JSON complete GET "${report}" complete)
+if(NOT complete)
+  message(FATAL_ERROR "The relocated fixture was incomplete: ${report}")
+endif()
+string(JSON calculation_count LENGTH "${report}" calculations)
+math(EXPR last_calculation "${calculation_count} - 1")
+set(checked_armor FALSE)
+set(checked_hp FALSE)
+foreach(index RANGE ${last_calculation})
+  string(JSON id GET "${report}" calculations ${index} id)
+  string(JSON value GET "${report}" calculations ${index} effective)
+  if(id STREQUAL "armorClass" AND value EQUAL 11)
+    set(checked_armor TRUE)
+  elseif(id STREQUAL "hp.maximum" AND value EQUAL 23)
+    set(checked_hp TRUE)
+  endif()
+endforeach()
+if(NOT checked_armor OR NOT checked_hp)
+  message(FATAL_ERROR "Relocated legacy Wizard did not retain expected AC 11 and HP 23.")
+endif()
+run_cli(0 sheet "${character}" "${test_root}/working/wizard.html")
+file(READ "${test_root}/working/wizard.html" sheet)
+if(NOT sheet MATCHES "Nyra" OR NOT sheet MATCHES "1.0.0")
+  message(FATAL_ERROR "Relocated sheet omitted character or exact-version identity.")
+endif()
+
+# An explicit empty directory takes precedence over valid installed packs for
+# evaluation, sheets, and both action paths.
+file(MAKE_DIRECTORY "${test_root}/empty-packs")
+run_cli(2 evaluate "${character}" "${test_root}/empty-packs")
+require_missing_pack("${report}")
+run_cli(2 sheet "${character}" "${test_root}/working/missing.html" "${test_root}/empty-packs")
+file(READ "${test_root}/working/missing.html" sheet)
+if(NOT sheet MATCHES "Missing exact pack")
+  message(FATAL_ERROR "Explicit empty directory did not produce a sheet source failure.")
+endif()
+file(WRITE "${test_root}/working/inputs.json" "{}\n")
+run_cli(2 preview "${character}" unavailable "${test_root}/working/inputs.json" "${test_root}/empty-packs")
+if(NOT report MATCHES "command.ruleset")
+  message(FATAL_ERROR "Preview did not honor the explicit pack directory: ${report}")
+endif()
+run_cli(2 apply "${character}" unavailable "${test_root}/working/inputs.json"
+  "${test_root}/working/applied.dnd.json" "${test_root}/empty-packs")
+if(NOT report MATCHES "command.ruleset" OR EXISTS "${test_root}/working/applied.dnd.json")
+  message(FATAL_ERROR "Apply did not fail without creating a file: ${report}")
+endif()
+
+# A version 2 pack must not substitute for the requested legacy version 1 pack.
+file(RENAME "${packs}/srd55-core" "${test_root}/legacy-pack")
+run_cli(2 evaluate "${character}")
+require_missing_pack("${report}")
+file(RENAME "${test_root}/legacy-pack" "${packs}/srd55-core")
+
+# Even a fully missing installation must not recover from compiled-in checkout
+# data. An explicit directory remains usable after installation is relocated.
+file(RENAME "${packs}" "${test_root}/explicit-packs")
+run_cli(2 evaluate "${character}")
+require_missing_pack("${report}")
+run_cli(0 evaluate "${character}" "${test_root}/explicit-packs")
+run_cli(0 sheet "${character}" "${test_root}/working/explicit.html" "${test_root}/explicit-packs")
+file(SHA256 "${character}" final_hash)
+if(NOT final_hash STREQUAL original_hash)
+  message(FATAL_ERROR "CLI validation changed the saved character.")
+endif()
+message(STATUS "Relocated CLI: PATH discovery, sheet export, explicit directories, exact versions, and input preservation passed.")

@@ -44,6 +44,13 @@ void require(const Json &j, const std::string &key, Json::value_t type) {
 bool ResolvedRuleset::valid() const { return !hasErrors(messages); }
 bool Evaluation::complete() const { return !hasErrors(messages); }
 bool TransitionResult::valid() const { return !hasErrors(messages); }
+Json effectiveCampaignOptions(const CharacterDocument &document) {
+    Json options = document.campaign.is_object() ? document.campaign : Json::object();
+    if (document.choices.is_object() && document.choices.contains("options") &&
+        document.choices["options"].is_object())
+        options.update(document.choices["options"]);
+    return options;
+}
 TransitionResult executeCommand(const CharacterDocument &document, const ResolvedRuleset &ruleset,
                                 const CharacterCommand &command) {
     TransitionResult result{document, {}};

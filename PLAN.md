@@ -124,6 +124,8 @@ For each edition or publication, establish its original-source ledger and reuse 
 
 ## Validation and defaults
 
+Implementation follow-through is recorded in [the September 8 checkpoint](docs/plan-followthrough.md). It distinguishes implemented fixes and completed automated checks from the unfinished PDF regression, native acceptance, B/X continuation decision, and later lifecycle/edition work. The remaining gates below are not waived by that checkpoint.
+
 - Verify every B/X class at first level, progression boundaries, and its normal maximum level. Cover ability and eligibility thresholds, XP changes, hit-point progression, equipment restrictions, saves, attacks, and spell progression.
 - Test incomplete drafts, invalid combinations, source removal, pack conflicts, DM overrides, and deterministic recalculation.
 - Confirm that save/reopen preserves choices, rolls, advancement, source versions, and resulting statistics. Exercise interrupted saves and missing dependencies.

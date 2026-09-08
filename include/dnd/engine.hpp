@@ -167,6 +167,9 @@ Evaluation evaluate(const CharacterDocument &document, const ResolvedRuleset &ru
 TransitionResult executeCommand(const CharacterDocument &document, const ResolvedRuleset &ruleset,
                                 const CharacterCommand &command);
 CharacterDocument newCharacter(const std::string &edition, const std::string &version = "");
+// Character options override campaign defaults per key, including explicit false.
+// Retain malformed values so the edition can diagnose them without changing saved inputs.
+Json effectiveCampaignOptions(const CharacterDocument &document);
 struct MigrationResult {
     CharacterDocument document;
     std::vector<Message> messages;

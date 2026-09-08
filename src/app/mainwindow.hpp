@@ -17,7 +17,8 @@ class QWidget;
 namespace dnd {
 class MainWindow final : public QMainWindow {
 public:
-    explicit MainWindow(const QString& dataRoot = {}, QWidget* parent = nullptr);
+    explicit MainWindow(const QString& dataRoot = {}, QWidget* parent = nullptr,
+                        std::function<int(int)> rollDie = {});
     void newDocument(const std::string& edition, const std::string& moduleVersion = {});
     bool openPath(const QString& path, bool offerRecovery = true);
     bool saveTo(const QString& path);
@@ -51,6 +52,7 @@ private:
     Evaluation evaluation_;
     QString dataRoot_, userPacks_, path_, protectedOriginPath_, lastError_;
     bool dirty_ = false, advanced_ = false, inspectOnly_ = false, refreshing_ = false;
+    std::function<int(int)> rollDie_;
     QListWidget* stages_ = nullptr;
     QLabel* summary_ = nullptr;
     QLabel* stageTitle_ = nullptr;

@@ -34,19 +34,6 @@ int stat(const Evaluation &e, const std::string &id) {
         throw std::runtime_error("Required statistic unavailable: " + id);
     return value->effective.get<int>();
 }
-std::map<std::string, int> levels(const CharacterDocument &d) {
-    std::map<std::string, int> result;
-    const int total = std::clamp(number(d.choices, "/level", 1), 1, 20);
-    const auto initial = text(d.choices, "/classId");
-    for (int i = 1; i <= total; ++i) {
-        const auto id = i > 1 && d.choices.value("multiclass", false)
-                            ? text(d.choices, "/advancement/" + std::to_string(i) + "/classId")
-                            : initial;
-        if (!id.empty())
-            ++result[id];
-    }
-    return result;
-}
 const ResourceDefinition &resource(const Evaluation &e, const std::string &id) {
     const auto found = std::find_if(e.resources.begin(), e.resources.end(),
                                     [&](const auto &r) { return r.id == id; });
@@ -197,11 +184,7 @@ void linkSrd55Resources(Evaluation &e) {
 
 void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &rules,
                             Evaluation &e) {
-    const auto classLevels = levels(d);
-    const auto classLevel = [&](const std::string &id) {
-        const auto found = classLevels.find("srd55:" + id);
-        return found == classLevels.end() ? 0 : found->second;
-    };
+    const auto classLevel = [&](const std::string &id) { return profileLevel(d.choices, rules, id); };
     const bool valid = e.complete();
     const bool character = e.find("hp.maximum") != nullptr;
     if (character) {
@@ -417,11 +400,7 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
     auto &d = result.document;
     const auto &input = command.inputs;
     const auto e = dnd::evaluate(before, rules);
-    const auto classLevels = levels(before);
-    const auto level = [&](const std::string &cls) {
-        auto found = classLevels.find("srd55:" + cls);
-        return found == classLevels.end() ? 0 : found->second;
-    };
+    const auto level = [&](const std::string &cls) { return profileLevel(before.choices, rules, cls); };
     try {
         if (!e.complete())
             throw std::runtime_error("Complete the character before applying lifecycle actions.");

@@ -3,6 +3,7 @@
 #include "srd55_fixture.hpp"
 #include <QAction>
 #include <QAbstractButton>
+#include <QAbstractTextDocumentLayout>
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
@@ -20,9 +21,12 @@
 #include <QStandardPaths>
 #include <QTemporaryDir>
 #include <QTextBrowser>
+#include <QTextBlock>
+#include <QTextDocument>
 #include <QTimer>
 #include <QtTest>
 #include <algorithm>
+#include <cmath>
 #include <fstream>
 
 class DesktopWorkflow : public QObject {
@@ -62,6 +66,43 @@ private slots:
         QSettings::setDefaultFormat(QSettings::IniFormat);
         QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, settings_.path());
         QFile::remove(QString::fromStdString(dnd::autosavePath((QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/untitled.dnd.json").toStdString()).string()));
+    }
+
+    void sheetSectionHeadingStaysWithItsFirstRow() {
+        // Vary the preceding content so this exercises real Qt page boundaries,
+        // including a section whose first row contains a nested advancement table.
+        for (int rows = 1; rows <= 40; ++rows) {
+            dnd::CharacterDocument character;
+            dnd::Evaluation evaluation;
+            dnd::SheetSection preceding{"Preceding statistics", {}, {}};
+            for (int row = 0; row < rows; ++row) {
+                const auto id = "filler." + std::to_string(row);
+                evaluation.calculations.push_back({id, "Statistic " + std::to_string(row), row, row});
+                preceding.calculationIds.push_back(id);
+            }
+            evaluation.sections.push_back(preceding);
+            const auto values = dnd::Json::array({{{"level", 1}, {"hitDie", 7}, {"hpAdded", 8}},
+                                                   {{"level", 2}, {"hitDie", 5}, {"hpAdded", 6}}});
+            evaluation.calculations.push_back({"advancement", "Advancement inputs", values, values});
+            evaluation.sections.push_back({"Advancement", {"advancement"}, {}});
+            QTextDocument sheet;
+            const qreal pageHeight = 500;
+            sheet.setPageSize(QSizeF(420, pageHeight));
+            sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml(character, evaluation, {})));
+            sheet.documentLayout()->documentSize();
+            int headingPage = -1, dataPage = -1;
+            for (auto block = sheet.begin(); block.isValid(); block = block.next()) {
+                const auto text = block.text();
+                const int page = static_cast<int>(std::floor(
+                    sheet.documentLayout()->blockBoundingRect(block).top() / pageHeight));
+                if (text == "Advancement") headingPage = page;
+                else if (text == "Advancement inputs") dataPage = page;
+            }
+            QVERIFY(headingPage >= 0 && dataPage >= 0);
+            QVERIFY2(headingPage == dataPage,
+                     qPrintable(QString("Heading on page %1, data on page %2 after %3 preceding rows")
+                                    .arg(headingPage).arg(dataPage).arg(rows)));
+        }
     }
 
     void createEquipAdvanceInspectOverrideSaveReopenExport() {
@@ -140,6 +181,99 @@ private slots:
         window.setAdvanced(true);
         QVERIFY(override->isVisible());
         QCOMPARE(dnd::toJson(window.document()), before);
+    }
+
+    void bxCampaignInheritanceMatchesSettingsAndExplicitHitPointRolls() {
+        QTemporaryDir directory;
+        for(const bool explicitFalse:{false,true}) {
+            const std::vector<int> dice{1,2,6};
+            std::size_t rolled=0;
+            dnd::MainWindow window({},nullptr,[&](int sides){
+                if(sides!=8 || rolled>=dice.size())return sides;
+                return dice[rolled++];
+            });
+            prepareFighter(window);
+            auto fixture=window.document();
+            fixture.campaign={{"rerollLowFirstHp",true},{"encumbrance","detailed"}};
+            fixture.choices["options"]={{"variableWeaponDamage",true}};
+            if(explicitFalse)fixture.choices["options"]["rerollLowFirstHp"]=false;
+            fixture.choices["hp"]={2};
+            fixture.rolls["hp"]["0"]={{"sides",8},{"dice",{2}},{"result",2}};
+            const QString path=directory.path()+(explicitFalse?"/exception.json":"/inherited.json");
+            dnd::saveCharacter(path.toStdString(),fixture);
+            QVERIFY(window.openPath(path,false));
+            const bool expectedReroll=!explicitFalse;
+            const auto hasPermission=[&](){return std::any_of(window.evaluation().messages.begin(),window.evaluation().messages.end(),[](const dnd::Message& m){return m.code=="bx.hp.reroll.available";});};
+            QCOMPARE(hasPermission(),expectedReroll);
+            QCOMPARE(window.document().choices["hp"],dnd::Json::array({2}));
+            QCOMPARE(window.evaluation().find("hp.max")->normal.get<int>(),3);
+            window.setAdvanced(true);
+            auto* stages=window.findChild<QListWidget*>("builderStages");
+            QVERIFY(stages);
+            for(std::size_t i=0;i<window.evaluation().stages.size();++i)
+                if(window.evaluation().stages[i].id=="options")stages->setCurrentRow(static_cast<int>(i)+1);
+            auto* optionalReroll=window.findChild<QCheckBox*>("/options/rerollLowFirstHp");
+            auto* encumbrance=window.findChild<QComboBox*>("/options/encumbrance");
+            QVERIFY(optionalReroll && encumbrance);
+            QCOMPARE(optionalReroll->isChecked(),expectedReroll);
+            QCOMPARE(encumbrance->currentData().toString(),QString("detailed"));
+
+            QAction* campaign=nullptr;QAction* roll=nullptr;
+            for(auto* action:window.findChildren<QAction*>()) {
+                if(action->text()=="Campaign settings & presets…")campaign=action;
+                if(action->text()=="Roll hit points…")roll=action;
+            }
+            QVERIFY(campaign && roll);
+            bool dialogSeen=false,dialogChecked=false;
+            QTimer::singleShot(0,&window,[&]{
+                if(auto* dialog=window.findChild<QDialog*>("campaignSettingsDialog")) {
+                    if(auto* check=dialog->findChild<QCheckBox*>("campaignRerollLowFirstHp")){dialogSeen=true;dialogChecked=check->isChecked();}
+                    dialog->reject();
+                }
+            });
+            const auto beforeDialog=dnd::toJson(window.document());
+            campaign->trigger();
+            QVERIFY(dialogSeen);QCOMPARE(dialogChecked,expectedReroll);
+            QCOMPARE(dnd::toJson(window.document()),beforeDialog);
+            QCOMPARE(rolled,std::size_t(0));
+
+            // Explicitly clear this fixture's first-level input before exercising the actual action.
+            QVERIFY(window.setChoice("/hp",dnd::Json::array()));
+            QTimer::singleShot(0,&window,[]{
+                if(auto* question=qobject_cast<QMessageBox*>(QApplication::activeModalWidget()))question->button(QMessageBox::Yes)->click();
+            });
+            roll->trigger();
+            const auto acceptedDice=window.document().rolls;
+            const auto acceptedHp=window.document().choices["hp"];
+            QCOMPARE(acceptedHp[0].get<int>(),expectedReroll?6:1);
+            QCOMPARE(rolled,expectedReroll?std::size_t(3):std::size_t(1));
+            QCOMPARE(acceptedDice["hp"]["0"]["dice"],expectedReroll?dnd::Json::array({1,2,6}):dnd::Json::array({1}));
+
+            // Saving settings and changing visibility preserve the already accepted dice.
+            QTimer::singleShot(0,&window,[&]{
+                if(auto* dialog=window.findChild<QDialog*>("campaignSettingsDialog")) {
+                    if(auto* check=dialog->findChild<QCheckBox*>("campaignRerollLowFirstHp"))check->setChecked(!expectedReroll);
+                    dialog->accept();
+                }
+            });
+            campaign->trigger();
+            QCOMPARE(dnd::effectiveCampaignOptions(window.document())["rerollLowFirstHp"],dnd::Json(!expectedReroll));
+            window.setAdvanced(false);window.setAdvanced(true);
+            QCOMPARE(window.document().rolls,acceptedDice);
+            QCOMPARE(window.document().choices["hp"],acceptedHp);
+            QTimer::singleShot(0,&window,[]{
+                if(auto* question=qobject_cast<QMessageBox*>(QApplication::activeModalWidget()))question->button(QMessageBox::Yes)->click();
+            });
+            roll->trigger();
+            QCOMPARE(window.document().rolls,acceptedDice);
+            QCOMPARE(rolled,expectedReroll?std::size_t(3):std::size_t(1));
+            QVERIFY(window.saveTo(path));
+            const auto saved=dnd::toJson(window.document());
+            const auto evaluation=dnd::toJson(window.evaluation());
+            QVERIFY(window.openPath(path,false));
+            QCOMPARE(dnd::toJson(window.document()),saved);
+            QCOMPARE(dnd::toJson(window.evaluation()),evaluation);
+        }
     }
 
     void unsupportedVersionAndMissingSourcesPreserveOriginal() {

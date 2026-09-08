@@ -55,7 +55,7 @@ TEST_CASE("Original B/X all seven classes at every supported level", "[bx][accep
         INFO(toJson(e)["messages"].dump());REQUIRE(e.complete());
         CHECK(value(e,"level")==level);CHECK(value(e,"xp.minimum")==thresholds[index]);
         CHECK(value(e,"hp.max")==3*std::min(level,9)+fixed.at(cls)*std::max(0,level-9));
-        if(index+1<thresholds.size())CHECK(value(e,"xp.next")==thresholds[index+1]);else CHECK(value(e,"xp.next")=="Class limit");
+        if(index+1<thresholds.size())CHECK(value(e,"xp.next")==thresholds[index+1]);else CHECK(value(e,"xp.next")==((cls=="dwarf" || cls=="elf" || cls=="halfling")?"Class limit":"Printed-table coverage limit"));
         if(cls=="cleric")CHECK(value(e,"spells.slots")==Json(clericSpells[index]));
         if(cls=="magic-user" || cls=="elf")CHECK(value(e,"spells.slots")==Json(muSpells[index]));
         for(const auto& calculation:e.calculations){CHECK_FALSE(calculation.steps.empty());CHECK_FALSE(calculation.sources.empty());}
@@ -72,6 +72,76 @@ TEST_CASE("B/X class limits and HP boundaries are enforced", "[bx][acceptance]")
     d=character("dwarf",12);d.choices["abilities"]["con"]=18;e=run(d);CHECK(value(e,"hp.max")==54); // 9*(2+3) + 3*3.
     d.resources["hp"]=4;CHECK(value(run(d),"hp.max")==54);CHECK(value(run(d),"hp.current")==4);
     d.choices["hp"].erase(0);CHECK(has(run(d),"bx.hp.roll"));
+}
+TEST_CASE("B/X human printed-table coverage is distinct from the original maximum", "[bx][acceptance]") {
+    for(const auto& cls:{"cleric","fighter","magic-user","thief"}) {
+        CAPTURE(cls);
+        auto d=character(cls,14);auto e=run(d);
+        REQUIRE(e.complete());
+        CHECK(value(e,"xp.next")=="Printed-table coverage limit");
+        CHECK(e.find("level")->steps.front().find("not the human class maximum")!=std::string::npos);
+        for(const int level:{15,36}) {
+            d.choices["level"]=level;
+            const auto before=toJson(d);e=run(d);
+            CHECK_FALSE(e.complete());
+            CHECK(has(e,"bx.level.continuationUnsupported"));
+            CHECK(toJson(d)==before);
+        }
+    }
+}
+TEST_CASE("B/X invalid memorization slots remain actionable saved inputs", "[bx][spells][regression]") {
+    auto d=character("magic-user");
+    for(const Json invalid:{Json(123),Json(false),Json(nullptr),Json::object(),Json::array()}) {
+        CAPTURE(invalid);
+        d.choices["prepared"]={{"1",Json::array({invalid})}};
+        const auto before=toJson(d);const auto e=run(d);
+        CHECK_FALSE(e.complete());
+        const auto problem=std::find_if(e.messages.begin(),e.messages.end(),[](const Message& m){return m.code=="bx.spells.preparedValue";});
+        REQUIRE(problem!=e.messages.end());
+        CHECK(problem->path=="/choices/prepared/1/0");
+        CHECK(problem->text.find("retained for correction")!=std::string::npos);
+        CHECK(value(e,"spells.prepared")["1"][0]!="Unmemorized");
+        CHECK(toJson(d)==before);
+        const auto reopened=documentFromJson(before);
+        CHECK(reopened.choices["prepared"]["1"][0]==invalid);
+        CHECK(toJson(run(reopened))==toJson(e));
+    }
+    d.choices["prepared"]={{"1",Json::array({""})}};
+    CHECK(run(d).complete());
+    CHECK(value(run(d),"spells.prepared")["1"][0]=="Unmemorized");
+    d.choices["prepared"]=Json::object();
+    CHECK(run(d).complete());
+}
+TEST_CASE("B/X campaign settings inherit per key and never reprocess accepted dice", "[bx][campaign][regression]") {
+    auto d=character();
+    d.campaign={{"rerollLowFirstHp",true},{"variableWeaponDamage",true},{"individualInitiative",true},{"encumbrance","detailed"}};
+    d.choices["options"]={{"expertWeaponRules",false}};
+    d.rolls["hp"]["0"]={{"sides",8},{"dice",{2}},{"result",2}};
+    const auto before=toJson(d);auto e=run(d);
+    REQUIRE(e.complete());
+    CHECK(has(e,"bx.hp.reroll.available"));
+    CHECK(value(e,"weapon.damage")=="1d8");
+    CHECK(value(e,"hp.max")==3); // Accepted 2 + Constitution 1; permission does not reroll.
+    CHECK(effectiveCampaignOptions(d)["encumbrance"]=="detailed");
+    CHECK(effectiveCampaignOptions(d)["expertWeaponRules"]==false);
+    CHECK(toJson(d)==before);
+    d.choices["options"]["rerollLowFirstHp"]=false;
+    d.choices["options"]["variableWeaponDamage"]=false;
+    e=run(d);
+    REQUIRE(e.complete());
+    CHECK_FALSE(has(e,"bx.hp.reroll.available"));
+    CHECK(value(e,"weapon.damage")=="1d6");
+    CHECK(effectiveCampaignOptions(d)["individualInitiative"]==true);
+    CHECK(value(e,"hp.max")==3);
+    const auto reopened=documentFromJson(toJson(d));
+    CHECK(reopened.rolls==before["rolls"]);
+    CHECK(reopened.choices["hp"]==before["choices"]["hp"]);
+    CHECK(toJson(run(reopened))==toJson(e));
+    d.choices["options"]["rerollLowFirstHp"]=nullptr;
+    CHECK(effectiveCampaignOptions(d)["rerollLowFirstHp"].is_null());
+    e=run(d);
+    CHECK_FALSE(e.complete());
+    CHECK(std::any_of(e.messages.begin(),e.messages.end(),[](const Message& m){return m.code=="bx.option.type" && m.path=="/choices/options/rerollLowFirstHp";}));
 }
 TEST_CASE("B13 Morgan Ironwolf worked example", "[bx][acceptance]") {
     auto d=character();d.name="Morgan Ironwolf";
@@ -185,7 +255,7 @@ TEST_CASE("B/X supplemental content uses supported mechanics and exact source pu
     dagger["id"]="house:ceremonial-dagger";dagger["name"]="Ceremonial dagger";dagger["cost"]=10;pack.entries.push_back(dagger);
     d.choices["weapon"]="house:ceremonial-dagger";
     auto e=evaluate(d,resolveRuleset(d,{pack}));INFO(toJson(e)["messages"].dump());CHECK(e.complete());CHECK(value(e,"money.spent")==10);
-    auto* attack=e.find("attack.melee");REQUIRE(attack);REQUIRE(attack->sources.size()==2);CHECK(attack->sources[0].page=="B7");CHECK(attack->sources[0].publication.find("Basic")!=std::string::npos);CHECK(attack->sources[1].page=="X26");CHECK(attack->sources[1].publication.find("Expert")!=std::string::npos);
+    auto* attack=e.find("attack.melee");REQUIRE(attack);REQUIRE(attack->sources.size()==4);CHECK(attack->sources[0].page=="B7");CHECK(attack->sources[0].publication.find("Basic")!=std::string::npos);CHECK(attack->sources[1].page=="X26");CHECK(attack->sources[1].publication.find("Expert")!=std::string::npos);
     Json fighter;for(const auto& item:pack.entries)if(item["id"]=="bx:fighter")fighter=item;
     fighter["id"]="house:campaign-fighter";fighter["name"]="Campaign fighter";pack.entries.push_back(fighter);d=character();d.choices["class"]="house:campaign-fighter";
     e=evaluate(d,resolveRuleset(d,{pack}));CHECK(e.complete());CHECK(value(e,"hp.max")==3);

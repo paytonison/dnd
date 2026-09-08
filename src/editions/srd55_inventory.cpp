@@ -124,8 +124,7 @@ bool equipped(const Json &item, const Json &instance) {
            (s(item, "wearSlot", "carried") == "carried" || b(instance, "equipped"));
 }
 int levelOf(const Context &ctx, const std::string &name) {
-    const auto it = ctx.classLevels.find("srd55:" + name);
-    return it == ctx.classLevels.end() ? 0 : it->second;
+    return profileLevel(ctx, name);
 }
 bool shieldTraining(const Context &ctx) {
     if (ctx.armorTraining.contains("shield"))
@@ -144,10 +143,8 @@ bool shieldTraining(const Context &ctx) {
     return false;
 }
 int attunementLimit(const Context &ctx) {
-    return levelOf(ctx, "rogue") >= 13 &&
-                   text(ctx.document.choices, "/subclasses/rogue") == "srd55:thief"
-               ? 4
-               : 3;
+    const auto* subclass = selectedSubclass(ctx, "rogue");
+    return levelOf(ctx, "rogue") >= 13 && subclass && text(*subclass, "/rulesProfile") == "thief" ? 4 : 3;
 }
 std::set<std::string> castingAbilities(const Context &ctx) {
     std::set<std::string> result = ctx.castingAbilities;
@@ -607,7 +604,9 @@ InventoryResult resolveInventory(const Context &ctx) {
                     out.darkvisionMinimum = std::max(out.darkvisionMinimum, value);
                 else if (op == "ac-bonus") {
                     const auto *profile = ctx.rules.find(baseProfile(*item, instance));
-                    if (!profile || s(*profile, "kind") != "shield" || shieldTraining(ctx))
+                    const bool contributes = !profile || s(*profile, "kind") != "shield" || shieldTraining(ctx);
+                    out.effects.back()["contributionApplied"] = contributes;
+                    if (contributes)
                         out.armorBonus += value;
                 } else if (op == "save-bonus")
                     for (const auto &ability : abilityNames)

@@ -184,6 +184,21 @@ void record(Evaluation &e, SheetSection &s, const std::string &id, const std::st
     addCalculation(e, id, label, std::move(value), std::move(steps), {ref(page)});
     s.calculationIds.push_back(id);
 }
+void appendSources(std::vector<SourceRef>& target, const std::vector<SourceRef>& sources) {
+    for (const auto& source : sources)
+        if (std::none_of(target.begin(), target.end(), [&](const auto& existing) {
+                return existing.publication == source.publication && existing.page == source.page && existing.url == source.url;
+            })) target.push_back(source);
+}
+void appendTrace(CalculationTrace& target, const CalculationTrace& trace) {
+    target.steps.insert(target.steps.end(), trace.steps.begin(), trace.steps.end());
+    appendSources(target.sources, trace.sources);
+}
+void record(Evaluation &e, SheetSection &s, const std::string &id, const std::string &label,
+            Json value, CalculationTrace trace) {
+    addCalculation(e, id, label, std::move(value), std::move(trace.steps), std::move(trace.sources));
+    s.calculationIds.push_back(id);
+}
 std::vector<Choice> literal(const std::vector<std::string> &ids, const std::string &page = "19") {
     std::vector<Choice> out;
     for (const auto &id : ids)
@@ -334,6 +349,13 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     if (!initial)
         return e;
     const auto creationScores = ctx.scores;
+    std::map<std::string, CalculationTrace> abilityTraces;
+    for (const auto& ability : abilities) {
+        const int boost = number(c, "/backgroundBoosts/" + ability);
+        abilityTraces[ability] = {{title(ability) + ": starting " + std::to_string(creationScores.at(ability) - boost) +
+            " + background " + std::to_string(boost) + " = " + std::to_string(creationScores.at(ability)) + "."}, {ref("21")}};
+        if (boost && background) appendSources(abilityTraces[ability].sources, {sourceFromJson(background->at("source"))});
+    }
     std::vector<LevelEvent> events;
     Stage history{"levels", "Class levels and advancement", {}};
     for (int level = 1; level <= ctx.totalLevel; ++level) {
@@ -351,13 +373,22 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
         events.push_back({level, classId, classLevel});
         ctx.classLevelEvents[classId].push_back(level);
     }
+    std::map<std::string, std::string> selectedProfiles;
+    for (const auto &[id, level] : ctx.classLevels) {
+        (void)level;
+        const auto profile = classProfile(rules, id);
+        if (!selectedProfiles.emplace(profile, id).second)
+            issue(e, "class.profile.duplicate", "/advancement",
+                  "Choose one content definition per class mechanics profile; '" + id +
+                  "' and '" + selectedProfiles.at(profile) + "' both use '" + profile + "'.");
+    }
     for (const auto &[id, level] : ctx.classLevels)
         if (level >= 3) {
             const auto opts = filter(options(rules, "subclass"), [&](const auto &o) {
-                return rules.find(o.id)->value("classId", "") == id;
+                return classProfile(rules, text(*rules.find(o.id), "/classId")) == classProfile(rules, id);
             });
             history.fields.push_back(
-                select("/subclasses/" + slug(id), title(slug(id)) + " subclass", opts));
+                select("/subclasses/" + classProfile(rules, id), rules.find(id)->value("name", id) + " subclass", opts));
             pick(e, c, history.fields.back());
         }
     if (!history.fields.empty())
@@ -390,10 +421,10 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             featCasting(text(c, "/feats/" + std::to_string(event.characterLevel) + "/id"),
                         "/feats/" + std::to_string(event.characterLevel));
     }
-    if (ctx.classLevels.contains("srd55:warlock")) {
-        const int count = number(*rules.find("srd55:warlock"),
+    if (profileLevel(ctx, "warlock") > 0) {
+        const int count = number(*rules.find(selectedClassId(ctx, "warlock")),
                                  "/progression/invocations/" +
-                                     std::to_string(ctx.classLevels.at("srd55:warlock") - 1));
+                                     std::to_string(profileLevel(ctx, "warlock") - 1));
         for (int i = 0; i < count; ++i)
             if (text(c, "/features/warlock/invocations/" + std::to_string(i)) ==
                 "srd55:lessons-of-the-first-ones")
@@ -588,7 +619,13 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                 issue(e, "feat.cap", fieldPath,
                       "This increase cannot raise the ability above " + std::to_string(cap) + ".",
                       "87");
+            const int before = ctx.scores[ability];
             ctx.scores[ability] += delta;
+            if (delta) {
+                abilityTraces[ability].steps.push_back(feat.value("name", "Feat") + ": " + std::to_string(before) +
+                    " + " + std::to_string(delta) + " = " + std::to_string(ctx.scores[ability]) + "; permitted cap " + std::to_string(cap) + ".");
+                appendSources(abilityTraces[ability].sources, {sourceFromJson(feat.at("source"))});
+            }
         }
         if (spent != count)
             issue(e, "feat.points", path,
@@ -606,8 +643,13 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             if (id.empty() || !appliedPermanent.insert(id).second ||
                 !ctx.scores.contains(ability) || effect.value("op", "") != "ability-increase")
                 continue;
+            const int before = ctx.scores[ability];
             ctx.scores[ability] = std::min(effect.value("maxScore", 30),
                                            ctx.scores[ability] + effect.value("value", 0));
+            abilityTraces[ability].steps.push_back("Permanent item event " + id + ": min(cap " +
+                std::to_string(effect.value("maxScore", 30)) + ", " + std::to_string(before) + " + " +
+                std::to_string(effect.value("value", 0)) + ") = " + std::to_string(ctx.scores[ability]) + ".");
+            appendSources(abilityTraces[ability].sources, {sourceFromJson(effect.at("source"))});
         }
     };
     for (const auto &event : events) {
@@ -660,9 +702,9 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                     bool style = false;
                     for (const auto &prior : events)
                         if (prior.characterLevel <= event.characterLevel)
-                            style = style || prior.classId == "srd55:fighter" ||
-                                    ((prior.classId == "srd55:paladin" ||
-                                      prior.classId == "srd55:ranger") &&
+                            style = style || classProfile(rules, prior.classId) == "fighter" ||
+                                    ((classProfile(rules, prior.classId) == "paladin" ||
+                                      classProfile(rules, prior.classId) == "ranger") &&
                                      prior.classLevel >= 2);
                     if (!style) {
                         option.available = false;
@@ -680,12 +722,15 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                 ownedFeats.insert(selected);
             }
         }
-        const auto abilityGrant = advancementAbilityGrant(event.classId, event.classLevel);
-        for (const auto &[ability, bonus] : abilityGrant.abilityBonuses)
-            ctx.scores[ability] = std::min(abilityGrant.abilityCaps.contains(ability)
-                                               ? abilityGrant.abilityCaps.at(ability)
-                                               : 20,
-                                           ctx.scores[ability] + bonus);
+        const auto abilityGrant = advancementAbilityGrant(classProfile(rules, event.classId), event.classLevel);
+        for (const auto &[ability, bonus] : abilityGrant.abilityBonuses) {
+            const int before = ctx.scores[ability];
+            const int cap = abilityGrant.abilityCaps.contains(ability) ? abilityGrant.abilityCaps.at(ability) : 20;
+            ctx.scores[ability] = std::min(cap, ctx.scores[ability] + bonus);
+            abilityTraces[ability].steps.push_back(cls.value("name", "Class") + " level " + std::to_string(event.classLevel) +
+                ": min(cap " + std::to_string(cap) + ", " + std::to_string(before) + " + " + std::to_string(bonus) + ") = " + std::to_string(ctx.scores[ability]) + ".");
+            appendSources(abilityTraces[ability].sources, {sourceFromJson(cls.at("source"))});
+        }
         applyPermanent(event.characterLevel);
         scoreHistory[static_cast<std::size_t>(event.characterLevel)] = ctx.scores;
     }
@@ -741,17 +786,38 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     ctx.armored = armor != nullptr;
     ctx.armorCategory = armor ? armor->value("category", "") : "";
     ctx.shield = itemState.initialized ? itemState.shield : flag(c, "/shield");
+    auto contributingAbilityItems = [&](const std::string& ability, const std::string& operation, int selectedMinimum = 0) {
+        auto& trace = abilityTraces[ability];
+        for (const auto& effect : itemState.effects) {
+            if (effect.value("ability", "") != ability || effect.value("op", "") != operation) continue;
+            if (operation == "ability-minimum" && effect.value("value", 0) != selectedMinimum) continue;
+            const auto* item = rules.find(effect.value("itemId", ""));
+            trace.steps.push_back((item ? item->value("name", "Item") : "Item") + " [" + effect.value("instanceId", "") +
+                "]: " + title(ability) + (operation == "ability-minimum" ? " minimum " : " bonus ") + std::to_string(effect.value("value", 0)) + ".");
+            appendSources(trace.sources, {sourceFromJson(effect.at("source"))});
+        }
+    };
     for (const auto &[ability, bonus] : itemState.abilityBonuses)
         if (ctx.scores.contains(ability)) {
             const int cap = itemState.abilityBonusCaps.contains(ability)
                                 ? itemState.abilityBonusCaps.at(ability)
                                 : 20;
-            if (bonus > 0 && ctx.scores[ability] < cap)
+            if (bonus > 0 && ctx.scores[ability] < cap) {
+                const int before = ctx.scores[ability];
                 ctx.scores[ability] = std::min(cap, ctx.scores[ability] + bonus);
+                abilityTraces[ability].steps.push_back("Current item increase: min(cap " + std::to_string(cap) + ", " +
+                    std::to_string(before) + " + " + std::to_string(bonus) + ") = " + std::to_string(ctx.scores[ability]) + ".");
+                contributingAbilityItems(ability, "ability-bonus");
+            }
         }
     for (const auto &[ability, minimum] : itemState.abilityMinimums)
-        if (ctx.scores.contains(ability))
+        if (ctx.scores.contains(ability) && ctx.scores[ability] < minimum) {
+            const int before = ctx.scores[ability];
             ctx.scores[ability] = std::max(ctx.scores[ability], minimum);
+            abilityTraces[ability].steps.push_back("Current item floor: max(" + std::to_string(before) + ", " +
+                std::to_string(minimum) + ") = " + std::to_string(ctx.scores[ability]) + ".");
+            contributingAbilityItems(ability, "ability-minimum", minimum);
+        }
     for (const auto &ability : abilities)
         ctx.modifiers[ability] = static_cast<int>(std::floor((ctx.scores[ability] - 10) / 2.0));
     const auto skillTimesBeforeFeats = ctx.skillAcquisitionLevels;
@@ -771,8 +837,8 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     ctx.toolProficiencies = tools;
     ctx.toolAcquisitionLevels = toolLevels;
     for (const auto &[id, level] : ctx.classLevels) {
-        addSet(ctx.preparedSpells, strings(c, "/spellcasting/" + slug(id) + "/preparedSpells"));
-        const auto *sub = entry(rules, text(c, "/subclasses/" + slug(id)), "subclass");
+        addSet(ctx.preparedSpells, strings(c, "/spellcasting/" + classProfile(rules, id) + "/preparedSpells"));
+        const auto *sub = selectedSubclass(ctx, classProfile(rules, id));
         if (sub)
             for (const auto &grant : sub->value("spellGrants", Json::array()))
                 if (grant.value("level", 99) <= level)
@@ -829,8 +895,12 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     const auto normalScores = ctx.scores;
     const int normalCon = static_cast<int>(std::floor((ctx.scores["constitution"] - 10) / 2.0));
     if (!grants.transformedForm.empty()) {
-        for (const auto &[ability, value] : grants.physicalAbilityOverrides)
+        for (const auto &[ability, value] : grants.physicalAbilityOverrides) {
             ctx.scores[ability] = value;
+            abilityTraces[ability].steps.push_back(grants.transformedForm.value("name", "Wild Shape") +
+                " replaces " + title(ability) + " with " + std::to_string(value) + ".");
+            appendSources(abilityTraces[ability].sources, {sourceFromJson(grants.transformedForm.at("source")), ref("42-43")});
+        }
         if (text(d.resources, "/formEquipment", "merged") != "worn") {
             ctx.armored = false;
             ctx.shield = false;
@@ -984,13 +1054,12 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     for (const auto &grant : itemState.spellGrants)
         extraSpells.push_back(grant);
     for (const auto &ability : abilities) {
-        record(e, abilitySheet, "ability." + ability, title(ability), ctx.scores[ability],
-               {"Accepted starting score, background and ordered ability increases.",
-                "Normal untransformed score " + std::to_string(normalScores.at(ability)) +
-                    "; effective form score " + std::to_string(ctx.scores[ability]) + "."},
-               "21");
-        record(e, abilitySheet, "modifier." + ability, title(ability) + " modifier",
-               ctx.modifiers[ability], {"floor((score - 10) / 2)."}, "21");
+        auto trace = abilityTraces.at(ability);
+        trace.steps.push_back("Normal untransformed score " + std::to_string(normalScores.at(ability)) +
+            "; current score " + std::to_string(ctx.scores[ability]) + ".");
+        record(e, abilitySheet, "ability." + ability, title(ability), ctx.scores[ability], trace);
+        trace.steps.push_back("floor((" + std::to_string(ctx.scores[ability]) + " - 10) / 2) = " + std::to_string(ctx.modifiers[ability]) + ".");
+        record(e, abilitySheet, "modifier." + ability, title(ability) + " modifier", ctx.modifiers[ability], std::move(trace));
     }
     record(e, summary, "level", "Character level", ctx.totalLevel,
            {"Total number of ordered class-level gains; class limits are separate."}, "23");
@@ -1002,10 +1071,14 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             " determines initial training, saving throws, starting equipment and first-level "
             "maximum Hit Die."},
            "25");
-    record(e, summary, "proficiency", "Proficiency bonus", ctx.proficiency,
-           {"2 + floor((total character level - 1) / 4), plus equipped-item modifier " +
-            std::to_string(itemState.proficiencyBonus) + "."},
-           "23");
+    CalculationTrace proficiencyTrace = {{"2 + floor((" + std::to_string(ctx.totalLevel) + " - 1) / 4) + equipped-item modifier " +
+        std::to_string(itemState.proficiencyBonus) + " = " + std::to_string(ctx.proficiency) + "."}, {ref("23")}};
+    for (const auto& effect : itemState.effects) if (effect.value("op", "") == "proficiency-bonus") {
+        const auto* item = rules.find(effect.value("itemId", ""));
+        proficiencyTrace.steps.push_back((item ? item->value("name", "Item") : "Item") + " [" + effect.value("instanceId", "") + "]: +" + std::to_string(effect.value("value", 0)) + ".");
+        appendSources(proficiencyTrace.sources, {sourceFromJson(effect.at("source"))});
+    }
+    record(e, summary, "proficiency", "Proficiency bonus", ctx.proficiency, std::move(proficiencyTrace));
     record(e, summary, "alignment", "Alignment", alignment, {"Chosen alignment."}, "21");
     record(e, summary, "xp.minimum", "Minimum XP for this level",
            xp[static_cast<std::size_t>(ctx.totalLevel - 1)],
@@ -1137,7 +1210,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             entry(rules, text(c, "/gamingSet"), "tool"))
             inventory.push_back(text(c, "/gamingSet"));
     }
-    if (ctx.classLevels.contains("srd55:wizard") && !contains(inventory, "srd55:spellbook"))
+    if (profileLevel(ctx, "wizard") > 0 && !contains(inventory, "srd55:spellbook"))
         inventory.push_back("srd55:spellbook");
     std::vector<Choice> buy;
     for (const auto &[id, item] : rules.content)
@@ -1224,25 +1297,57 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
         issue(e, "hands", "/weaponId", "A two-handed weapon and Shield cannot be wielded together.",
               "90");
     std::map<std::string, int> formulas = {{"Standard unarmored", 10 + ctx.modifiers["dexterity"]}};
+    auto modifierTrace = [&](const std::string& ability) {
+        const auto* calculation = e.find("modifier." + ability);
+        return calculation ? CalculationTrace{calculation->steps, calculation->sources} : CalculationTrace{};
+    };
+    std::map<std::string, std::vector<std::string>> formulaAbilities = {{"Standard unarmored", {"dexterity"}}};
+    std::map<std::string, CalculationTrace> formulaTraces;
+    formulaTraces["Standard unarmored"] = {{"Standard unarmored: 10 + Dexterity modifier (" +
+        std::to_string(ctx.modifiers["dexterity"]) + ") = " + std::to_string(formulas.at("Standard unarmored")) + "."}, {ref("22")}};
     if (armor) {
         int ac = armor->at("ac");
         const int dexCap = armor->value("dexCap", 99);
         ac += dexCap == 0 ? 0 : std::min(ctx.modifiers["dexterity"], dexCap);
-        formulas = {{armor->value("name", "Armor"), ac}};
+        const auto label = armor->value("name", "Armor");
+        formulas = {{label, ac}};
+        formulaAbilities[label] = dexCap == 0 ? std::vector<std::string>{} : std::vector<std::string>{"dexterity"};
+        const int dexterity = dexCap == 0 ? 0 : std::min(ctx.modifiers["dexterity"], dexCap);
+        formulaTraces[label] = {{label + ": base " + std::to_string(armor->at("ac").get<int>()) +
+            " + applied Dexterity (" + std::to_string(dexterity) + ") = " + std::to_string(ac) + ".",
+            dexCap == 0 ? "This armor excludes Dexterity from its base AC." :
+                "Dexterity modifier " + std::to_string(ctx.modifiers["dexterity"]) +
+                (dexCap == 99 ? "; no armor cap." : "; armor cap " + std::to_string(dexCap) + ".")},
+            {sourceFromJson(armor->at("source")), ref("92")}};
     }
     for (const auto &[label, ac] : grants.armorFormulas)
         formulas[label] = ac;
     for (const auto &[label, ac] : features.armorFormulas)
         formulas[label] = ac;
+    for (const auto& [label, trace] : grants.armorFormulaTraces) formulaTraces[label] = trace;
+    for (const auto& [label, trace] : features.armorFormulaTraces) formulaTraces[label] = trace;
+    for (const auto& [label, values] : grants.armorFormulaAbilities) formulaAbilities[label] = values;
+    for (const auto& [label, values] : features.armorFormulaAbilities) formulaAbilities[label] = values;
     for (const auto &formula : itemState.armorFormulas) {
         int ac = formula.value("base", 0);
-        for (const auto &ability : strings(formula, "/abilities"))
+        std::string arithmetic = std::to_string(ac);
+        for (const auto &ability : strings(formula, "/abilities")) {
             ac += ctx.modifiers[ability];
-        formulas[formula.value("label", "Magic item armor")] = ac;
+            arithmetic += " + " + title(ability) + " modifier (" + std::to_string(ctx.modifiers[ability]) + ")";
+        }
+        const auto label = formula.value("label", "Magic item armor");
+        formulas[label] = ac;
+        formulaAbilities[label] = strings(formula, "/abilities");
+        formulaTraces[label] = {{label + ": " + arithmetic + " = " + std::to_string(ac) + "."},
+            {sourceFromJson(formula.at("source"))}};
     }
-    if (!grants.transformedForm.empty() && grants.transformedForm.contains("ac"))
+    if (!grants.transformedForm.empty() && grants.transformedForm.contains("ac")) {
         formulas["Wild Shape natural armor"] = grants.transformedForm.at("ac").get<int>();
-    int best = 0;
+        formulaTraces["Wild Shape natural armor"] = {{grants.transformedForm.value("name", "Beast") +
+            " natural Armor Class = " + std::to_string(formulas.at("Wild Shape natural armor")) + "."},
+            {sourceFromJson(grants.transformedForm.at("source")), ref("42-43")}};
+    }
+    int best = std::numeric_limits<int>::min();
     std::string bestName;
     for (const auto &[label, ac] : formulas)
         if (ac > best) {
@@ -1251,7 +1356,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
         }
     std::vector<Choice> formulaOpts;
     for (const auto &[label, ac] : formulas)
-        formulaOpts.push_back({label, label + " = " + std::to_string(ac), true, {}, {ref("25")}});
+        formulaOpts.push_back({label, label + " = " + std::to_string(ac), true, {}, formulaTraces.at(label).sources});
     if (formulas.size() > 1) {
         auto field = select(itemState.initialized ? "/inventory/armorFormula" : "/armorFormula",
                             "Armor Class formula", formulaOpts);
@@ -1265,32 +1370,90 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             bestName = selected;
         }
     }
-    const int shieldBonus = ctx.shield && trainedShield ? 2 : 0;
-    record(e, combat, "armorClass", "Armor Class",
-           best + shieldBonus + featAc + itemState.armorBonus,
-           {bestName + " = " + std::to_string(best) + "; Shield " + std::to_string(shieldBonus) +
-            "; Defense " + std::to_string(featAc) + "; item bonuses " +
-            std::to_string(itemState.armorBonus) + ". Alternative formulas do not stack."},
-           "22");
+    const auto* shieldDefinition = entry(rules, "srd55:shield-equipment", "shield");
+    const int shieldBonus = ctx.shield && trainedShield && shieldDefinition ? shieldDefinition->value("ac", 0) : 0;
+    auto itemTrace = [&](const std::set<std::string>& operations, const std::string& movementMode = "") {
+        CalculationTrace trace;
+        for (const auto& effect : itemState.effects) {
+            if (!operations.contains(effect.value("op", "")) || !effect.value("contributionApplied", true)) continue;
+            if (!movementMode.empty() && effect.value("mode", "walk") != movementMode) continue;
+            const auto* item = rules.find(effect.value("itemId", ""));
+            const auto label = item ? item->value("name", "Item") : "Item";
+            const auto operation = effect.value("op", "");
+            const std::map<std::string, std::string> labels = {{"ac-bonus", "Armor Class bonus"},
+                {"ability-check-bonus", "Ability check bonus"}, {"speed-minimum", effect.value("mode", "walk") + " Speed minimum"}};
+            const auto description = operation.starts_with("armor-") ? "Ignores the armor Speed penalty." :
+                labels.at(operation) + " " + std::to_string(effect.value("value", 0)) + ".";
+            trace.steps.push_back(label + " [" + effect.value("instanceId", "") + "]: " + description);
+            appendSources(trace.sources, {sourceFromJson(effect.at("source"))});
+        }
+        return trace;
+    };
+    CalculationTrace armorTrace = formulaTraces.at(bestName);
+    for (const auto& ability : formulaAbilities[bestName]) appendTrace(armorTrace, modifierTrace(ability));
+    armorTrace.steps.push_back("Selected base AC " + std::to_string(best) + " + Shield " +
+        std::to_string(shieldBonus) + " + Defense " + std::to_string(featAc) + " + item bonuses " +
+        std::to_string(itemState.armorBonus) + " = " + std::to_string(best + shieldBonus + featAc + itemState.armorBonus) + ".");
+    armorTrace.steps.push_back("Alternative base AC formulas do not stack.");
+    if (shieldBonus) appendSources(armorTrace.sources, {sourceFromJson(shieldDefinition->at("source")), ref("92")});
+    if (featAc) {
+        const auto* defense = rules.find("srd55:defense");
+        armorTrace.steps.push_back("Defense: +1 while wearing armor.");
+        if (defense) appendSources(armorTrace.sources, {sourceFromJson(defense->at("source"))});
+    }
+    appendTrace(armorTrace, itemTrace({"ac-bonus"}));
+    record(e, combat, "armorClass", "Armor Class", best + shieldBonus + featAc + itemState.armorBonus, std::move(armorTrace));
     int speed = species ? species->value("speed", 30) : 30;
-    if (lineage && lineage->contains("speed"))
+    CalculationTrace speedTrace;
+    if (species) {
+        speedTrace.steps.push_back(species->value("name", "Species") + " base Speed: " + std::to_string(speed) + " feet.");
+        speedTrace.sources.push_back(sourceFromJson(species->at("source")));
+    } else { speedTrace.steps.push_back("Provisional base Speed: 30 feet; species selection is incomplete.");speedTrace.sources.push_back(ref("22")); }
+    if (lineage && lineage->contains("speed")) {
         speed = lineage->at("speed");
-    if (!grants.transformedForm.empty())
+        speedTrace.steps.push_back(lineage->value("name", "Lineage") + " replaces base Speed with " + std::to_string(speed) + " feet.");
+        appendSources(speedTrace.sources, {sourceFromJson(lineage->at("source"))});
+    }
+    if (!grants.transformedForm.empty()) {
         speed = number(grants.transformedForm, "/speed/walk", 0);
+        speedTrace.steps.push_back(grants.transformedForm.value("name", "Wild Shape") + " replaces base walking Speed with " + std::to_string(speed) + " feet.");
+        appendSources(speedTrace.sources, {sourceFromJson(grants.transformedForm.at("source")), ref("42-43")});
+    }
+    const int baseSpeed = speed;
     speed += grants.speedBonus + features.speedBonus + itemState.speedBonus;
-    if (itemState.speedMinimums.contains("walk"))
-        speed = std::max(speed, itemState.speedMinimums.at("walk"));
-    if (armor && !itemState.ignoreArmorSpeedPenalty &&
-        ctx.scores["strength"] < armor->value("strength", 0))
-        speed -= 10;
-    record(e, combat, "speed", "Speed (feet)", std::max(0, speed),
-           {"Species speed plus eligible class features; heavy armor Strength penalty applies "
-            "where required."},
-           "22");
-    record(e, combat, "initiative", "Initiative bonus",
-           ctx.modifiers["dexterity"] + featInitiative + grants.initiativeBonus +
-               features.initiativeBonus + itemState.initiativeBonus,
-           {"Dexterity modifier plus eligible feats/class/item bonuses."}, "22");
+    appendTrace(speedTrace, grants.speedTrace);appendTrace(speedTrace, features.speedTrace);
+    speedTrace.steps.push_back("Base " + std::to_string(baseSpeed) + " + class bonuses " +
+        std::to_string(grants.speedBonus + features.speedBonus) + " + item bonuses " +
+        std::to_string(itemState.speedBonus) + " = " + std::to_string(speed) + " feet.");
+    if (itemState.speedMinimums.contains("walk")) {
+        const int minimum = itemState.speedMinimums.at("walk");
+        speedTrace.steps.push_back("Item walking minimum: max(" + std::to_string(speed) + ", " + std::to_string(minimum) + ") = " + std::to_string(std::max(speed, minimum)) + ".");
+        speed = std::max(speed, minimum);
+        appendTrace(speedTrace, itemTrace({"speed-minimum"}, "walk"));
+    }
+    if (armor && ctx.scores["strength"] < armor->value("strength", 0)) {
+        const int penalty = itemState.ignoreArmorSpeedPenalty ? 0 : 10;
+        speedTrace.steps.push_back(armor->value("name", "Armor") + ": Strength " + std::to_string(ctx.scores["strength"]) +
+            " < required " + std::to_string(armor->value("strength", 0)) + "; Speed penalty " + std::to_string(penalty) + " feet.");
+        speed -= penalty;
+        appendSources(speedTrace.sources, {sourceFromJson(armor->at("source")), ref("92")});
+        appendTrace(speedTrace, modifierTrace("strength"));
+        if (itemState.ignoreArmorSpeedPenalty) appendTrace(speedTrace, itemTrace({"armor-speed-penalty-ignored", "armor-strength-requirement-ignored"}));
+    }
+    speedTrace.steps.push_back("Final Speed: max(0, " + std::to_string(speed) + ") = " + std::to_string(std::max(0, speed)) + " feet.");
+    record(e, combat, "speed", "Speed (feet)", std::max(0, speed), std::move(speedTrace));
+    const int initiative = ctx.modifiers["dexterity"] + featInitiative + grants.initiativeBonus + features.initiativeBonus + itemState.initiativeBonus;
+    CalculationTrace initiativeTrace = {{"Dexterity modifier " + std::to_string(ctx.modifiers["dexterity"]) +
+        " + Alert " + std::to_string(featInitiative) + " + class bonuses " + std::to_string(grants.initiativeBonus + features.initiativeBonus) +
+        " + item bonuses " + std::to_string(itemState.initiativeBonus) + " = " + std::to_string(initiative) + "."}, {ref("13")}};
+    appendTrace(initiativeTrace, modifierTrace("dexterity"));
+    if (featInitiative) {
+        initiativeTrace.steps.push_back("Alert adds the proficiency bonus: " + std::to_string(ctx.proficiency) + ".");
+        if (const auto* proficiency = e.find("proficiency")) appendSources(initiativeTrace.sources, proficiency->sources);
+        if (const auto* alert = rules.find("srd55:alert")) appendSources(initiativeTrace.sources, {sourceFromJson(alert->at("source"))});
+    }
+    appendTrace(initiativeTrace, itemTrace({"ability-check-bonus"}));
+    record(e, combat, "initiative", "Initiative bonus", initiative, std::move(initiativeTrace));
     int attackCount = std::max(grants.attackCount, features.attackCount);
     int attackMod = ctx.modifiers["strength"], damageMod = attackMod;
     std::string damage = "1", weaponName = "Unarmed Strike", attackAbility = "strength";
@@ -1425,16 +1588,55 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                 (features.skillBonuses.contains(id) ? features.skillBonuses.at(id) : 0) +
                 (itemState.skillBonuses.contains(id) ? itemState.skillBonuses.at(id) : 0);
             int total = ctx.modifiers[ability] + prof + bonus;
-            if (!grants.transformedForm.empty())
-                total =
-                    std::max(total, number(grants.transformedForm, "/skills/" + slug(id), total));
-            record(e, skillSheet, "skill." + slug(id), item.value("name", id), total,
-                   {title(ability) + " modifier; " +
-                    (expert       ? "Expertise doubles proficiency once."
-                     : proficient ? "Proficiency applies once."
-                                  : "Untrained; only applicable half-proficiency applies.") +
-                    " Wild Shape retains the better applicable skill total."},
-                   "8");
+            CalculationTrace trace = {{title(ability) + " modifier = " + std::to_string(ctx.modifiers[ability]) + "."},
+                {sourceFromJson(item.at("source")), ref("8")}};
+            appendTrace(trace, modifierTrace(ability));
+            if (prof) if (const auto* proficiency = e.find("proficiency")) appendSources(trace.sources, proficiency->sources);
+            if (proficient) {
+                if (background && contains(strings(*background, "/skills"), id)) appendSources(trace.sources, {sourceFromJson(background->at("source"))});
+                if (contains(strings(c, "/classSkills"), id)) appendSources(trace.sources, {sourceFromJson(initial->at("source"))});
+                if (species && text(c, "/speciesSkill") == id) appendSources(trace.sources, {sourceFromJson(species->at("source"))});
+                for (const auto& [classId, level] : ctx.classLevels) {
+                    (void)level;
+                    if (classId != ctx.initialClass && contains(strings(c, "/multiclassSkills/" + slug(classId)), id))
+                        appendSources(trace.sources, {sourceFromJson(rules.find(classId)->at("source"))});
+                }
+                for (const auto& selection : feats) if (selection.id == "srd55:skilled") {
+                    const auto path = selection.owner == "human" ? "/skilledChoices" : selection.path + "/skilledChoices";
+                    if (contains(strings(c, path), id)) if (const auto* feat = rules.find(selection.id))
+                        appendSources(trace.sources, {sourceFromJson(feat->at("source"))});
+                }
+                for (const auto* result : {&grants, &features})
+                    if (result->skillProficiencySources.contains(id)) appendSources(trace.sources, result->skillProficiencySources.at(id));
+            }
+            if (expert) {
+                trace.steps.push_back("Expertise: 2 x proficiency bonus " + std::to_string(ctx.proficiency) + " = " + std::to_string(prof) + ".");
+                for (const auto* result : {&grants, &features})
+                    if (result->expertiseSources.contains(id)) appendSources(trace.sources, result->expertiseSources.at(id));
+            } else if (proficient) trace.steps.push_back("Proficiency bonus: " + std::to_string(prof) + ".");
+            else {
+                trace.steps.push_back(prof ? "Jack of All Trades: floor(" + std::to_string(ctx.proficiency) + " / 2) = " + std::to_string(prof) + "." : "No proficiency contribution: 0.");
+                if (prof) { appendSources(trace.sources, grants.halfProficiencySources);appendSources(trace.sources, features.halfProficiencySources); }
+            }
+            for (const auto* result : {&grants, &features}) {
+                if (result->skillBonusTraces.contains(id)) appendTrace(trace, result->skillBonusTraces.at(id));
+                if (result->skillBonusAbilities.contains(id)) for (const auto& component : result->skillBonusAbilities.at(id))
+                    if (component != ability) appendTrace(trace, modifierTrace(component));
+                if (result->skillAbilitySources.contains(id)) {
+                    trace.steps.push_back("Primal Knowledge uses Strength for this skill while Rage is active.");
+                    appendSources(trace.sources, result->skillAbilitySources.at(id));
+                }
+            }
+            appendTrace(trace, itemTrace({"ability-check-bonus"}));
+            trace.steps.push_back("Ability " + std::to_string(ctx.modifiers[ability]) + " + proficiency contribution " +
+                std::to_string(prof) + " + other bonuses " + std::to_string(bonus) + " = " + std::to_string(total) + ".");
+            if (!grants.transformedForm.empty()) {
+                const int beast = number(grants.transformedForm, "/skills/" + slug(id), total);
+                trace.steps.push_back("Wild Shape: max(character " + std::to_string(total) + ", Beast " + std::to_string(beast) + ") = " + std::to_string(std::max(total, beast)) + ".");
+                total = std::max(total, beast);
+                appendSources(trace.sources, {sourceFromJson(grants.transformedForm.at("source")), ref("42-43")});
+            }
+            record(e, skillSheet, "skill." + slug(id), item.value("name", id), total, std::move(trace));
         }
     for (const auto &ability : abilities) {
         const int bonus =
@@ -1619,8 +1821,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                           "Additional Druid slots require a recorded campaign ruling and reason "
                           "because the source leaves their expiration unspecified.",
                           "43");
-                if (!ctx.classLevels.contains("srd55:druid") ||
-                    ctx.classLevels.at("srd55:druid") < 5)
+                if (profileLevel(ctx, "druid") < 5)
                     issue(e, "slots.druid.class", "/resources/" + std::string(key),
                           "Druid slot conversions require the source class feature.", "43");
             }
@@ -1664,7 +1865,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
         const auto kind = casting.value("kind", "none");
         if (kind == "none")
             continue;
-        const auto classSlug = slug(id), base = "/spellcasting/" + classSlug,
+        const auto classSlug = classProfile(rules, id), base = "/spellcasting/" + classSlug,
                    list = casting.value("list", classSlug), ability = casting.value("ability", "");
         if (!ctx.modifiers.contains(ability)) {
             issue(e, "casting.ability", base, "A supported spellcasting ability is required.");
@@ -1737,7 +1938,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                     path, "Wizard spells learned at class level " + std::to_string(learnedLevel),
                     opts, true));
                 addSet(book, picks(e, c, spellStage.fields.back(), learnedLevel == 1 ? 6 : 2));
-                const auto subclass = text(c, "/subclasses/wizard");
+                const auto* subclass = selectedSubclass(ctx, "wizard");
                 int previousHighest = 0;
                 if (learnedLevel > 1) {
                     const auto &previousSlots =
@@ -1746,7 +1947,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                         if (previousSlots.at(static_cast<std::size_t>(s - 1)).get<int>())
                             previousHighest = s;
                 }
-                if (subclass == "srd55:evoker" &&
+                if (subclass && text(*subclass, "/rulesProfile") == "evoker" &&
                     (learnedLevel == 3 || (learnedLevel > 3 && limit > previousHighest))) {
                     auto savantOpts = filter(spellOptions(list, 1, limit), [&](const auto &o) {
                         return rules.find(o.id)->value("school", "") == "Evocation";

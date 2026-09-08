@@ -97,7 +97,8 @@ bool supportsModuleVersion(const ContentPack& pack, const std::string& version) 
 int die(int sides) { return QRandomGenerator::global()->bounded(1, sides + 1); }
 }
 
-MainWindow::MainWindow(const QString& dataRoot, QWidget* parent) : QMainWindow(parent) {
+MainWindow::MainWindow(const QString& dataRoot, QWidget* parent, std::function<int(int)> rollDie)
+    : QMainWindow(parent), rollDie_(rollDie ? std::move(rollDie) : die) {
     dataRoot_ = dataRoot;
     if (dataRoot_.isEmpty()) {
         const QString bundled = QCoreApplication::applicationDirPath() + "/../Resources/packs";
@@ -410,7 +411,9 @@ void MainWindow::rebuildFields() {
         stageTitle_->setText(q(stage.label));
         for (const auto& field : stage.fields) {
             if (field.advanced && !advanced_) continue;
-            const Json value = at(field.scope == "resources" ? document_.resources : document_.choices, field.path);
+            const Json value = field.scope == "choices" && field.path.starts_with("/options/")
+                ? at(effectiveCampaignOptions(document_), field.path.substr(8))
+                : at(field.scope == "resources" ? document_.resources : document_.choices, field.path);
             QWidget* editor = nullptr;
             if (field.kind == "integer") {
                 auto* spin = new QSpinBox;
@@ -921,18 +924,19 @@ void MainWindow::configureSources() {
 
 void MainWindow::configureCampaign() {
     if (readOnlyMode()) return;
-    QDialog dialog(this); dialog.setWindowTitle("Campaign settings"); dialog.resize(530, 350);
+    QDialog dialog(this); dialog.setObjectName("campaignSettingsDialog"); dialog.setWindowTitle("Campaign settings"); dialog.resize(530, 350);
     auto* layout = new QVBoxLayout(&dialog); auto* form = new QFormLayout;
     auto* preset = new QComboBox; preset->addItems({"Original defaults", "Published B/X optional rules", "Custom campaign"}); preset->setCurrentIndex(2);
     if (document_.edition != "bx") if (auto* model = qobject_cast<QStandardItemModel*>(preset->model())) model->item(1)->setEnabled(false);
     auto* name = new QLineEdit(q(document_.campaign.value("name", std::string{})));
     form->addRow("Campaign name", name); form->addRow("Preset", preset);
-    const Json options = document_.choices.value("options", document_.campaign);
-    auto* variable = new QCheckBox("Variable weapon damage"); variable->setChecked(options.value("variableWeaponDamage", false));
-    auto* initiative = new QCheckBox("Individual initiative"); initiative->setChecked(options.value("individualInitiative", false));
-    auto* encumbrance = new QComboBox; encumbrance->addItems({"basic", "detailed"}); encumbrance->setCurrentText(q(options.value("encumbrance", std::string("basic"))));
-    auto* reroll = new QCheckBox("Reroll low first-level hit points"); reroll->setChecked(options.value("rerollLowFirstHp", false));
-    auto* expert = new QCheckBox("Expert weapon rules (two-handed weapons and crossbows)"); expert->setChecked(options.value("expertWeaponRules", false));
+    const Json options = effectiveCampaignOptions(document_);
+    auto enabled = [&](const std::string& key) { return options.value(key, Json(false)) == Json(true); };
+    auto* variable = new QCheckBox("Variable weapon damage"); variable->setChecked(enabled("variableWeaponDamage"));
+    auto* initiative = new QCheckBox("Individual initiative"); initiative->setChecked(enabled("individualInitiative"));
+    auto* encumbrance = new QComboBox; encumbrance->addItems({"basic", "detailed"}); encumbrance->setCurrentText(q(stringChoice(options,"encumbrance","basic")));
+    auto* reroll = new QCheckBox("Reroll low first-level hit points"); reroll->setObjectName("campaignRerollLowFirstHp"); reroll->setChecked(enabled("rerollLowFirstHp"));
+    auto* expert = new QCheckBox("Expert weapon rules (two-handed weapons and crossbows)"); expert->setChecked(enabled("expertWeaponRules"));
     auto* optional = new QGroupBox("B/X optional rules"); auto* optionalLayout = new QFormLayout(optional);
     optionalLayout->addRow(variable); optionalLayout->addRow(initiative); optionalLayout->addRow("Encumbrance", encumbrance); optionalLayout->addRow(reroll); optionalLayout->addRow(expert);
     optional->setVisible(advanced_ && document_.edition == "bx");
@@ -1048,7 +1052,7 @@ bool MainWindow::acceptRoll(const std::string& requestId, bool replaceExisting) 
     }
     try {
         std::vector<int> dice;
-        for (int i = 0; i < request->count; ++i) dice.push_back(die(request->sides));
+        for (int i = 0; i < request->count; ++i) dice.push_back(rollDie_(request->sides));
         auto kept = dice; std::sort(kept.begin(), kept.end()); kept.erase(kept.begin(), kept.begin() + request->dropLowest);
         int total = 0; for (const int value : kept) total += value;
         Json choices = document_.choices, rolls = document_.rolls;
@@ -1104,7 +1108,7 @@ void MainWindow::rollAbilities() {
     const std::vector<std::string> names = bx ? std::vector<std::string>{"str", "int", "wis", "dex", "con", "cha"} : std::vector<std::string>{"strength", "intelligence", "wisdom", "dexterity", "constitution", "charisma"};
     Json recorded = Json::object();
     for (const auto& name : names) {
-        std::vector<int> dice{die(6), die(6), die(6)}; if (!bx) dice.push_back(die(6));
+        std::vector<int> dice{rollDie_(6), rollDie_(6), rollDie_(6)}; if (!bx) dice.push_back(rollDie_(6));
         int total = 0; for (int n : dice) total += n; if (!bx) total -= *std::min_element(dice.begin(), dice.end());
         document_.choices["abilities"][name] = total; recorded[name] = {{"dice", dice}, {"total", total}};
     }
@@ -1133,9 +1137,9 @@ void MainWindow::rollHitPoints() {
     for (int i = bx ? 0 : 2; i < (bx ? count : count + 1); ++i) {
         const std::string path = "/hp/" + std::to_string(i);
         if (!at(document_.choices, path).is_null()) continue;
-        int result = die(sides); std::vector<int> dice{result};
-        if (bx && i == 0 && sides > 2 && document_.choices.value("options", document_.campaign).value("rerollLowFirstHp", false))
-            while (result <= 2) { result = die(sides); dice.push_back(result); }
+        int result = rollDie_(sides); std::vector<int> dice{result};
+        if (bx && i == 0 && sides > 2 && effectiveCampaignOptions(document_).value("rerollLowFirstHp", Json(false)) == Json(true))
+            while (result <= 2) { result = rollDie_(sides); dice.push_back(result); }
         document_.choices[Json::json_pointer(path)] = result;
         document_.rolls["hp"][std::to_string(i)] = {{"sides", sides}, {"dice", dice}, {"result", result}};
     }
@@ -1146,7 +1150,7 @@ void MainWindow::rollMoney() {
     if (document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("money"); return; }
     if (document_.edition != "bx") return;
     if (QMessageBox::question(this, "Roll starting money", "Roll 3d6 × 10 gold pieces and replace the creation-time money roll? Current gold is separate.") != QMessageBox::Yes) return;
-    const std::vector<int> dice{die(6), die(6), die(6)}; const int total = dice[0] + dice[1] + dice[2];
+    const std::vector<int> dice{rollDie_(6), rollDie_(6), rollDie_(6)}; const int total = dice[0] + dice[1] + dice[2];
     document_.choices["moneyRoll"] = total; document_.rolls["startingMoney"] = {{"dice", dice}, {"total", total}, {"gold", total * 10}}; markChanged();
 }
 }

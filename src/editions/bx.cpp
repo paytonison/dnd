@@ -128,16 +128,19 @@ Evaluation evaluateBx(const CharacterDocument& d, const ResolvedRuleset& rules) 
     if (!restriction.empty()) message(e, "bx.class.eligibility", "/choices/class", restriction, "B9-B10");
     const std::string profile = "bx:" + cls->at("rulesProfile").get<std::string>();
     const int maxLevel = cls->at("maxLevel").get<int>();
+    const bool humanTableBoundary=maxLevel==14 && (profile=="bx:cleric" || profile=="bx:fighter" || profile=="bx:magic-user" || profile=="bx:thief");
     const int level = readNumber(e,c,"level",1,maxLevel,1,"/choices/level",false,"X5-X8");
+    if(humanTableBoundary && c.contains("level") && c["level"].is_number_integer() && c["level"]>maxLevel)
+        message(e,"bx.level.continuationUnsupported","/choices/level","This module verifies the printed progression tables through level 14. Expert X8 allows human advancement through level 36, but continuation abilities and spell progression still need an explicit supported profile. Retain this input for inspection or choose a supported level.","X7-X8");
     const int hitDie = cls->at("hitDie").get<int>();
     const auto& xpTable = cls->at("xp");
     const int xpMinimum = xpTable.at(static_cast<std::size_t>(level-1)).get<int>();
     const int xp = readNumber(e,c,"xp",0,2000000000,xpMinimum,"/choices/xp",false,"X5-X6");
-    classStage.fields.push_back(numberField("/level","Level",1,maxLevel));
+    classStage.fields.push_back(numberField("/level","Level",1,maxLevel,humanTableBoundary?"Verified printed-table coverage ends at level 14. Expert X8 permits advancement through 36; continuation mechanics are not yet supported.":""));
     classStage.fields.push_back(numberField("/xp","Experience points (after prior awards)",0,2000000000,"For higher-level creation, leaving this unset uses the class minimum. Earned experience is recorded after its prime-requisite adjustment."));
     e.stages.push_back(classStage);
     addCalculation(e,"class","Class",cls->at("name"),{"Original 1981 B/X class, including race-as-class where applicable."},{entryRef(*cls)});
-    addCalculation(e,"level","Level",level,{"Supported class limit: "+std::to_string(maxLevel)+"."},{entryRef(*cls,"progressionSource")});
+    addCalculation(e,"level","Level",level,{humanTableBoundary?"Verified printed-table coverage through level 14; this is not the human class maximum. Expert X8 permits advancement through 36, with continuation choices still unsupported.":"Supported class limit: "+std::to_string(maxLevel)+"."},humanTableBoundary?std::vector<SourceRef>{entryRef(*cls,"progressionSource"),bxSource("X7-X8")}:std::vector<SourceRef>{entryRef(*cls,"progressionSource")});
     addCalculation(e,"xp","Experience points",xp,{"Saved adjusted experience; never retroactively rescaled when abilities change."},{bxSource("B7"),entryRef(*cls,"progressionSource")});
     addCalculation(e,"xp.minimum","Minimum XP for level",xpMinimum,{"Class progression table, level "+std::to_string(level)+"."},{entryRef(*cls,"progressionSource")});
     if (xp < xpMinimum) message(e,"bx.xp.level","/choices/xp","The selected level requires at least "+std::to_string(xpMinimum)+" experience points.","X5-X6");
@@ -145,7 +148,7 @@ Evaluation evaluateBx(const CharacterDocument& d, const ResolvedRuleset& rules) 
         int next=xpTable.at(static_cast<std::size_t>(level)).get<int>();
         addCalculation(e,"xp.next","Next level at XP",next,{"Class progression table, next level."},{entryRef(*cls,"progressionSource")});
         if (xp>=next) message(e,"bx.advance.ready","/choices/level","Experience is sufficient for the next level. Record its hit-point result and advancement choices before increasing the level.","B22","info");
-    } else addCalculation(e,"xp.next","Next level at XP","Class limit",{"No advancement beyond the supported original class table."},{entryRef(*cls,"progressionSource")});
+    } else addCalculation(e,"xp.next","Next level at XP",humanTableBoundary?"Printed-table coverage limit":"Class limit",{humanTableBoundary?"Level 14 ends the implemented printed table, not human advancement. Expert X8 continuation through level 36 is not yet supported.":"The class has reached its original level limit."},humanTableBoundary?std::vector<SourceRef>{entryRef(*cls,"progressionSource"),bxSource("X7-X8")}:std::vector<SourceRef>{entryRef(*cls,"progressionSource")});
 
     const auto adjustments = c.value("adjustments", Json::object());
     int spent=0,gained=0;
@@ -247,18 +250,23 @@ Evaluation evaluateBx(const CharacterDocument& d, const ResolvedRuleset& rules) 
     addCalculation(e,"retainers.morale","Retainer morale",band(scores["cha"])+4,{"Charisma retainer morale table."},{bxSource("B7")});
     e.stages.push_back(identityStage);
 
-    const auto options=c.value("options",Json::object());
-    auto enabled=[&](const std::string& key,bool fallback){return options.contains(key)?boolChoice(options,key,fallback):boolChoice(d.campaign,key,fallback);};
+    const auto options=effectiveCampaignOptions(d);
+    auto optionPath=[&](const std::string& key){return c.contains("options") && c["options"].is_object() && c["options"].contains(key)?"/choices/options/"+key:"/campaign/"+key;};
+    auto enabled=[&](const std::string& key,bool fallback){
+        if(options.contains(key) && !options[key].is_boolean())message(e,"bx.option.type",optionPath(key),"This optional rule must be true or false; its saved value is retained for correction.","B6, B7, B27, X4");
+        return boolChoice(options,key,fallback);
+    };
     const bool variableDamage=enabled("variableWeaponDamage",false);
     const bool individualInitiative=enabled("individualInitiative",false);
     const bool expertWeapons=enabled("expertWeaponRules",false);
     const bool rerollFirst=enabled("rerollLowFirstHp",false);
-    const std::string encumbrance=stringChoice(options,"encumbrance",stringChoice(d.campaign,"encumbrance","basic"));
+    const std::string encumbrance=stringChoice(options,"encumbrance","basic");
+    if(options.contains("encumbrance") && !options["encumbrance"].is_string())message(e,"bx.option.type",optionPath("encumbrance"),"The encumbrance option must name basic or detailed; its saved value is retained for correction.","B20");
     Stage optionalStage{"options","Optional rules",{}};
     for(const auto& item:std::vector<std::pair<std::string,std::string>>{{"variableWeaponDamage","Variable weapon damage (B27, X25)"},{"expertWeaponRules","Two-handed weapon / crossbow timing (X4)"},{"individualInitiative","Individual initiative (B7, B23)"},{"rerollLowFirstHp","DM permits rerolling first-level HP of 1 or 2 (B6)"}})
         optionalStage.fields.push_back({"/options/"+item.first,item.second,"boolean",0,1,{},true,"Published optional rule; accepted rolls remain unchanged."});
     auto encField=selectField("/options/encumbrance","Encumbrance method",{{"basic","Armor and treasure categories",true,{}, {bxSource("B20")}},{"detailed","Detailed coin weights",true,{}, {bxSource("B20")}}});encField.advanced=true;optionalStage.fields.push_back(encField);
-    if(encumbrance!="basic" && encumbrance!="detailed") message(e,"bx.option.encumbrance","/campaign/encumbrance","Encumbrance method must be basic or detailed.","B20");
+    if(encumbrance!="basic" && encumbrance!="detailed") message(e,"bx.option.encumbrance",optionPath("encumbrance"),"Encumbrance method must be basic or detailed.","B20");
     if(rerollFirst && hpRolls.is_array() && !hpRolls.empty() && hpRolls[0].is_number_integer() && hpRolls[0].get<int>()<=2)
         message(e,"bx.hp.reroll.available","/choices/hp/0","The campaign permits rerolling this first-level result. Roll explicitly and record the accepted result if desired.","B6","info");
     e.stages.push_back(optionalStage);
@@ -363,9 +371,10 @@ Evaluation evaluateBx(const CharacterDocument& d, const ResolvedRuleset& rules) 
         const int needed=attack.at(i).get<int>();
         baseTable[armorClass]=needed;meleeTable[armorClass]=needed-str;missileTable[armorClass]=needed-missile;
     }
-    addCalculation(e,"attack.base","Attack matrix: armor class → roll",baseTable,{"Printed character matrix selected by class and level; repeated 20s are preserved."},{bxSource("X26")});
-    addCalculation(e,"attack.melee","Melee: armor class → roll",meleeTable,{"Subtract Strength to-hit adjustment "+std::to_string(str)+" from each printed target. Natural 1 misses and natural 20 hits."},refs("B7, X26"));
-    addCalculation(e,"attack.missile","Missile: armor class → roll",missileTable,{"Subtract Dexterity "+std::to_string(dex)+" and halfling missile bonus "+std::to_string(profile=="bx:halfling"?1:0)+". Range applies separately (+1 short / 0 medium / -1 long). Natural 1 misses and natural 20 hits."},refs("B7, B10, B27, X26"));
+    auto attackSources=[&](const std::string& pages){auto sources=refs(pages);sources.push_back(entryRef(*combat));sources.push_back(entryRef(*cls,"attackSource"));return sources;};
+    addCalculation(e,"attack.base","Attack matrix: armor class → roll",baseTable,{"Resolved character matrix selected by class and level; repeated 20s are preserved."},attackSources("X26"));
+    addCalculation(e,"attack.melee","Melee: armor class → roll",meleeTable,{"Subtract Strength to-hit adjustment "+std::to_string(str)+" from each resolved target. Natural 1 misses and natural 20 hits."},attackSources("B7, X26"));
+    addCalculation(e,"attack.missile","Missile: armor class → roll",missileTable,{"Subtract Dexterity "+std::to_string(dex)+" and halfling missile bonus "+std::to_string(profile=="bx:halfling"?1:0)+". Range applies separately (+1 short / 0 medium / -1 long). Natural 1 misses and natural 20 hits."},attackSources("B7, B10, B27, X26"));
     addCalculation(e,"attack.meleeBonus","Strength to-hit / melee damage adjustment",str,{"Strength table; damage on a successful attack cannot fall below 1."},{bxSource("B7")});
     addCalculation(e,"attack.missileBonus","Missile to-hit adjustment",missile,{"Dexterity "+std::to_string(dex)+" plus halfling bonus "+std::to_string(profile=="bx:halfling"?1:0)+"; this does not increase missile damage."},{bxSource("B7, B10")});
     const int damageDie=weapon?(variableDamage?weapon->value("damageDie",6):6):2;
@@ -450,7 +459,12 @@ Evaluation evaluateBx(const CharacterDocument& d, const ResolvedRuleset& rules) 
                 const auto slotPath="/prepared/"+sl+"/"+std::to_string(slot);
                 auto field=selectField(slotPath,"Spell level "+sl+", daily slot "+std::to_string(slot+1),preparedOptions);
                 field.help="Duplicate memorization is allowed. Casting and recovery are tracked separately as current resources.";spellStage.fields.push_back(field);
-                const std::string selected=chosen.is_array() && static_cast<std::size_t>(slot)<chosen.size() && chosen[slot].is_string()?chosen[slot].get<std::string>():"";
+                const bool recorded=chosen.is_array() && static_cast<std::size_t>(slot)<chosen.size();
+                if(recorded && !chosen[slot].is_string()) {
+                    message(e,"bx.spells.preparedValue","/choices"+slotPath,"This memorization slot must contain a spell identifier or an empty string to leave it unmemorized; the invalid saved value is retained for correction.","B15");
+                    names.push_back("Invalid selection: "+chosen[slot].dump());continue;
+                }
+                const std::string selected=recorded?chosen[slot].get<std::string>():"";
                 if(selected.empty()){names.push_back("Unmemorized");continue;}
                 const bool reverse=selected.size()>8 && selected.ends_with(":reverse");
                 const auto baseId=reverse?selected.substr(0,selected.size()-8):selected;
@@ -494,6 +508,10 @@ std::vector<Message> validateBx(const ContentPack& pack) {
     auto stringArray=[](const Json& j){return j.is_array() && std::all_of(j.begin(),j.end(),[](const auto& s){return s.is_string();});};
     for(const auto& item:pack.entries) {
         const auto kind=item.value("kind","");
+        const auto role=item.value("replaces",item.value("id",""));
+        if((role=="bx:combat-tables" || role=="bx:thief-skills" || role=="bx:turn-undead") && kind!="table") {
+            fail(item,"Record '"+item.value("id","")+"' binds required table '"+role+"' but kind is '"+kind+"'; kind must be table.");continue;
+        }
         if(!kinds.contains(kind)){fail(item,"B/X does not support content kind '"+kind+"'. A new mechanic needs a module extension.");continue;}
         if(item.contains("modifiers") || item.contains("effects") || item.contains("mechanics")){fail(item,"Unrecognized executable modifier/effect declarations are unsupported by this B/X module.");continue;}
         if(kind=="class") {
@@ -569,7 +587,9 @@ std::vector<Message> validateBx(const ContentPack& pack) {
 EditionModule bxModule(){return {"bx","Original B/X (1981)","1.0.0",false,evaluateBx,validateBx,[](const ResolvedRuleset& rules){
     std::vector<Message> messages;
     auto required=[&](const std::string& id,const std::string& purpose){
-        if(!rules.find(id))messages.push_back({"error","content.bx.missing_reference","/packs","Required B/X table '"+id+"' is unavailable for "+purpose+". Overrides cannot supply missing rules.",{bxSource("X5-X6, X26")}});
+        const auto* item=rules.find(id);
+        if(!item)messages.push_back({"error","content.bx.missing_reference","/packs","Required B/X table '"+id+"' is unavailable for "+purpose+". Overrides cannot supply missing rules.",{bxSource("X5-X6, X26")}});
+        else if(item->value("kind","")!="table")messages.push_back({"error","content.bx.reference_kind","/packs/"+item->value("id",id)+"/kind","Required B/X table '"+id+"' used by "+purpose+" resolves to record '"+item->value("id",id)+"' with kind '"+item->value("kind","")+"'; kind must be table.",{entryRef(*item)}});
     };
     bool anyClass=false;
     for(const auto& [id,item]:rules.content)if(item.value("kind","")=="class") {

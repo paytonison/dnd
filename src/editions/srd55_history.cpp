@@ -37,8 +37,8 @@ Json get(const Json& value,const std::string& path){const auto* p=at(value,path)
 int total(const Json& c){return std::clamp(number(c,"/level",1),1,20);}
 std::vector<std::string> classOrder(const Json& c){std::vector<std::string> result;const auto initial=text(c,"/classId");for(int n=1;n<=total(c);++n){const bool multi=get(c,"/multiclass")==true;result.push_back(n==1||!multi?initial:text(c,"/advancement/"+std::to_string(n)+"/classId"));}return result;}
 std::map<std::string,int> levels(const Json& c){std::map<std::string,int> result;for(const auto& id:classOrder(c))++result[id];return result;}
-int classLevel(const Json& c,const std::string& cls){const auto counts=levels(c);const auto it=counts.find(cls.starts_with("srd55:")?cls:"srd55:"+cls);return it==counts.end()?0:it->second;}
-int characterAt(const Json& c,const std::string& cls,int classRank){int rank=0;const auto order=classOrder(c);for(std::size_t i=0;i<order.size();++i)if(order[i]=="srd55:"+cls&&++rank==classRank)return static_cast<int>(i+1);return 0;}
+const Json* profileClass(const Json& c,const ResolvedRuleset& rules,const std::string& profile){for(const auto& id:classOrder(c))if(classProfile(rules,id)==profile)return rules.find(id);return nullptr;}
+int characterAt(const Json& c,const ResolvedRuleset& rules,const std::string& cls,int classRank){int rank=0;const auto order=classOrder(c);for(std::size_t i=0;i<order.size();++i)if(classProfile(rules,order[i])==cls&&++rank==classRank)return static_cast<int>(i+1);return 0;}
 Json snapshot(const CharacterDocument& d){return {{"choices",d.choices},{"rolls",d.rolls},{"campaign",d.campaign},{"resources",d.resources},{"overrides",d.overrides}};}
 Json lockedChoices(Json c){
     // Wielded/worn equipment, XP bookkeeping, and current resource choices are
@@ -79,7 +79,7 @@ std::vector<std::string> featRoots(const Json& c,const ResolvedRuleset& rules){
 std::vector<Policy> policies(const Json& c,const ResolvedRuleset& rules){
     std::vector<Policy> result;
     auto add=[&](const std::string& path,const std::string& cls,const std::string& page,int level,int longRest,int shortRest=0,int character=0,const std::string& budget="",bool any=false){result.push_back({safeId(path),path,budget.empty()?path:budget,cls,page,level,longRest,shortRest,character,any});};
-    for(const auto& [id,l]:levels(c)){const auto* data=rules.find(id);if(!data)continue;const auto cls=shortId(id),base="/spellcasting/"+cls;const auto casting=data->value("casting",Json::object());if(casting.value("kind","none")!="none"){
+    for(const auto& [id,l]:levels(c)){const auto* data=rules.find(id);if(!data)continue;const auto cls=classProfile(rules,id),base="/spellcasting/"+cls;const auto casting=data->value("casting",Json::object());if(casting.value("kind","none")!="none"){
         const auto cantrip=casting.value("cantripChange","");add(base+"/cantrips",cls,data->at("source").value("page","19"),cantrip=="class-level-one"?1:0,cantrip=="long-rest-one"?1:0);
         const auto prepared=casting.value("preparationChange","");add(base+"/preparedSpells",cls,data->at("source").value("page","19"),prepared=="class-level-one"?1:0,prepared=="long-rest-any"?999:prepared=="long-rest-one"?1:0,cls=="wizard"&&l>=5?1:0);
     }
@@ -106,19 +106,19 @@ std::vector<Policy> policies(const Json& c,const ResolvedRuleset& rules){
 int allowance(const Policy& p,const Parsed& history){if(p.atWill)return 999;if(history.trigger=="cast-find-familiar"&&p.path=="/features/warlock/chainMovement")return 1;if(history.trigger=="long-rest")return p.longRestLimit;if(history.trigger=="short-rest")return p.shortRestLimit;if(history.trigger=="advance")return p.characterLevelLimit>0?p.characterLevelLimit:history.triggerClass==p.cls?p.classLevelLimit:0;return 0;}
 const Policy* matching(const std::vector<Policy>& choices,const std::string& path){const Policy* result=nullptr;for(const auto& p:choices)if(starts(path,p.path)&&(!result||p.path.size()>result->path.size()))result=&p;return result;}
 Json invocationAcquisitions(const Json& c,const ResolvedRuleset& rules,const Json& input,std::vector<Message>& messages){
-    Json result=Json::object();const auto inv=strings(c,"/features/warlock/invocations");const int warlock=classLevel(c,"warlock");
+    Json result=Json::object();const auto inv=strings(c,"/features/warlock/invocations");const int warlock=profileLevel(c,rules,"warlock");
     for(std::size_t i=0;i<inv.size();++i){const auto* entry=rules.find(inv[i]);if(!entry)continue;const auto key=std::to_string(i);const int rank=number(input,"/invocationLevels/"+key,0);const int minimum=number(*entry,"/prerequisites/minWarlockLevel",1);
-        int slotMinimum=1;const auto* cls=rules.find("srd55:warlock");if(cls)for(int l=1;l<=20;++l)if(number(*cls,"/progression/invocations/"+std::to_string(l-1),0)>static_cast<int>(i)){slotMinimum=l;break;}
+        int slotMinimum=1;const auto* cls=profileClass(c,rules,"warlock");if(cls)for(int l=1;l<=20;++l)if(number(*cls,"/progression/invocations/"+std::to_string(l-1),0)>static_cast<int>(i)){slotMinimum=l;break;}
         if(rank<std::max(minimum,slotMinimum)||rank>warlock){problem(messages,"baseline-acquisition","Declare a legal acquisition class level for invocation "+key+" (minimum "+std::to_string(std::max(minimum,slotMinimum))+", maximum "+std::to_string(warlock)+").","/invocationLevels/"+key,"71-74");continue;}
-        result["/features/warlock/invocations/"+key]={{"classLevel",rank},{"characterLevel",characterAt(c,"warlock",rank)},{"id",inv[i]},{"origin","declared-baseline"}};
+        result["/features/warlock/invocations/"+key]={{"classLevel",rank},{"characterLevel",characterAt(c,rules,"warlock",rank)},{"id",inv[i]},{"origin","declared-baseline"}};
     }
     for(std::size_t i=0;i<inv.size();++i){const auto* item=rules.find(inv[i]);if(!item)continue;const auto* dependencies=at(*item,"/prerequisites/invocations");if(!dependencies||!dependencies->is_array())continue;for(const auto& dependency:*dependencies)if(dependency.is_string()){
         const auto found=std::find(inv.begin(),inv.end(),dependency.get<std::string>());if(found==inv.end())continue;const auto parent="/features/warlock/invocations/"+std::to_string(found-inv.begin()),child="/features/warlock/invocations/"+std::to_string(i);
         if(result.contains(parent)&&result.contains(child)&&result[parent]["characterLevel"]>result[child]["characterLevel"])problem(messages,"baseline-prerequisite-time","An invocation cannot predate its prerequisite invocation.",child,"71-74");
     }}return result;
 }
-void updateAcquisitions(Parsed& history,const Json& before,const Json& after){
-    const auto old=strings(before,"/features/warlock/invocations"),now=strings(after,"/features/warlock/invocations");const int rank=classLevel(after,"warlock");
+void updateAcquisitions(Parsed& history,const Json& before,const Json& after,const ResolvedRuleset* rules=nullptr){
+    const auto old=strings(before,"/features/warlock/invocations"),now=strings(after,"/features/warlock/invocations");const int rank=rules?profileLevel(after,*rules,"warlock"):0;
     for(std::size_t i=0;i<now.size();++i){const auto root="/features/warlock/invocations/"+std::to_string(i),target="/features/warlock/invocationTargets/"+std::to_string(i);if(i>=old.size()||old[i]!=now[i]||get(before,target)!=get(after,target))history.acquisitions[root]={{"id",now[i]},{"classLevel",rank},{"characterLevel",total(after)},{"origin","recorded-event"}};}
     for(auto it=history.acquisitions.begin();it!=history.acquisitions.end();){const auto key=it.key();bool present=false;for(std::size_t i=0;i<now.size();++i)present=present||key=="/features/warlock/invocations/"+std::to_string(i);if(!present)it=history.acquisitions.erase(it);else ++it;}
 }
@@ -161,7 +161,7 @@ void validateAdvance(const CharacterDocument& d,const Json& before,const Json& a
     const auto& a=before.at("choices");const auto& b=after.at("choices");const auto oldOrder=classOrder(a),newOrder=classOrder(b);
     if(total(b)!=total(a)+1||total(a)>=20||newOrder.size()!=oldOrder.size()+1||!std::equal(oldOrder.begin(),oldOrder.end(),newOrder.begin())){problem(errors,"advance-level","Advancement must add exactly one class level while preserving every earlier class event.");return;}
     validateInvocationDependencies(a,b,rules,errors);
-    const auto target=shortId(newOrder.back());const auto available=policies(a,rules);std::map<std::string,Field> resultingFields;const auto added=newFields(d,before,after,rules,history,&resultingFields);std::vector<std::string> paths;diff(lockedChoices(a),lockedChoices(b),"",paths);
+    const auto target=classProfile(rules,newOrder.back());const auto available=policies(a,rules);std::map<std::string,Field> resultingFields;const auto added=newFields(d,before,after,rules,history,&resultingFields);std::vector<std::string> paths;diff(lockedChoices(a),lockedChoices(b),"",paths);
     const auto changedInvocation=invocationScopes(a,b);std::set<std::string> groupPaths;
     for(const auto& path:paths){
         if(path=="/level"||path=="/multiclass"||starts(path,"/advancement"))continue;
@@ -231,10 +231,16 @@ Parsed parse(const CharacterDocument& d,const ResolvedRuleset* rules,bool checkR
             if(state.pending.empty()||integerChoice(event,"beginSequence",-1)!=integerChoice(state.pending,"sequence",-2)){problem(state.messages,"commit","Commit has no matching pending operation.");break;}
             const bool advance=kind==std::string(prefix)+"commit-advance";
             if(state.pending.value("kind","")!=std::string(prefix)+(advance?"begin-advance":"begin-change")){problem(state.messages,"commit-kind","Commit kind does not match the pending operation.");break;}
-            if(advance){if(classOrder(after["choices"]).back()!=state.pending.value("classId",""))problem(state.messages,"advance-class","The committed class differs from the class selected by Begin Advancement.");std::map<std::string,int> spent;if(rules)validateAdvance(d,before,after,*rules,state.events,state.messages,&spent);state.trigger="advance";state.triggerClass=shortId(classOrder(after["choices"]).back());state.triggerSequence=seq;state.used=std::move(spent);}
+            if(advance){if(classOrder(after["choices"]).back()!=state.pending.value("classId",""))problem(state.messages,"advance-class","The committed class differs from the class selected by Begin Advancement.");std::map<std::string,int> spent;if(rules)validateAdvance(d,before,after,*rules,state.events,state.messages,&spent);state.trigger="advance";state.triggerClass=rules?classProfile(*rules,classOrder(after["choices"]).back()):shortId(classOrder(after["choices"]).back());state.triggerSequence=seq;state.used=std::move(spent);}
             else if(rules){validateReplacement(before["choices"],after["choices"],*rules,state,state.messages);const auto available=policies(before["choices"],*rules);for(const auto& [budget,n]:changedBudgets(before["choices"],after["choices"],available)){const auto permission=std::find_if(available.begin(),available.end(),[&](const auto& p){return p.budget==budget;});if(permission!=available.end()&&permission->atWill)continue;state.used[budget]+=permission!=available.end()&&allowance(*permission,state)>=999?999:n;}}
-            updateAcquisitions(state,before["choices"],after["choices"]);state.stable=after;state.pending=Json::object();
-            if(event.value("acquisitions",Json::object())!=state.acquisitions)problem(state.messages,"acquisition-tampered","Recorded choice acquisition levels do not match the committed change.");
+            // A rules-free history read cannot infer a content ID's mechanics
+            // profile. Preserve recorded acquisition metadata here; the public
+            // evaluator validates its independent derivation with resolved rules.
+            if(rules){
+                updateAcquisitions(state,before["choices"],after["choices"],rules);
+                if(event.value("acquisitions",Json::object())!=state.acquisitions)problem(state.messages,"acquisition-tampered","Recorded choice acquisition levels do not match the committed change.");
+            }else state.acquisitions=event.value("acquisitions",Json::object());
+            state.stable=after;state.pending=Json::object();
             if(checkRules&&rules)checkCore(d,after,*rules,state.events,state.messages,"Committed history snapshot is not a valid character");
         }else if(kind==std::string(prefix)+"cancel"){
             if(state.pending.empty()||integerChoice(event,"beginSequence",-1)!=integerChoice(state.pending,"sequence",-2)||!sameLocked(before,after)){problem(state.messages,"cancel","Cancellation must restore its pending operation's accepted choices.");break;}
@@ -271,7 +277,7 @@ std::string cadence(const Policy& p){if(p.atWill)return "As an explicit feature 
 std::vector<std::string> editablePendingPaths(const CharacterDocument& d,const ResolvedRuleset& rules,const Parsed& state,const Evaluation& e){
     std::vector<std::string> result;if(state.pending.empty())return result;const auto after=snapshot(d);const auto& before=state.stable;
     if(state.pending.value("kind","")==std::string(prefix)+"begin-advance"){
-        const auto paths=newFields(d,before,after,rules,state.events);result.insert(result.end(),paths.begin(),paths.end());const auto target=shortId(classOrder(d.choices).back());for(const auto& p:policies(before["choices"],rules))if(p.cls==target||p.characterLevelLimit>0)result.push_back(p.path);
+        const auto paths=newFields(d,before,after,rules,state.events);result.insert(result.end(),paths.begin(),paths.end());const auto target=classProfile(rules,classOrder(d.choices).back());for(const auto& p:policies(before["choices"],rules))if(p.cls==target||p.characterLevelLimit>0)result.push_back(p.path);
     }else for(const auto& p:policies(before["choices"],rules)){const auto used=state.used.find(p.budget);if(allowance(p,state)>(used==state.used.end()?0:used->second))result.push_back(p.path);}
     const auto owned=invocationScopes(before["choices"],d.choices);result.insert(result.end(),owned.begin(),owned.end());
     // New dependent feat/Tome fields are offered only inside their owning invocation.
@@ -289,7 +295,7 @@ std::map<std::string,int> srd55HistoryAcquisitionLevels(const CharacterDocument&
 void appendHistoryActionsInternal(const CharacterDocument& d,const ResolvedRuleset& r,Evaluation& e){
     if(historyReplayDepth)return;const auto state=parse(d,&r,false);const auto fields=fieldMap(e);
     if(!state.accepted){ActionDefinition accept;accept.id=std::string(prefix)+"accept-baseline";accept.label="Accept character and start history";accept.description="Lock the completed creation choices. Later changes use their published advancement or rest permissions.";accept.available=e.complete()&&state.messages.empty();accept.reason=accept.available?"":"Complete and validate the character before accepting its baseline.";accept.sources={srd55v2::ref("23-26")};
-        const auto invocations=strings(d.choices,"/features/warlock/invocations");const int warlock=classLevel(d.choices,"warlock");for(std::size_t i=0;i<invocations.size();++i){const auto* item=r.find(invocations[i]);int minimum=item?number(*item,"/prerequisites/minWarlockLevel",1):1;if(const auto* cls=r.find("srd55:warlock"))for(int l=1;l<=20;++l)if(number(*cls,"/progression/invocations/"+std::to_string(l-1),0)>static_cast<int>(i)){minimum=std::max(minimum,l);break;}accept.fields.push_back(integer("/invocationLevels/"+std::to_string(i),"Warlock class level when "+(item?item->value("name",invocations[i]):invocations[i])+" was acquired",minimum,warlock,"Declare the actual acquisition level; a later replacement uses its new acquisition level."));}e.actions.push_back(accept);return;
+        const auto invocations=strings(d.choices,"/features/warlock/invocations");const int warlock=profileLevel(d.choices,r,"warlock");for(std::size_t i=0;i<invocations.size();++i){const auto* item=r.find(invocations[i]);int minimum=item?number(*item,"/prerequisites/minWarlockLevel",1):1;if(const auto* cls=profileClass(d.choices,r,"warlock"))for(int l=1;l<=20;++l)if(number(*cls,"/progression/invocations/"+std::to_string(l-1),0)>static_cast<int>(i)){minimum=std::max(minimum,l);break;}accept.fields.push_back(integer("/invocationLevels/"+std::to_string(i),"Warlock class level when "+(item?item->value("name",invocations[i]):invocations[i])+" was acquired",minimum,warlock,"Declare the actual acquisition level; a later replacement uses its new acquisition level."));}e.actions.push_back(accept);return;
     }
     const auto editable=editablePendingPaths(d,r,state,e);
     for(auto& stage:e.stages)for(auto& f:stage.fields)if(f.scope=="choices"){
@@ -336,7 +342,7 @@ TransitionResult applyHistoryCommandInternal(const CharacterDocument& original,c
     if(id==std::string(prefix)+"commit"){
         if(state.pending.empty())return rejected(original,"pending","There is no pending change to commit.");
         const auto checked=core(original,rules);if(!checked.complete()){appendErrors(result.messages,checked);return result;}
-        auto candidate=original;const bool advancement=state.pending.value("kind","")==std::string(prefix)+"begin-advance";auto next=state;updateAcquisitions(next,state.stable.at("choices"),candidate.choices);
+        auto candidate=original;const bool advancement=state.pending.value("kind","")==std::string(prefix)+"begin-advance";auto next=state;updateAcquisitions(next,state.stable.at("choices"),candidate.choices,&rules);
         appendEvent(candidate,state,advancement?"commit-advance":"commit-change",state.stable,snapshot(candidate),{{"beginSequence",integerChoice(state.pending,"sequence",-1)},{"inputs",command.inputs},{"acquisitions",next.acquisitions}});
         const auto verified=evaluate(candidate,rules);if(!verified.complete()){appendErrors(result.messages,verified);return result;}result.document=std::move(candidate);return result;
     }
@@ -371,7 +377,7 @@ TransitionResult applyHistoryCommandInternal(const CharacterDocument& original,c
         appendEvent(candidate,state,"begin-change",state.stable,snapshot(candidate),{{"policyId",found->id},{"inputs",command.inputs}});
         const auto preview=core(candidate,rules);auto pending=parse(candidate,&rules,false);const auto editable=editablePendingPaths(candidate,rules,pending,preview);
         if(preview.complete()){
-            auto next=pending;updateAcquisitions(next,state.stable["choices"],candidate.choices);appendEvent(candidate,pending,"commit-change",state.stable,snapshot(candidate),{{"beginSequence",pending.sequence},{"inputs",command.inputs},{"acquisitions",next.acquisitions}});
+            auto next=pending;updateAcquisitions(next,state.stable["choices"],candidate.choices,&rules);appendEvent(candidate,pending,"commit-change",state.stable,snapshot(candidate),{{"beginSequence",pending.sequence},{"inputs",command.inputs},{"acquisitions",next.acquisitions}});
             const auto verified=evaluate(candidate,rules);if(!verified.complete()){appendErrors(result.messages,verified);return result;}
         }else{
             for(const auto& message:preview.messages)if(message.severity=="error"){

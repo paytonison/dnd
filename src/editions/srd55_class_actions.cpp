@@ -6,18 +6,6 @@
 namespace dnd::srd55v2 {
 namespace {
 constexpr const char *prefix = "srd55.classes.";
-int classLevel(const CharacterDocument &d, const std::string &name) {
-    int result = 0;
-    const int total = std::clamp(number(d.choices, "/level", 1), 1, 20);
-    for (int n = 1; n <= total; ++n) {
-        const auto id = n == 1 || !d.choices.value("multiclass", false)
-                            ? text(d.choices, "/classId")
-                            : text(d.choices, "/advancement/" + std::to_string(n) + "/classId");
-        if (id == "srd55:" + name)
-            ++result;
-    }
-    return result;
-}
 const ResourceDefinition *findResource(const Evaluation &e, const std::string &id) {
     const auto found = std::find_if(e.resources.begin(), e.resources.end(),
                                     [&](const auto &r) { return r.id == id; });
@@ -239,9 +227,9 @@ const Reuse reuses[] = {
      0, true, "76"}};
 } // namespace
 
-void appendSrd55ClassActions(const CharacterDocument &d, const ResolvedRuleset &, Evaluation &e) {
-    const int druid = classLevel(d, "druid"), monk = classLevel(d, "monk"),
-              sorcerer = classLevel(d, "sorcerer");
+void appendSrd55ClassActions(const CharacterDocument &d, const ResolvedRuleset &rules, Evaluation &e) {
+    const int druid = profileLevel(d.choices, rules, "druid"), monk = profileLevel(d.choices, rules, "monk"),
+              sorcerer = profileLevel(d.choices, rules, "sorcerer");
     if (druid >= 5) {
         add(e, "druid.slot-to-wild-shape", "Wild Resurgence: recover Wild Shape",
             "With no Wild Shape uses remaining, expend any spell slot to regain one use. Once on "
@@ -281,13 +269,13 @@ void appendSrd55ClassActions(const CharacterDocument &d, const ResolvedRuleset &
             fields, "46", text(d.resources, "/lifecycle/restWindow") == "short-rest",
             "First record the qualifying Short Rest.");
     }
-    if (classLevel(d, "barbarian") >= 15 || classLevel(d, "bard") >= 18 || druid == 20 ||
+    if (profileLevel(d.choices, rules, "barbarian") >= 15 || profileLevel(d.choices, rules, "bard") >= 18 || druid == 20 ||
         monk >= 2) {
         std::vector<Field> fields = {
             eventField("/eventId", "Initiative event identifier"),
             integer("/initiativeRoll", "Accepted Initiative d20 result", 1, 20),
             boolean("/confirmed", "I rolled Initiative for this event")};
-        if (classLevel(d, "barbarian") >= 15)
+        if (profileLevel(d.choices, rules, "barbarian") >= 15)
             fields.push_back(boolean("/usePersistentRage", "Use Persistent Rage recovery"));
         if (monk >= 2) {
             const auto *die = e.find("feature.monk.martialArtsDie");
@@ -343,7 +331,7 @@ TransitionResult applySrd55ClassCommand(const CharacterDocument &before,
             throw std::runtime_error("This class action is unavailable.");
         auto &d = result.document;
         const auto &input = command.inputs;
-        const int druid = classLevel(before, "druid");
+        const int druid = profileLevel(before.choices, rules, "druid");
         if (command.id == std::string(prefix) + "druid.slot-to-wild-shape") {
             if (druid < 5 || !flag(input, "confirmedOwnTurn"))
                 throw std::runtime_error(
@@ -402,7 +390,7 @@ TransitionResult applySrd55ClassCommand(const CharacterDocument &before,
                 throw std::runtime_error("Confirm an accepted Initiative roll for this event.");
             const auto id = event(before, command, "eventId");
             const int roll = integerInput(input, "initiativeRoll", 1, 20);
-            if (classLevel(before, "barbarian") >= 15 && flag(input, "usePersistentRage")) {
+            if (profileLevel(before.choices, rules, "barbarian") >= 15 && flag(input, "usePersistentRage")) {
                 const auto &pool = resource(e, "barbarian:rage");
                 const int missing = pool.maximum - remaining(d, pool);
                 if (missing < 1)
@@ -410,11 +398,11 @@ TransitionResult applySrd55ClassCommand(const CharacterDocument &before,
                 spend(d, e, "barbarian:persistent-rage", 1);
                 restore(d, e, pool.id, missing);
             }
-            if (classLevel(before, "bard") >= 18)
+            if (profileLevel(before.choices, rules, "bard") >= 18)
                 minimum(d, e, "bard:inspiration", 2);
             if (druid == 20)
                 minimum(d, e, "druid:wild-shape", 1);
-            const int monk = classLevel(before, "monk");
+            const int monk = profileLevel(before.choices, rules, "monk");
             if (monk >= 2 && flag(input, "useUncannyMetabolism")) {
                 const int sides = stat(e, "feature.monk.martialArtsDie");
                 if (sides < 1 || sides > 1000)
@@ -437,7 +425,7 @@ TransitionResult applySrd55ClassCommand(const CharacterDocument &before,
                 d.rolls["classActions"][id] = {{"action", command.id}, {"initiativeD20", roll}};
             }
         } else if (command.id == std::string(prefix) + "activate-innate-sorcery-with-points") {
-            if (classLevel(before, "sorcerer") < 7 || !flag(input, "confirmedBonusAction"))
+            if (profileLevel(before.choices, rules, "sorcerer") < 7 || !flag(input, "confirmedBonusAction"))
                 throw std::runtime_error(
                     "Sorcery Incarnate requires level 7 and its Bonus Action.");
             for (const auto *condition : {"incapacitated", "unconscious"}) {

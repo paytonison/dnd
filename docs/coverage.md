@@ -1,6 +1,6 @@
 # Coverage ledger
 
-Coverage is recorded by publication and feature. A catalog entry is not an implementation claim. The delivery gates are evaluated against `PLAN (1).md`; this ledger must not redefine that scope to match whichever tests currently pass.
+Coverage is recorded by publication and feature. A catalog entry is not an implementation claim. The delivery gates are evaluated against `PLAN.md`; this ledger must not redefine that scope to match whichever tests currently pass.
 
 | Publication/profile | Current implementation | Verification |
 | --- | --- | --- |
@@ -19,6 +19,6 @@ Coverage is recorded by publication and feature. A catalog entry is not an imple
 | 2014 5e / SRD 5.1 | Planned | Not implemented or verified |
 | Supplemental publications | Per-edition expansion pending; common pack import interface implemented | No supplemental publication lifecycle is claimed as implemented |
 
-The B/X human tables stop at level 14. The Expert book's suggested extrapolation pending a future Companion expansion is distinct from the printed core class tables. It must not be silently substituted for verified progression. Detailed B/X source ambiguities belong in the B/X source ledger.
+The full B/X human tables stop at level 14, but Expert X7–X8 expressly allows human advancement through 36. The interface now labels 14 as the **printed-table coverage limit**, while dwarf 12, elf 10, and halfling 8 remain actual class limits. Beyond-14 XP/HP increments and attack guidance are available in the original book; later spells and special abilities require an explicit continuation profile and campaign decisions. That profile is not yet implemented, so the original first-release normal-maximum requirement remains **open**. No later edition or speculative complete progression is substituted. See the precise source boundary in `sources-bx.md`.
 
 Platform claims likewise remain separate: CI jobs are configured for macOS, Windows and Linux. A checked-in workflow is not proof that a hosted job ran. Initial local runtime and packaging acceptance are performed on macOS; unexecuted platforms remain unverified.

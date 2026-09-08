@@ -1,4 +1,6 @@
 #include "dnd/content.hpp"
+#include "dnd/persistence.hpp"
+#include "srd55_fixture.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <array>
 #include <fstream>
@@ -157,4 +159,143 @@ TEST_CASE("SRD Wild Shape and familiar source records have real physical stats a
     REQUIRE(entries.at("srd55:creature-imp").at("type")=="Fiend");
     REQUIRE(entries.at("srd55:creature-imp").at("chainFamiliar")==true);
     REQUIRE(entries.at("srd55:creature-sphinx-of-wonder").at("type")=="Celestial");
+}
+
+namespace {
+struct ProfilePackFixture {
+    dnd::ContentPack core;
+    Json manifest;
+    Json entries = Json::array();
+    std::filesystem::path root;
+    ProfilePackFixture() {
+        auto loaded=dnd::loadPack(std::filesystem::path(DND_DATA_DIR)/"srd55-core-v2");
+        REQUIRE(loaded.valid());core=loaded.pack;
+        root=std::filesystem::temp_directory_path()/("dnd-profile-"+dnd::newCharacter("srd55","2.0.0").id);
+        std::filesystem::create_directories(root/"input");
+        manifest=core.manifest;manifest["id"]="profile-fixture";manifest["version"]="1.0.0";
+        manifest["name"]="Alternate profile fixture";manifest["publisher"]="Profile Test Publisher";manifest["origin"]="homebrew";
+        manifest["dependencies"]=Json::array({{{"id","srd55-core"},{"version","2.0.0"}}});manifest["dataFiles"]=Json::array({"content.json"});
+    }
+    ~ProfilePackFixture(){std::error_code ignored;std::filesystem::remove_all(root,ignored);}
+    Json definition(const std::string& id)const {
+        const auto found=std::find_if(core.entries.begin(),core.entries.end(),[&](const auto& item){return item.at("id")==id;});
+        REQUIRE(found!=core.entries.end());return *found;
+    }
+    void write()const {
+        std::ofstream(root/"input"/"manifest.json")<<manifest.dump(2);
+        std::ofstream(root/"input"/"content.json")<<entries.dump(2);
+    }
+    dnd::CharacterDocument document()const {auto result=dnd::newCharacter("srd55","2.0.0");result.packs.push_back({"profile-fixture","1.0.0"});return result;}
+};
+bool profileErrors(const std::vector<dnd::Message>& messages){return std::any_of(messages.begin(),messages.end(),[](const auto& message){return message.severity=="error";});}
+}
+
+TEST_CASE("Imported class profiles retain public choices resources identities and saved actions", "[srd55-v2-content][profiles]") {
+    ProfilePackFixture fixture;
+    for(const auto& cls:srd55fixtures::classes){
+        auto definition=fixture.definition("srd55:"+cls);definition["id"]="profile-fixture:"+cls;definition["name"]="Alternate "+cls;
+        definition["source"]={{"publication","Profile Fixture"},{"page","1"}};fixture.entries.push_back(definition);
+        auto subclass=fixture.definition("srd55:"+srd55fixtures::subclasses.at(cls));subclass["id"]="profile-fixture:"+srd55fixtures::subclasses.at(cls);
+        subclass["classId"]="profile-fixture:"+cls;subclass["source"]={{"publication","Profile Fixture Subclass"},{"page","2"}};
+        if(subclass.contains("spellGrants"))for(auto& grant:subclass["spellGrants"])grant["source"]={{"publication","Profile Fixture Spell Grants"},{"page","3"}};
+        if(subclass.contains("landSpells"))for(auto& land:subclass["landSpells"])for(auto& grant:land)grant["source"]={{"publication","Profile Fixture Land Grants"},{"page","4"}};
+        fixture.entries.push_back(subclass);
+    }
+    fixture.write();auto loaded=dnd::loadPack(fixture.root/"input");REQUIRE(loaded.valid());
+    const auto installed=dnd::installPack(fixture.root/"input",fixture.root/"installed",{fixture.core});REQUIRE_FALSE(profileErrors(installed));
+    loaded=dnd::loadPack(fixture.root/"installed"/"profile-fixture-1.0.0");REQUIRE(loaded.valid());
+    const auto resolved=dnd::resolveRuleset(fixture.document(),{fixture.core,loaded.pack});
+    INFO(Json(resolved.messages.size()).dump());REQUIRE(resolved.valid());
+    const auto reversed=dnd::resolveRuleset(fixture.document(),{loaded.pack,fixture.core});REQUIRE(reversed.valid());REQUIRE(reversed.content==resolved.content);
+    const auto stock=srd55fixtures::rules();
+    for(const auto& cls:srd55fixtures::classes)for(const int classLevel:{3,20}){
+        CAPTURE(cls,classLevel);
+        const auto original=srd55fixtures::complete(cls,classLevel,stock);INFO(srd55fixtures::errors(original.evaluation));REQUIRE(original.evaluation.complete());
+        auto document=original.document;document.packs=fixture.document().packs;document.choices["classId"]="profile-fixture:"+cls;
+        document.choices["subclasses"][cls]="profile-fixture:"+srd55fixtures::subclasses.at(cls);
+        const auto evaluated=dnd::evaluate(document,resolved);INFO(srd55fixtures::errors(evaluated));REQUIRE(evaluated.complete());
+        for(const auto& resource:original.evaluation.resources){
+            const auto found=std::find_if(evaluated.resources.begin(),evaluated.resources.end(),[&](const auto& candidate){return candidate.id==resource.id;});
+            CAPTURE(resource.id);REQUIRE(found!=evaluated.resources.end());CHECK(found->maximum==resource.maximum);CHECK(found->recharge==resource.recharge);
+        }
+        std::set<std::string> expectedFields,actualFields;
+        for(const auto& stage:original.evaluation.stages)if(stage.id.starts_with("features-"))for(const auto& field:stage.fields)expectedFields.insert(field.path);
+        for(const auto& stage:evaluated.stages)if(stage.id.starts_with("features-"))for(const auto& field:stage.fields)actualFields.insert(field.path);
+        CHECK(actualFields==expectedFields);
+        for(const auto& id:{"hp.maximum","armorClass","proficiency"}){const auto* expected=original.evaluation.find(id);const auto* actual=evaluated.find(id);REQUIRE(expected);REQUIRE(actual);CHECK(actual->normal==expected->normal);}
+        const auto path=fixture.root/(cls+".dnd.json");dnd::saveCharacter(path,document);const auto reopened=dnd::loadCharacter(path);REQUIRE_FALSE(reopened.inspectOnly);CHECK(dnd::toJson(reopened.document)==dnd::toJson(document));
+        CHECK(dnd::toJson(dnd::evaluate(reopened.document,resolved))==dnd::toJson(evaluated));
+        if(cls=="warlock"&&classLevel==3){
+            Json inputs;for(std::size_t i=0;i<document.choices["features"]["warlock"]["invocations"].size();++i)inputs["invocationLevels"][std::to_string(i)]=3;
+            auto baseline=dnd::executeCommand(document,resolved,{"srd55.history.accept-baseline",inputs});REQUIRE(baseline.valid());
+            auto advanced=dnd::executeCommand(baseline.document,resolved,{"srd55.history.begin-advance",{{"classId","profile-fixture:warlock"}}});REQUIRE(advanced.valid());
+            srd55fixtures::seedAdvancement(advanced.document,stock,"warlock",4);advanced.document.choices["subclasses"]["warlock"]="profile-fixture:fiend-patron";
+            advanced.document.choices["features"]["warlock"]["invocations"][0]="srd55:otherworldly-leap";
+            const auto completed=srd55fixtures::finish(advanced.document,resolved);INFO(srd55fixtures::errors(completed.evaluation));REQUIRE(completed.evaluation.complete());
+            const auto committed=dnd::executeCommand(completed.document,resolved,{"srd55.history.commit",Json::object()});REQUIRE(committed.valid());
+            const auto event=std::find_if(committed.document.advancement.rbegin(),committed.document.advancement.rend(),[](const auto& item){return item.is_object()&&item.value("kind","")=="srd55.history.commit-advance";});
+            REQUIRE(event!=committed.document.advancement.rend());CHECK(event->at("acquisitions").at("/features/warlock/invocations/0").at("classLevel")==4);
+            const auto rested=dnd::executeCommand(committed.document,resolved,{"srd55.resources.short-rest",{{"hours",1},{"interrupted",false}}});REQUIRE(rested.valid());
+            const auto path=fixture.root/"warlock-after-rest.dnd.json";dnd::saveCharacter(path,rested.document);const auto reopened=dnd::loadCharacter(path);REQUIRE_FALSE(reopened.inspectOnly);CHECK(dnd::evaluate(reopened.document,resolved).complete());
+        }
+        if(cls=="fighter"&&classLevel==3){
+            const auto resource=std::find_if(evaluated.resources.begin(),evaluated.resources.end(),[](const auto& value){return value.id=="fighter:second-wind";});REQUIRE(resource!=evaluated.resources.end());CHECK(resource->maximum==2);
+            CHECK(std::any_of(resource->sources.begin(),resource->sources.end(),[](const auto& source){return source.publication=="Profile Fixture";}));
+            CHECK(dnd::renderSheetHtml(document,evaluated,resolved).find("Alternate fighter")!=std::string::npos);
+            auto spent=dnd::executeCommand(document,resolved,{"srd55.resources.spend",{{"resource","fighter:second-wind"},{"amount",1}}});REQUIRE(spent.valid());CHECK(spent.document.resources["fighter:second-wind"]==1);CHECK(spent.document.choices["classId"]=="profile-fixture:fighter");
+            auto rested=dnd::executeCommand(spent.document,resolved,{"srd55.resources.short-rest",{{"hours",1},{"interrupted",false}}});REQUIRE(rested.valid());CHECK(rested.document.resources["fighter:second-wind"]==2);
+            auto baseline=dnd::executeCommand(rested.document,resolved,{"srd55.history.accept-baseline",Json::object()});REQUIRE(baseline.valid());
+            auto advanced=dnd::executeCommand(baseline.document,resolved,{"srd55.history.begin-advance",{{"classId","profile-fixture:fighter"}}});REQUIRE(advanced.valid());
+            srd55fixtures::seedAdvancement(advanced.document,stock,"fighter",4);advanced.document.choices["subclasses"]["fighter"]="profile-fixture:champion";
+            auto completed=srd55fixtures::finish(advanced.document,resolved);INFO(srd55fixtures::errors(completed.evaluation));REQUIRE(completed.evaluation.complete());
+            auto committed=dnd::executeCommand(completed.document,resolved,{"srd55.history.commit",Json::object()});INFO(srd55fixtures::errors(dnd::evaluate(committed.document,resolved)));REQUIRE(committed.valid());CHECK(committed.document.choices["classId"]=="profile-fixture:fighter");
+        }
+    }
+}
+
+TEST_CASE("Supported profile progression reads the selected definition", "[srd55-v2-content][profiles]") {
+    ProfilePackFixture fixture;auto fighter=fixture.definition("srd55:fighter");fighter["id"]="profile-fixture:warrior";fighter["progression"]["secondWind"][0]=3;fighter["progression"]["attacks"][0]=2;fixture.entries.push_back(fighter);fixture.write();
+    const auto loaded=dnd::loadPack(fixture.root/"input");REQUIRE(loaded.valid());const auto rules=dnd::resolveRuleset(fixture.document(),{fixture.core,loaded.pack});REQUIRE(rules.valid());
+    auto original=srd55fixtures::complete("fighter",1,srd55fixtures::rules());REQUIRE(original.evaluation.complete());original.document.packs=fixture.document().packs;original.document.choices["classId"]="profile-fixture:warrior";
+    const auto result=dnd::evaluate(original.document,rules);INFO(srd55fixtures::errors(result));REQUIRE(result.complete());
+    REQUIRE(result.find("feature.fighter.resource-second-wind"));CHECK(result.find("feature.fighter.resource-second-wind")->normal["maximum"]==3);
+    REQUIRE(result.find("attacks"));CHECK(result.find("attacks")->normal==2);
+}
+
+TEST_CASE("Unsupported profile bindings and malformed progression fail before installation", "[srd55-v2-content][profiles]") {
+    ProfilePackFixture fixture;const auto original=fixture.definition("srd55:fighter");
+    for(const auto& change:std::vector<std::pair<std::string,Json>>{
+        {"/rulesProfile","unknown-profile"},{"/rulesProfile",123},
+        {"/features/0/mechanics/feature","fighter:unimplemented-power"},{"/features/0/mechanics/handler",false},
+        {"/features/0/mechanics/extraEffect",42},{"/features/0/level",2},
+        {"/progression/secondWind/0","three"},{"/progression/secondWind/0",-1},{"/progression/secondWind/0",1.5},
+        {"/progression/attacks/0",0},{"/progression/mystery",Json::array()},
+        {"/casting/ability","intelligence"},{"/casting/extraEffect",42},{"/proficiency/0",20},{"/features",Json::array()}}){
+        CAPTURE(change.first,change.second);auto invalid=original;invalid["id"]="profile-fixture:invalid";invalid[Json::json_pointer(change.first)]=change.second;fixture.entries=Json::array({invalid});fixture.write();
+        const auto loaded=dnd::loadPack(fixture.root/"input");REQUIRE_FALSE(loaded.valid());
+        CHECK(std::any_of(loaded.messages.begin(),loaded.messages.end(),[](const auto& message){return message.path.find("profile-fixture:invalid")!=std::string::npos;}));
+        const auto installed=dnd::installPack(fixture.root/"input",fixture.root/"installed",{fixture.core});CHECK(profileErrors(installed));CHECK_FALSE(std::filesystem::exists(fixture.root/"installed"/"profile-fixture-1.0.0"));
+        auto direct=fixture.core;direct.manifest=fixture.manifest;direct.entries={invalid};const auto rules=dnd::resolveRuleset(fixture.document(),{fixture.core,direct});CHECK_FALSE(rules.valid());
+    }
+    for(const auto& cls:{"druid","paladin","rogue","sorcerer","warlock"}){
+        auto invalid=fixture.definition("srd55:"+std::string(cls));invalid["id"]="profile-fixture:invalid";
+        const std::map<std::string,std::string> column={{"druid","knownForms"},{"paladin","layOnHands"},{"rogue","sneakAttack"},{"sorcerer","metamagicCount"},{"warlock","invocations"}};
+        invalid["progression"][column.at(cls)][0]=99;fixture.entries=Json::array({invalid});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    }
+    for(const auto& id:{"srd55:agonizing-blast","srd55:quickened-spell"}){
+        auto invalid=fixture.definition(id);invalid["mechanics"]["feature"]="unknown:binding";fixture.entries=Json::array({invalid});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+        invalid=fixture.definition(id);invalid["id"]="profile-fixture:unsupported";fixture.entries=Json::array({invalid});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    }
+    auto invalidFeat=fixture.definition("srd55:alert");invalidFeat["id"]="profile-fixture:alert";fixture.entries=Json::array({invalidFeat});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    for(const auto& id:{"srd55:elf","srd55:alert","srd55:high-elf","srd55:spellbook"}){
+        auto invalid=fixture.definition(id);invalid["mechanics"]={{"handler","srd55-v2"},{"feature","unimplemented"}};fixture.entries=Json::array({invalid});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    }
+    for(const auto& path:{"/speed/walk","/saves/strength","/skills/athletics"}){
+        auto invalid=fixture.definition("srd55:creature-ape");invalid[Json::json_pointer(path)]="not-a-number";fixture.entries=Json::array({invalid});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    }
+    auto invalidSpells=fixture.definition("srd55:life-domain");invalidSpells["id"]="profile-fixture:invalid";invalidSpells["spellGrants"][0]["spells"][0]=123;fixture.entries=Json::array({invalidSpells});fixture.write();CHECK_FALSE(dnd::loadPack(fixture.root/"input").valid());
+    auto subclass=fixture.definition("srd55:champion");subclass["id"]="profile-fixture:invalid";subclass["classId"]="srd55:wizard";fixture.entries=Json::array({subclass});fixture.write();
+    const auto loaded=dnd::loadPack(fixture.root/"input");REQUIRE(loaded.valid());const auto resolved=dnd::resolveRuleset(fixture.document(),{fixture.core,loaded.pack});CHECK_FALSE(resolved.valid());
+    CHECK(std::any_of(resolved.messages.begin(),resolved.messages.end(),[](const auto& message){return message.code=="content.srd55.v2.profile"&&message.path=="profile-fixture:invalid/classId";}));
+    CHECK(profileErrors(dnd::installPack(fixture.root/"input",fixture.root/"installed",{fixture.core})));
 }

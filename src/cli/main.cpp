@@ -1,3 +1,4 @@
+#include "content_path.hpp"
 #include "dnd/content.hpp"
 #include "dnd/persistence.hpp"
 #include <fstream>
@@ -66,8 +67,10 @@ int main(int argc, char **argv) {
             const auto inputs = Json::parse(inputsFile);
             const int packArgument = command == "apply" ? 6 : 5;
             std::vector<Message> messages;
-            const auto packs = loadPackDirectory(
-                argc > packArgument ? argv[packArgument] : DND_DATA_DIR, messages);
+            const auto packs =
+                loadPackDirectory(argc > packArgument ? std::filesystem::path(argv[packArgument])
+                                                      : defaultCliPackDirectory(argv[0]),
+                                  messages);
             auto rules = resolveRuleset(loaded.document, packs);
             rules.messages.insert(rules.messages.end(), messages.begin(), messages.end());
             const auto result = executeCommand(loaded.document, rules, {argv[3], inputs});
@@ -101,8 +104,10 @@ int main(int argc, char **argv) {
             }
             const int packArgument = command == "sheet" ? 4 : 3;
             std::vector<Message> messages;
-            const auto packs = loadPackDirectory(
-                argc > packArgument ? argv[packArgument] : DND_DATA_DIR, messages);
+            const auto packs =
+                loadPackDirectory(argc > packArgument ? std::filesystem::path(argv[packArgument])
+                                                      : defaultCliPackDirectory(argv[0]),
+                                  messages);
             auto ruleset = resolveRuleset(loaded.document, packs);
             ruleset.messages.insert(ruleset.messages.end(), messages.begin(), messages.end());
             const auto result = evaluate(loaded.document, ruleset);

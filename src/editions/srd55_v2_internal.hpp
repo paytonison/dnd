@@ -1,13 +1,14 @@
 #pragma once
 #include "dnd/engine.hpp"
 #include <set>
+#include <algorithm>
 
 namespace dnd::srd55v2 {
 struct Context {
     Context(const CharacterDocument& d, const ResolvedRuleset& r) : document(d), rules(r) {}
     const CharacterDocument& document;
     const ResolvedRuleset& rules;
-    std::map<std::string, int> classLevels; // keys are full srd55:class ids
+    std::map<std::string, int> classLevels; // keys are selected content identities, not mechanics profiles
     std::map<std::string, std::vector<int>> classLevelEvents; // class level index -> character level
     std::map<std::string, int> choiceAcquisitionLevels;
     std::string initialClass;
@@ -29,12 +30,17 @@ struct Context {
     bool armored = false;
     bool shield = false;
 };
+struct CalculationTrace {
+    std::vector<std::string> steps;
+    std::vector<SourceRef> sources;
+};
 struct FeatureResult {
     Evaluation evaluation;
     std::map<std::string, int> abilityBonuses;
     std::map<std::string, int> abilityCaps;
     std::set<std::string> skillProficiencies;
     std::map<std::string, int> skillAcquisitionLevels;
+    std::map<std::string, std::vector<SourceRef>> skillProficiencySources;
     std::set<std::string> expertise;
     std::set<std::string> armorTraining;
     std::set<std::string> weaponTraining;
@@ -55,6 +61,14 @@ struct FeatureResult {
     std::map<std::string, int> spellSaveBonuses;
     std::map<std::string, int> spellAttackBonuses;
     std::map<std::string, int> armorFormulas; // named complete base AC, no stacking
+    std::map<std::string, CalculationTrace> armorFormulaTraces;
+    std::map<std::string, std::vector<std::string>> armorFormulaAbilities;
+    CalculationTrace speedTrace;
+    std::map<std::string, CalculationTrace> skillBonusTraces;
+    std::map<std::string, std::vector<std::string>> skillBonusAbilities;
+    std::map<std::string, std::vector<SourceRef>> expertiseSources;
+    std::map<std::string, std::vector<SourceRef>> skillAbilitySources;
+    std::vector<SourceRef> halfProficiencySources;
     int hpBonus = 0;
     int speedBonus = 0;
     int attackCount = 1;
@@ -65,7 +79,7 @@ struct FeatureResult {
 FeatureResult resolveClassChoices(const Context& context);
 // Second pass: final ability modifiers are available; calculations and capacities.
 FeatureResult evaluateClassFeatures(const Context& context);
-FeatureResult advancementAbilityGrant(const std::string& classId, int classLevel);
+FeatureResult advancementAbilityGrant(const std::string& profile, int classLevel);
 
 SourceRef ref(const std::string& page);
 const Json* at(const Json& value, const std::string& pointer);
@@ -80,4 +94,44 @@ std::vector<Choice> options(const ResolvedRuleset& rules, const std::string& kin
 std::string pick(Evaluation& result, const Json& choices, const Field& field, bool required = true);
 std::vector<std::string> picks(Evaluation& result, const Json& choices, const Field& field, int count, bool exact = true);
 void merge(Evaluation& target, const Evaluation& source);
+
+// Content identities remain in the document; executable behavior and its stable
+// choice/resource paths are selected through the validated mechanics profile.
+inline std::string classProfile(const ResolvedRuleset& rules, const std::string& id) {
+    const auto* definition = rules.find(id);
+    return definition && definition->value("kind", "") == "class"
+        ? text(*definition, "/rulesProfile") : "";
+}
+inline std::string selectedClassId(const Context& context, const std::string& profile) {
+    for (const auto& [id, level] : context.classLevels)
+        if (level > 0 && classProfile(context.rules, id) == profile) return id;
+    return "";
+}
+inline int profileLevel(const Context& context, const std::string& profile) {
+    const auto id = selectedClassId(context, profile);
+    const auto found = context.classLevels.find(id);
+    return found == context.classLevels.end() ? 0 : found->second;
+}
+inline const Json* selectedSubclass(const Context& context, const std::string& profile) {
+    auto id = text(context.document.choices, "/subclasses/" + profile);
+    if (id.empty() && context.classLevels.size() == 1)
+        id = text(context.document.choices, "/subclassId");
+    const auto* definition = context.rules.find(id);
+    return profileLevel(context, profile) >= 3 && definition &&
+        definition->value("kind", "") == "subclass" &&
+        classProfile(context.rules, text(*definition, "/classId")) == profile
+        ? definition : nullptr;
+}
+inline int profileLevel(const Json& choices, const ResolvedRuleset& rules, const std::string& profile) {
+    int count = 0;
+    const int total = std::clamp(number(choices, "/level", 1), 1, 20);
+    const auto* multiclass = at(choices, "/multiclass");
+    for (int level = 1; level <= total; ++level) {
+        const auto id = level == 1 || !multiclass || *multiclass != true
+            ? text(choices, "/classId")
+            : text(choices, "/advancement/" + std::to_string(level) + "/classId");
+        if (classProfile(rules, id) == profile) ++count;
+    }
+    return count;
+}
 } // namespace dnd::srd55v2

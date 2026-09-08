@@ -174,3 +174,177 @@ TEST_CASE("Pack import validates dependency compatibility for every advertised m
         std::reverse(manifest["moduleVersions"].begin(), manifest["moduleVersions"].end());
     }
 }
+
+TEST_CASE("Replacement preflight preserves mechanical roles and the usable installation", "[content][replacement]") {
+    TemporaryDirectory temp;
+    const auto installed = temp.path / "installed";
+    REQUIRE(installPack(std::filesystem::path(DND_DATA_DIR) / "bx-core", installed).empty());
+    auto base = basePack();
+    const auto originalTable = *std::find_if(base.entries.begin(), base.entries.end(), [](const auto& item) {
+        return item.at("id") == "bx:combat-tables";
+    });
+    const auto language = *std::find_if(base.entries.begin(), base.entries.end(), [](const auto& item) {
+        return item.at("kind") == "language";
+    });
+    auto addon = base;
+    addon.manifest["id"] = "table-addon";
+    addon.manifest["dependencies"] = Json::array({{{"id", "bx-core"}, {"version", "1.0.0"}}});
+    addon.manifest["dataFiles"] = {"content.json"};
+    const auto source = temp.path / "addon";
+    std::filesystem::create_directories(source);
+    std::ofstream(source / "manifest.json") << addon.manifest.dump();
+    auto document = newCharacter("bx");
+    document.name = "Replacement acceptance";
+    document.choices = {{"class", "bx:fighter"}, {"level", 1}, {"xp", 0},
+        {"abilities", {{"str", 10}, {"int", 10}, {"wis", 10}, {"dex", 10}, {"con", 10}, {"cha", 10}}},
+        {"alignment", "lawful"}, {"hp", {4}}, {"moneyRoll", 18}, {"weapon", "bx:sword"}};
+    const auto baseline = evaluate(document, resolveRuleset(document, {base}));
+    REQUIRE(baseline.complete());
+    document.packs.push_back({"table-addon", "1.0.0"});
+
+    SECTION("Wrong-kind and malformed tables fail load, import, and direct resolution") {
+        for (const bool wrongKind : {true, false}) {
+            CAPTURE(wrongKind);
+            auto replacement = wrongKind ? language : originalTable;
+            replacement["id"] = "table-addon:combat";
+            replacement["replaces"] = "bx:combat-tables";
+            if (!wrongKind) replacement.erase("attackRows");
+            addon.entries = {replacement};
+            std::ofstream(source / "content.json") << Json(addon.entries).dump();
+            const auto loaded = loadPack(source);
+            CHECK_FALSE(loaded.valid());
+            CHECK(hasCode(loaded.messages, "pack.bx.mechanics"));
+            const auto rejected = installPack(source, installed);
+            CHECK(hasCode(rejected, "pack.bx.mechanics"));
+            CHECK_FALSE(std::filesystem::exists(installed / "table-addon-1.0.0"));
+            CHECK_FALSE(std::filesystem::exists(installed / ".table-addon-1.0.0.importing"));
+            for (const auto& catalog : {std::vector<ContentPack>{base, addon}, std::vector<ContentPack>{addon, base}}) {
+                const auto resolved = resolveRuleset(document, catalog);
+                CHECK_FALSE(resolved.valid());
+                const auto evaluated = evaluate(document, resolved);
+                CHECK_FALSE(evaluated.complete());
+                CHECK(evaluated.calculations.empty());
+                CHECK_FALSE(hasCode(evaluated.messages, "evaluation.invalid_input"));
+            }
+            std::vector<Message> messages;
+            const auto usable = loadPackDirectory(installed, messages);
+            REQUIRE(messages.empty());
+            REQUIRE(usable.size() == 1);
+            auto originalDocument = document;
+            originalDocument.packs.pop_back();
+            CHECK(toJson(evaluate(originalDocument, resolveRuleset(originalDocument, usable))) == toJson(baseline));
+        }
+    }
+    SECTION("Compatible table replacement is independent of pack and pin order") {
+        auto replacement = originalTable;
+        replacement["id"] = "table-addon:combat";
+        replacement["replaces"] = "bx:combat-tables";
+        replacement["name"] = "Campaign attack matrix";
+        replacement["source"] = {{"publication", "Acceptance campaign table"}, {"page", "Combat"}};
+        // Explicit homebrew table change: first-level target against AC 9 is 11.
+        replacement["attackRows"][0][0] = 11;
+        addon.entries = {replacement};
+        std::ofstream(source / "content.json") << Json(addon.entries).dump();
+        REQUIRE(loadPack(source).valid());
+        REQUIRE(installPack(source, installed).empty());
+        std::vector<Message> messages;
+        const auto catalog = loadPackDirectory(installed, messages);
+        REQUIRE(messages.empty());
+        const auto expectedRules = resolveRuleset(document, catalog);
+        REQUIRE(expectedRules.valid());
+        const auto expected = evaluate(document, expectedRules);
+        REQUIRE(expected.complete());
+        REQUIRE(expected.find("attack.base"));
+        CHECK(expected.find("attack.base")->effective.at("9") == 11);
+        CHECK(std::any_of(expected.find("attack.base")->sources.begin(), expected.find("attack.base")->sources.end(), [](const auto& source) {
+            return source.publication == "Acceptance campaign table" && source.page == "Combat";
+        }));
+        CHECK(expectedRules.find("bx:combat-tables")->at("replacementId") == "table-addon:combat");
+        CHECK(expectedRules.find("bx:combat-tables")->at("source") == replacement.at("source"));
+        for (int pinOrder = 0; pinOrder < 2; ++pinOrder) {
+            for (const auto& order : {std::vector<ContentPack>{base, addon}, std::vector<ContentPack>{addon, base}}) {
+                const auto rules = resolveRuleset(document, order);
+                REQUIRE(rules.valid());
+                CHECK(rules.content == expectedRules.content);
+                CHECK(toJson(evaluate(document, rules)) == toJson(expected));
+            }
+            std::reverse(document.packs.begin(), document.packs.end());
+        }
+    }
+    SECTION("Generic replacement kind mismatches fail dependency-aware installation") {
+        auto replacement = language;
+        replacement["id"] = "table-addon:not-a-weapon";
+        replacement["replaces"] = "bx:sword";
+        addon.entries = {replacement};
+        std::ofstream(source / "content.json") << Json(addon.entries).dump();
+        REQUIRE(loadPack(source).valid()); // The target's kind requires its dependency.
+        const auto rejected = installPack(source, installed);
+        CHECK(hasCode(rejected, "content.replacement_kind"));
+        CHECK_FALSE(std::filesystem::exists(installed / "table-addon-1.0.0"));
+        const auto rules = resolveRuleset(document, {addon, base});
+        CHECK_FALSE(rules.valid());
+        CHECK(hasCode(rules.messages, "content.replacement_kind"));
+    }
+}
+
+TEST_CASE("Direct resolution validates generic entry fields before edition mechanics", "[content][in-memory]") {
+    const auto base=basePack();const auto document=newCharacter("bx");
+    const auto entryId=base.entries.back().at("id").get<std::string>();
+    for(const auto& change:std::vector<std::pair<std::string,Json>>{
+        {"/replaces",123},{"/source/publication",123},{"/source/page",false},{"/source/url",123},
+        {"/source",Json::array()},{"/kind",123},{"/name",""},{"/id",123},{"/id","unnamespaced"}}){
+        CAPTURE(change.first,change.second);
+        auto bad=base;bad.entries.back()[Json::json_pointer(change.first)]=change.second;
+        ResolvedRuleset rules;REQUIRE_NOTHROW(rules=resolveRuleset(document,{bad}));CHECK_FALSE(rules.valid());
+        const auto path=change.first=="/id"?change.first:"/"+entryId+change.first;
+        CHECK(std::any_of(rules.messages.begin(),rules.messages.end(),[&](const auto& issue){return issue.path.starts_with("/packs/bx-core/")&&issue.path.ends_with(path);}));
+        const auto result=evaluate(document,rules);CHECK_FALSE(result.complete());CHECK(result.calculations.empty());CHECK_FALSE(hasCode(result.messages,"evaluation.invalid_input"));
+    }
+    for(const auto& malformed:Json::array({nullptr,Json::array(),123})){auto bad=base;bad.entries.back()=malformed;ResolvedRuleset rules;REQUIRE_NOTHROW(rules=resolveRuleset(document,{bad}));CHECK_FALSE(rules.valid());CHECK(hasCode(rules.messages,"pack.entry"));CHECK(evaluate(document,rules).calculations.empty());}
+    auto duplicated=base;duplicated.entries.push_back(duplicated.entries.back());const auto rules=resolveRuleset(document,{duplicated});CHECK_FALSE(rules.valid());CHECK(hasCode(rules.messages,"pack.duplicate"));
+    auto unselected=base;unselected.manifest["id"]="unselected";unselected.entries.back()["source"]=123;
+    CHECK(resolveRuleset(document,{base,unselected}).valid()); // Unselected payloads do not change the active ruleset.
+    CHECK(resolveRuleset(document,{base}).valid());
+}
+
+TEST_CASE("Direct resolution validates manifests before typed catalog and dependency access", "[content][in-memory]") {
+    const auto base=basePack();const auto document=newCharacter("bx");
+    for(const auto& change:std::vector<std::pair<std::string,Json>>{
+        {"/id",123},{"/version",123},{"/edition",false},{"/schemaVersion",2},{"/publisher",nullptr},
+        {"/sources/0/publication",123},{"/sources/0/url",false},{"/license/text",123},
+        {"/dependencies",123},{"/dependencies",Json::array({{{"id","bx-core"},{"version",123}}})},
+        {"/conflicts",Json::array({123})},{"/moduleVersions",123},{"/moduleVersions",Json::array({123})},
+        {"/dataFiles",Json::array({123})},{"/dataFiles",Json::array({"../outside.json"})}}){
+        CAPTURE(change.first,change.second);auto bad=base;bad.manifest[Json::json_pointer(change.first)]=change.second;
+        ResolvedRuleset rules;REQUIRE_NOTHROW(rules=resolveRuleset(document,{bad}));CHECK_FALSE(rules.valid());
+        CHECK(std::any_of(rules.messages.begin(),rules.messages.end(),[&](const auto& issue){return issue.path.starts_with("/packs/")&&issue.path.find(change.first)!=std::string::npos;}));
+        CHECK(evaluate(document,rules).calculations.empty());
+    }
+    for(const auto& manifest:Json::array({nullptr,Json::array(),123})){auto bad=base;bad.manifest=manifest;ResolvedRuleset rules;REQUIRE_NOTHROW(rules=resolveRuleset(document,{bad}));CHECK_FALSE(rules.valid());CHECK(hasCode(rules.messages,"pack.manifest"));}
+}
+
+TEST_CASE("Loader installer and direct resolution share metadata rejection without damaging installed data", "[content][in-memory]") {
+    TemporaryDirectory temp;const auto base=basePack();const auto source=temp.path/"source",installed=temp.path/"installed";
+    std::filesystem::create_directories(source);REQUIRE(installPack(std::filesystem::path(DND_DATA_DIR)/"bx-core",installed).empty());
+    auto manifest=base.manifest;manifest["dataFiles"]={"content.json"};std::ofstream(source/"manifest.json")<<manifest.dump();
+    for(const auto& field:{"replaces","source"}){
+        CAPTURE(field);auto bad=base;
+        if(std::string(field)=="replaces")bad.entries.back()[field]=123;
+        else bad.entries.back()[field]={{"publication",123},{"page","B7"}};
+        std::ofstream(source/"content.json")<<Json(bad.entries).dump();
+        const auto loaded=loadPack(source);CHECK_FALSE(loaded.valid());const auto rejected=installPack(source,installed);CHECK_FALSE(rejected.empty());CHECK_FALSE(std::filesystem::exists(installed/".bx-core-1.0.0.importing"));
+        const auto current=loadPack(installed/"bx-core-1.0.0");REQUIRE(current.valid());CHECK(current.pack.manifest==base.manifest);CHECK(current.pack.entries==base.entries);
+    }
+    // A malformed caller-supplied catalog is rejected before installer pinning.
+    auto malformed=base;malformed.manifest["dependencies"]=123;
+    const auto example=std::filesystem::path(DND_DATA_DIR).parent_path().parent_path()/"templates/content-pack";
+    std::vector<Message> result;REQUIRE_NOTHROW(result=installPack(example,installed,{malformed}));CHECK_FALSE(result.empty());CHECK_FALSE(std::filesystem::exists(installed/"example-homebrew-1.0.0"));
+}
+
+TEST_CASE("Throwing mechanical validation becomes a pack diagnostic with the offending record", "[content][in-memory]") {
+    auto bad=basePack();const auto spell=std::find_if(bad.entries.begin(),bad.entries.end(),[](const auto& entry){return entry.at("kind")=="spell";});REQUIRE(spell!=bad.entries.end());
+    const auto id=spell->at("id").get<std::string>();(*spell)["tradition"]=123;
+    ResolvedRuleset rules;REQUIRE_NOTHROW(rules=resolveRuleset(newCharacter("bx"),{bad}));CHECK_FALSE(rules.valid());
+    CHECK(std::any_of(rules.messages.begin(),rules.messages.end(),[&](const auto& issue){return issue.code=="pack.mechanics"&&issue.path=="/packs/bx-core/"+id;}));
+    CHECK(evaluate(newCharacter("bx"),rules).calculations.empty());
+}

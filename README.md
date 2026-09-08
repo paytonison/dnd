@@ -1,6 +1,6 @@
 # Dungeoning a Dragon
 
-A local desktop D&D character builder with a C++20 rules engine and Qt 6 Widgets interface. Work is in progress against [the implementation plan](PLAN%20%281%29.md). The implementation includes original 1981 B/X, the preserved experimental SRD 5.2.1 fighter/wizard interface proof, and an expanded SRD module with all 12 classes through level 20 under continued validation; [the coverage ledger](docs/coverage.md) distinguishes implementation from future editions and verification.
+A local desktop D&D character builder with a C++20 rules engine and Qt 6 Widgets interface. Work is in progress against [the implementation plan](PLAN.md). The implementation includes original 1981 B/X, the preserved experimental SRD 5.2.1 fighter/wizard interface proof, and an expanded SRD module with all 12 classes through level 20 under continued validation; [the coverage ledger](docs/coverage.md) distinguishes implementation from future editions and verification.
 
 ## Build
 
@@ -44,7 +44,7 @@ Use the source dialogs to select content packs, browse searchable options and th
 ./build/dnd-cli sheet rook.dnd.json rook.html
 ```
 
-Evaluation returns exit status `2` for an incomplete or invalid draft, `0` for a complete character, and `1` for a command or file error. It is expected that a newly created blank draft is incomplete. The optional final argument to `evaluate` and `sheet` selects an alternate pack directory.
+Evaluation returns exit status `2` for an incomplete or invalid draft, `0` for a complete character, and `1` for a command or file error. It is expected that a newly created blank draft is incomplete. The optional final argument to `evaluate` and `sheet` selects an alternate pack directory. Installed CLI commands discover packs relative to the executable under `../share/dungeoning-a-dragon/packs`; an explicit directory takes precedence. Only the original development executable falls back to its configured checkout. See [installed CLI validation](docs/packaging.md#installed-command-line-tool).
 
 Application code retains the repository's BSD-3-Clause license. Content license and publisher metadata are separate. SRD 5.2.1 material is attributed under CC BY 4.0. B/X is independently encoded mechanical data with original explanatory text; book scans, artwork, and copied book prose are excluded from distributions.
 
