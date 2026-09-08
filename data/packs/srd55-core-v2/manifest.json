@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "id": "srd55-core",
+  "version": "2.0.0",
+  "edition": "srd55",
+  "moduleVersions": [
+    "2.0.0"
+  ],
+  "name": "SRD 5.2.1 \u2014 classes 1\u201320 and complete spell catalog",
+  "publisher": "Wizards of the Coast LLC",
+  "origin": "official",
+  "license": {
+    "id": "CC-BY-4.0",
+    "text": "This work includes material from the System Reference Document 5.2.1 (\"SRD 5.2.1\") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.\n\nChanges: Original SRD material has been converted to structured class, subclass, feat, spell, option, equipment, and creature records. Text extraction normalizes typography and line wrapping. Numeric progression tables were transcribed and visually checked against original pages. Mechanical metadata identifies supported evaluator handlers; inclusion of a description does not establish that its effects have been executed or tested. Application code remains separately licensed under BSD-3-Clause.\n",
+    "url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+  },
+  "dependencies": [],
+  "conflicts": [],
+  "dataFiles": [
+    "content.json",
+    "magic-items.json"
+  ],
+  "sources": [
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "1",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=1"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "19",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=19"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "23",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=23"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=24"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "25",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=25"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "26",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=26"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "28",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=28"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "31",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=31"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "36",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=36"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "41",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=41"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "47",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=47"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "49",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=49"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "53",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=53"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "57",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=57"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=61"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=64"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "70",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=70"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "77",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=77"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "83",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=83"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "88",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=88"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "89",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=89"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "96",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "97",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "103",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=103"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "104",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=104"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "107",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=107"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "175",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=175"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "254",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=254"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "344",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=344"
+    },
+    {
+      "publication": "System Reference Document 5.2.1",
+      "page": "364",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=364"
+    }
+  ],
+  "coverage": {
+    "status": "experimental",
+    "dataCoverage": "12 SRD classes and subclasses levels 1\u201320; all SRD class spell lists and descriptions; feats, invocations, Metamagic; required species and creature records",
+    "executionCoverage": "Determined by module 2.0.0 evaluator and acceptance tests, independently of data catalog inclusion."
+  },
+  "sourceArtifact": {
+    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+    "sha256": "8974902d109d6e63672d7c490bde9ccf052410503d9cfa768237154fbc5e3d87",
+    "pages": 364
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "example-homebrew",
+  "version": "1.0.0",
+  "edition": "bx",
+  "name": "Example homebrew equipment",
+  "publisher": "Your campaign",
+  "origin": "homebrew",
+  "license": {
+    "id": "BSD-3-Clause",
+    "text": "Original example data copyright 2026 Payton Ison and contributors, licensed under BSD-3-Clause. See repository LICENSE."
+  },
+  "sources": [
+    {
+      "publication": "Example homebrew equipment",
+      "page": "1",
+      "url": ""
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "bx-core",
+      "version": "1.0.0"
+    }
+  ],
+  "conflicts": [],
+  "dataFiles": [
+    "content.json"
+  ]
+}

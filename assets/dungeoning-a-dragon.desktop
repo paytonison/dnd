@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dungeoning a Dragon
+Comment=Offline tabletop character builder
+Exec="Dungeoning a Dragon" %f
+Icon=dungeoning-a-dragon
+Terminal=false
+Categories=Game;RolePlaying;

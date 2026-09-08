@@ -1,0 +1,96 @@
+{
+  "format": "dungeoning-a-dragon",
+  "schemaVersion": 1,
+  "id": "legacy-wizard-acceptance",
+  "name": "Nyra",
+  "edition": "srd55",
+  "moduleVersion": "1.0.0",
+  "campaign": {},
+  "packs": [
+    {
+      "id": "srd55-core",
+      "version": "1.0.0"
+    }
+  ],
+  "choices": {
+    "classId": "srd55:wizard",
+    "level": 3,
+    "speciesId": "srd55:dwarf",
+    "backgroundId": "srd55:sage",
+    "alignment": "Neutral",
+    "languages": [
+      "srd55:elvish",
+      "srd55:draconic"
+    ],
+    "abilities": {
+      "strength": 8,
+      "dexterity": 12,
+      "constitution": 13,
+      "intelligence": 15,
+      "wisdom": 14,
+      "charisma": 10
+    },
+    "backgroundBoosts": {
+      "intelligence": 2,
+      "constitution": 1
+    },
+    "classSkills": [
+      "srd55:insight",
+      "srd55:investigation"
+    ],
+    "classEquipment": "A",
+    "backgroundEquipment": "A",
+    "weaponId": "srd55:dagger",
+    "cantrips": [
+      "srd55:light",
+      "srd55:mage-hand",
+      "srd55:ray-of-frost"
+    ],
+    "spellbook": {
+      "1": [
+        "srd55:detect-magic",
+        "srd55:feather-fall",
+        "srd55:mage-armor",
+        "srd55:magic-missile",
+        "srd55:sleep",
+        "srd55:thunderwave"
+      ],
+      "2": [
+        "srd55:shield",
+        "srd55:burning-hands"
+      ],
+      "3": [
+        "srd55:misty-step",
+        "srd55:web"
+      ]
+    },
+    "preparedSpells": [
+      "srd55:mage-armor",
+      "srd55:magic-missile",
+      "srd55:sleep",
+      "srd55:thunderwave",
+      "srd55:shield",
+      "srd55:web"
+    ],
+    "magicInitiate": {
+      "background": {
+        "ability": "intelligence",
+        "cantrips": [
+          "srd55:fire-bolt",
+          "srd55:mending"
+        ],
+        "spell": "srd55:identify"
+      }
+    },
+    "scholarSkill": "srd55:arcana",
+    "subclassId": "srd55:evoker",
+    "evocationSavant": [
+      "srd55:scorching-ray",
+      "srd55:shatter"
+    ]
+  },
+  "advancement": [],
+  "rolls": {},
+  "resources": {},
+  "overrides": []
+}

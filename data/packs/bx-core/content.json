@@ -1,0 +1,4108 @@
+[
+  {
+    "id": "bx:cleric",
+    "kind": "class",
+    "name": "Cleric",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B9",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 6,
+    "maxLevel": 14,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 1,
+    "primeRequisites": [
+      "wis"
+    ],
+    "minimumAbilities": {},
+    "xp": [
+      0,
+      1500,
+      3000,
+      6000,
+      12000,
+      25000,
+      50000,
+      100000,
+      200000,
+      300000,
+      400000,
+      500000,
+      600000,
+      700000
+    ],
+    "spellSlots": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        2,
+        2,
+        1,
+        1
+      ],
+      [
+        3,
+        3,
+        2,
+        2,
+        1
+      ],
+      [
+        3,
+        3,
+        3,
+        2,
+        2
+      ],
+      [
+        4,
+        4,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        4,
+        4,
+        3,
+        3
+      ],
+      [
+        5,
+        5,
+        4,
+        4,
+        3
+      ],
+      [
+        5,
+        5,
+        5,
+        4,
+        4
+      ],
+      [
+        6,
+        5,
+        5,
+        5,
+        4
+      ]
+    ],
+    "spellTradition": "cleric",
+    "attackProgression": "cleric",
+    "attackStep": 4,
+    "savingThrows": [
+      [
+        11,
+        12,
+        14,
+        16,
+        15
+      ],
+      [
+        9,
+        10,
+        12,
+        14,
+        12
+      ],
+      [
+        6,
+        7,
+        9,
+        11,
+        9
+      ],
+      [
+        3,
+        5,
+        7,
+        8,
+        7
+      ]
+    ],
+    "savingThrowStep": 4,
+    "abilityDonors": [
+      "str",
+      "int"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X5",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110792-sample.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 1,
+        "text": "Turning undead uses the class table and a 2d6 result; a successful result affects 2d6 hit dice, with at least one creature affected.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      },
+      {
+        "level": 9,
+        "text": "Eligible to establish a stronghold; religious support, followers, and obligations are adjudicated by the DM.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [],
+    "rulesProfile": "cleric"
+  },
+  {
+    "id": "bx:dwarf",
+    "kind": "class",
+    "name": "Dwarf",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B9",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 8,
+    "maxLevel": 12,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 3,
+    "primeRequisites": [
+      "str"
+    ],
+    "minimumAbilities": {
+      "con": 9
+    },
+    "xp": [
+      0,
+      2200,
+      4400,
+      8800,
+      17000,
+      35000,
+      70000,
+      140000,
+      270000,
+      400000,
+      530000,
+      660000
+    ],
+    "spellSlots": [],
+    "spellTradition": "",
+    "attackProgression": "warrior",
+    "attackStep": 3,
+    "savingThrows": [
+      [
+        8,
+        9,
+        10,
+        13,
+        12
+      ],
+      [
+        6,
+        7,
+        8,
+        10,
+        10
+      ],
+      [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        2,
+        3,
+        4,
+        4,
+        6
+      ]
+    ],
+    "savingThrowStep": 3,
+    "abilityDonors": [
+      "int",
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X5",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110792-sample.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 1,
+        "text": "Infravision: 60 feet. Detect underground slopes, traps, moving walls, or recent construction on 1-2 on d6 while searching.",
+        "source": {
+          "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+          "page": "B9",
+          "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+        }
+      },
+      {
+        "level": 9,
+        "text": "Eligible to establish an underground stronghold.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [
+      "Dwarvish",
+      "Gnome",
+      "Kobold",
+      "Goblin"
+    ],
+    "rulesProfile": "dwarf"
+  },
+  {
+    "id": "bx:elf",
+    "kind": "class",
+    "name": "Elf",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B9",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 6,
+    "maxLevel": 10,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 2,
+    "primeRequisites": [
+      "str",
+      "int"
+    ],
+    "minimumAbilities": {
+      "int": 9
+    },
+    "xp": [
+      0,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      120000,
+      250000,
+      400000,
+      600000
+    ],
+    "spellSlots": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        2,
+        2,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        3,
+        2,
+        1,
+        0
+      ],
+      [
+        3,
+        3,
+        3,
+        3,
+        2,
+        0
+      ]
+    ],
+    "spellTradition": "magic-user",
+    "attackProgression": "warrior",
+    "attackStep": 3,
+    "savingThrows": [
+      [
+        12,
+        13,
+        13,
+        15,
+        15
+      ],
+      [
+        10,
+        11,
+        11,
+        13,
+        12
+      ],
+      [
+        8,
+        9,
+        9,
+        10,
+        10
+      ],
+      [
+        6,
+        7,
+        8,
+        8,
+        8
+      ]
+    ],
+    "savingThrowStep": 3,
+    "abilityDonors": [
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X5",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110792-sample.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 1,
+        "text": "Infravision: 60 feet. Find secret or hidden doors on 1-2 on d6 while searching. Immune to ghoul paralysis.",
+        "source": {
+          "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+          "page": "B9",
+          "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+        }
+      },
+      {
+        "level": 9,
+        "text": "Eligible to establish a woodland stronghold; local animal assistance depends on its completion and the DM.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [
+      "Elvish",
+      "Orc",
+      "Hobgoblin",
+      "Gnoll"
+    ],
+    "rulesProfile": "elf"
+  },
+  {
+    "id": "bx:fighter",
+    "kind": "class",
+    "name": "Fighter",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B10",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 8,
+    "maxLevel": 14,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 2,
+    "primeRequisites": [
+      "str"
+    ],
+    "minimumAbilities": {},
+    "xp": [
+      0,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      120000,
+      240000,
+      360000,
+      480000,
+      600000,
+      720000,
+      840000
+    ],
+    "spellSlots": [],
+    "spellTradition": "",
+    "attackProgression": "warrior",
+    "attackStep": 3,
+    "savingThrows": [
+      [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      [
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      [
+        8,
+        9,
+        10,
+        10,
+        12
+      ],
+      [
+        6,
+        7,
+        8,
+        8,
+        10
+      ],
+      [
+        4,
+        5,
+        6,
+        5,
+        8
+      ]
+    ],
+    "savingThrowStep": 3,
+    "abilityDonors": [
+      "int",
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X6",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 9,
+        "text": "Eligible to establish a castle and become a landed ruler.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [],
+    "rulesProfile": "fighter"
+  },
+  {
+    "id": "bx:halfling",
+    "kind": "class",
+    "name": "Halfling",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B10",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 6,
+    "maxLevel": 8,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 0,
+    "primeRequisites": [
+      "str",
+      "dex"
+    ],
+    "minimumAbilities": {
+      "dex": 9,
+      "con": 9
+    },
+    "xp": [
+      0,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      120000
+    ],
+    "spellSlots": [],
+    "spellTradition": "",
+    "attackProgression": "warrior",
+    "attackStep": 3,
+    "savingThrows": [
+      [
+        8,
+        9,
+        10,
+        13,
+        12
+      ],
+      [
+        6,
+        7,
+        8,
+        10,
+        10
+      ],
+      [
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    ],
+    "savingThrowStep": 3,
+    "abilityDonors": [
+      "int",
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X6",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 1,
+        "text": "Hiding: 90% outdoors in cover; 1-2 on d6 in dungeon shadows while remaining silent and motionless.",
+        "source": {
+          "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+          "page": "B10",
+          "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+        }
+      },
+      {
+        "level": 1,
+        "text": "May establish a stronghold when resources and circumstances permit.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [],
+    "rulesProfile": "halfling"
+  },
+  {
+    "id": "bx:magic-user",
+    "kind": "class",
+    "name": "Magic-user",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B10",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 4,
+    "maxLevel": 14,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 1,
+    "primeRequisites": [
+      "int"
+    ],
+    "minimumAbilities": {},
+    "xp": [
+      0,
+      2500,
+      5000,
+      10000,
+      20000,
+      40000,
+      80000,
+      150000,
+      300000,
+      450000,
+      600000,
+      750000,
+      900000,
+      1050000
+    ],
+    "spellSlots": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        2,
+        2,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        3,
+        2,
+        1,
+        0
+      ],
+      [
+        3,
+        3,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      [
+        4,
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3
+      ],
+      [
+        4,
+        4,
+        4,
+        4,
+        3,
+        3
+      ]
+    ],
+    "spellTradition": "magic-user",
+    "attackProgression": "magic-user",
+    "attackStep": 5,
+    "savingThrows": [
+      [
+        13,
+        14,
+        13,
+        16,
+        15
+      ],
+      [
+        11,
+        12,
+        11,
+        14,
+        12
+      ],
+      [
+        8,
+        9,
+        8,
+        11,
+        8
+      ]
+    ],
+    "savingThrowStep": 5,
+    "abilityDonors": [
+      "str",
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X6",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 9,
+        "text": "May undertake magical item research; process and costs require DM adjudication.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7, X51",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      },
+      {
+        "level": 11,
+        "text": "May establish a tower and attract 1d6 apprentices of levels 1-3.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X7-X8",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [],
+    "rulesProfile": "magic-user"
+  },
+  {
+    "id": "bx:thief",
+    "kind": "class",
+    "name": "Thief",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B10",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    "hitDie": 4,
+    "maxLevel": 14,
+    "rolledHitDiceLimit": 9,
+    "fixedHpPerLevel": 2,
+    "primeRequisites": [
+      "dex"
+    ],
+    "minimumAbilities": {},
+    "xp": [
+      0,
+      1200,
+      2400,
+      4800,
+      9600,
+      20000,
+      40000,
+      80000,
+      160000,
+      280000,
+      400000,
+      520000,
+      640000,
+      760000
+    ],
+    "spellSlots": [],
+    "spellTradition": "",
+    "attackProgression": "cleric",
+    "attackStep": 4,
+    "savingThrows": [
+      [
+        13,
+        14,
+        13,
+        16,
+        15
+      ],
+      [
+        12,
+        13,
+        11,
+        14,
+        13
+      ],
+      [
+        10,
+        11,
+        9,
+        12,
+        10
+      ],
+      [
+        8,
+        9,
+        7,
+        10,
+        8
+      ]
+    ],
+    "savingThrowStep": 4,
+    "abilityDonors": [
+      "int",
+      "wis"
+    ],
+    "progressionSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X6",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "savesSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X24",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "attackSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "abilities": [
+      {
+        "level": 1,
+        "text": "Backstab: attack from behind while unnoticed grants +4 to hit and doubles normal damage.",
+        "source": {
+          "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+          "page": "B10",
+          "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+        }
+      },
+      {
+        "level": 4,
+        "text": "Read nonmagical languages with 80% success. A failed text can be retried after gaining a level.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X8",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      },
+      {
+        "level": 9,
+        "text": "May establish a hideout and attract 2d6 first-level thief followers.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X8",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      },
+      {
+        "level": 10,
+        "text": "Can use magic-user scrolls, with a 10% chance that the spell has the opposite effect.",
+        "source": {
+          "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+          "page": "X8",
+          "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+        }
+      }
+    ],
+    "nativeLanguages": [],
+    "rulesProfile": "thief"
+  },
+  {
+    "id": "bx:combat-tables",
+    "kind": "table",
+    "name": "Character attack matrix",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X26",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "armorClasses": [
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      -1,
+      -2,
+      -3
+    ],
+    "attackRows": [
+      [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        20,
+        20
+      ],
+      [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      [
+        2,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    ]
+  },
+  {
+    "id": "bx:thief-skills",
+    "kind": "table",
+    "name": "Thief ability progression",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X6",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "skills": [
+      "Open locks",
+      "Find or remove traps",
+      "Pick pockets",
+      "Move silently",
+      "Climb sheer surfaces",
+      "Hide in shadows",
+      "Hear noise (d6)"
+    ],
+    "rows": [
+      [
+        15,
+        10,
+        20,
+        20,
+        87,
+        10,
+        2
+      ],
+      [
+        20,
+        15,
+        25,
+        25,
+        88,
+        15,
+        2
+      ],
+      [
+        25,
+        20,
+        30,
+        30,
+        89,
+        20,
+        3
+      ],
+      [
+        30,
+        25,
+        35,
+        35,
+        90,
+        25,
+        3
+      ],
+      [
+        35,
+        30,
+        40,
+        40,
+        91,
+        30,
+        3
+      ],
+      [
+        45,
+        40,
+        45,
+        45,
+        92,
+        36,
+        3
+      ],
+      [
+        55,
+        50,
+        55,
+        55,
+        93,
+        45,
+        4
+      ],
+      [
+        65,
+        60,
+        65,
+        65,
+        94,
+        55,
+        4
+      ],
+      [
+        75,
+        70,
+        75,
+        75,
+        95,
+        65,
+        4
+      ],
+      [
+        85,
+        80,
+        85,
+        85,
+        96,
+        75,
+        4
+      ],
+      [
+        95,
+        90,
+        95,
+        95,
+        97,
+        85,
+        5
+      ],
+      [
+        96,
+        95,
+        105,
+        96,
+        98,
+        90,
+        5
+      ],
+      [
+        97,
+        97,
+        115,
+        98,
+        99,
+        95,
+        5
+      ],
+      [
+        99,
+        99,
+        125,
+        99,
+        99,
+        99,
+        5
+      ]
+    ]
+  },
+  {
+    "id": "bx:turn-undead",
+    "kind": "table",
+    "name": "Cleric turning progression",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X5",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110792-sample.pdf"
+    },
+    "undead": [
+      "Skeleton",
+      "Zombie",
+      "Ghoul",
+      "Wight",
+      "Wraith",
+      "Mummy",
+      "Spectre",
+      "Vampire"
+    ],
+    "rows": [
+      [
+        "7",
+        "9",
+        "11",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "T",
+        "7",
+        "9",
+        "11",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "T",
+        "T",
+        "7",
+        "9",
+        "11",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "D",
+        "T",
+        "T",
+        "7",
+        "9",
+        "11",
+        "-",
+        "-"
+      ],
+      [
+        "D",
+        "D",
+        "T",
+        "T",
+        "7",
+        "9",
+        "11",
+        "-"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "T",
+        "T",
+        "7",
+        "9",
+        "11"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "D",
+        "T",
+        "T",
+        "7",
+        "9"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "T",
+        "T",
+        "7"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "T",
+        "T"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "T"
+      ],
+      [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ]
+    ]
+  },
+  {
+    "id": "bx:leather",
+    "kind": "armor",
+    "name": "Leather armor",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B12",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "cost": 20,
+    "armorClass": 7,
+    "weightCoins": 200
+  },
+  {
+    "id": "bx:chain",
+    "kind": "armor",
+    "name": "Chain mail",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B12",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "cost": 40,
+    "armorClass": 5,
+    "weightCoins": 400
+  },
+  {
+    "id": "bx:plate",
+    "kind": "armor",
+    "name": "Plate mail",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B12",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "cost": 60,
+    "armorClass": 3,
+    "weightCoins": 500
+  },
+  {
+    "id": "bx:battle-axe",
+    "kind": "weapon",
+    "name": "Battle axe",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 7,
+    "damageDie": 8,
+    "weightCoins": 50,
+    "twoHanded": true,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:hand-axe",
+    "kind": "weapon",
+    "name": "Hand axe",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 4,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      10,
+      20,
+      30
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:crossbow",
+    "kind": "weapon",
+    "name": "Crossbow",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 30,
+    "damageDie": 6,
+    "weightCoins": 50,
+    "twoHanded": true,
+    "missile": true,
+    "missileOnly": true,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      80,
+      160,
+      240
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:longbow",
+    "kind": "weapon",
+    "name": "Long bow",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 40,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": true,
+    "missile": true,
+    "missileOnly": true,
+    "clericAllowed": false,
+    "demihumanForbidden": true,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      70,
+      140,
+      210
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:shortbow",
+    "kind": "weapon",
+    "name": "Short bow",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 25,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": true,
+    "missile": true,
+    "missileOnly": true,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      50,
+      100,
+      150
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:dagger",
+    "kind": "weapon",
+    "name": "Dagger",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 3,
+    "damageDie": 4,
+    "weightCoins": 10,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      10,
+      20,
+      30
+    ],
+    "magicUserAllowed": true
+  },
+  {
+    "id": "bx:silver-dagger",
+    "kind": "weapon",
+    "name": "Silver dagger",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 30,
+    "damageDie": 4,
+    "weightCoins": 10,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      10,
+      20,
+      30
+    ],
+    "magicUserAllowed": true
+  },
+  {
+    "id": "bx:short-sword",
+    "kind": "weapon",
+    "name": "Short sword",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 7,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:sword",
+    "kind": "weapon",
+    "name": "Sword",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 10,
+    "damageDie": 8,
+    "weightCoins": 60,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:two-handed-sword",
+    "kind": "weapon",
+    "name": "Two-handed sword",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 15,
+    "damageDie": 10,
+    "weightCoins": 150,
+    "twoHanded": true,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": true,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:mace",
+    "kind": "weapon",
+    "name": "Mace",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:club",
+    "kind": "weapon",
+    "name": "Club",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 3,
+    "damageDie": 4,
+    "weightCoins": 50,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:pole-arm",
+    "kind": "weapon",
+    "name": "Pole arm",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 7,
+    "damageDie": 10,
+    "weightCoins": 150,
+    "twoHanded": true,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:sling",
+    "kind": "weapon",
+    "name": "Sling with 30 stones",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 2,
+    "damageDie": 4,
+    "weightCoins": null,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": true,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      40,
+      80,
+      160
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:spear",
+    "kind": "weapon",
+    "name": "Spear",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 3,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [
+      20,
+      40,
+      60
+    ],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:war-hammer",
+    "kind": "weapon",
+    "name": "War hammer",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5,
+    "damageDie": 6,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:staff",
+    "kind": "weapon",
+    "name": "Staff",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 2,
+    "damageDie": 4,
+    "weightCoins": 40,
+    "twoHanded": true,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:javelin",
+    "kind": "weapon",
+    "name": "Javelin",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1,
+    "damageDie": 4,
+    "weightCoins": null,
+    "twoHanded": false,
+    "missile": true,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:lance",
+    "kind": "weapon",
+    "name": "Lance",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5,
+    "damageDie": 6,
+    "weightCoins": null,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": false,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X25",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "weightSource": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B20",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  },
+  {
+    "id": "bx:backpack",
+    "kind": "equipment",
+    "name": "Backpack",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:oil",
+    "kind": "equipment",
+    "name": "Flask of oil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 2
+  },
+  {
+    "id": "bx:hammer",
+    "kind": "equipment",
+    "name": "Small hammer",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 2
+  },
+  {
+    "id": "bx:holy-symbol",
+    "kind": "equipment",
+    "name": "Holy symbol",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 25
+  },
+  {
+    "id": "bx:holy-water",
+    "kind": "equipment",
+    "name": "Holy water (one vial)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 25
+  },
+  {
+    "id": "bx:iron-spikes",
+    "kind": "equipment",
+    "name": "Iron spikes (12)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:lantern",
+    "kind": "equipment",
+    "name": "Lantern",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 10
+  },
+  {
+    "id": "bx:mirror",
+    "kind": "equipment",
+    "name": "Hand mirror, steel",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:iron-rations",
+    "kind": "equipment",
+    "name": "Iron rations (one week)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 15
+  },
+  {
+    "id": "bx:rations",
+    "kind": "equipment",
+    "name": "Standard rations (one week)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:rope",
+    "kind": "equipment",
+    "name": "Rope (50 feet)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:small-sack",
+    "kind": "equipment",
+    "name": "Small sack",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:large-sack",
+    "kind": "equipment",
+    "name": "Large sack",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 2
+  },
+  {
+    "id": "bx:thieves-tools",
+    "kind": "equipment",
+    "name": "Thieves tools",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 25
+  },
+  {
+    "id": "bx:tinder-box",
+    "kind": "equipment",
+    "name": "Tinder box",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 3
+  },
+  {
+    "id": "bx:torches",
+    "kind": "equipment",
+    "name": "Torches (6)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:waterskin",
+    "kind": "equipment",
+    "name": "Waterskin",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:wine",
+    "kind": "equipment",
+    "name": "Wine (one quart)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:wolfsbane",
+    "kind": "equipment",
+    "name": "Wolfsbane",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 10
+  },
+  {
+    "id": "bx:wooden-pole",
+    "kind": "equipment",
+    "name": "Wooden pole (10 feet)",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 1
+  },
+  {
+    "id": "bx:arrows",
+    "kind": "equipment",
+    "name": "Quiver with 20 arrows",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:quarrels",
+    "kind": "equipment",
+    "name": "Case with 30 quarrels",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 10
+  },
+  {
+    "id": "bx:silver-arrow",
+    "kind": "equipment",
+    "name": "Silver-tipped arrow",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:crowbar",
+    "kind": "equipment",
+    "name": "Crowbar",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 10
+  },
+  {
+    "id": "bx:garlic",
+    "kind": "equipment",
+    "name": "Garlic",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 5
+  },
+  {
+    "id": "bx:grappling-hook",
+    "kind": "equipment",
+    "name": "Grappling hook",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 25
+  },
+  {
+    "id": "bx:stakes",
+    "kind": "equipment",
+    "name": "Stakes and mallet",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X9",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "cost": 3
+  },
+  {
+    "id": "bx:language-bugbear",
+    "kind": "language",
+    "name": "Bugbear",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-doppelganger",
+    "kind": "language",
+    "name": "Doppelganger",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-dragon",
+    "kind": "language",
+    "name": "Dragon",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-dwarvish",
+    "kind": "language",
+    "name": "Dwarvish",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-elvish",
+    "kind": "language",
+    "name": "Elvish",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-gargoyle",
+    "kind": "language",
+    "name": "Gargoyle",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-gnoll",
+    "kind": "language",
+    "name": "Gnoll",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-gnome",
+    "kind": "language",
+    "name": "Gnome",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-goblin",
+    "kind": "language",
+    "name": "Goblin",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-halfling",
+    "kind": "language",
+    "name": "Halfling",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-harpy",
+    "kind": "language",
+    "name": "Harpy",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-hobgoblin",
+    "kind": "language",
+    "name": "Hobgoblin",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-kobold",
+    "kind": "language",
+    "name": "Kobold",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-lizard-man",
+    "kind": "language",
+    "name": "Lizard Man",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-medusa",
+    "kind": "language",
+    "name": "Medusa",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-minotaur",
+    "kind": "language",
+    "name": "Minotaur",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-ogre",
+    "kind": "language",
+    "name": "Ogre",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-orc",
+    "kind": "language",
+    "name": "Orc",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-pixie",
+    "kind": "language",
+    "name": "Pixie",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:language-human-dialect",
+    "kind": "language",
+    "name": "Human Dialect",
+    "source": {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B13",
+      "url": "https://www.americanroads.us/DandD/DnD_Basic_Rules_Moldvay.pdf"
+    }
+  },
+  {
+    "id": "bx:spell-cleric-cure-light-wounds",
+    "kind": "spell",
+    "name": "Cure Light Wounds",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Cause Light Wounds"
+  },
+  {
+    "id": "bx:spell-cleric-detect-evil",
+    "kind": "spell",
+    "name": "Detect Evil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-detect-magic",
+    "kind": "spell",
+    "name": "Detect Magic",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-light",
+    "kind": "spell",
+    "name": "Light",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Darkness"
+  },
+  {
+    "id": "bx:spell-cleric-protection-from-evil",
+    "kind": "spell",
+    "name": "Protection from Evil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-purify-food-and-water",
+    "kind": "spell",
+    "name": "Purify Food and Water",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-remove-fear",
+    "kind": "spell",
+    "name": "Remove Fear",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Cause Fear"
+  },
+  {
+    "id": "bx:spell-cleric-resist-cold",
+    "kind": "spell",
+    "name": "Resist Cold",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-bless",
+    "kind": "spell",
+    "name": "Bless",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Blight"
+  },
+  {
+    "id": "bx:spell-cleric-find-traps",
+    "kind": "spell",
+    "name": "Find Traps",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-know-alignment",
+    "kind": "spell",
+    "name": "Know Alignment",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-hold-person",
+    "kind": "spell",
+    "name": "Hold Person",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-resist-fire",
+    "kind": "spell",
+    "name": "Resist Fire",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-silence-15-feet-radius",
+    "kind": "spell",
+    "name": "Silence 15 feet radius",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-snake-charm",
+    "kind": "spell",
+    "name": "Snake Charm",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-speak-with-animals",
+    "kind": "spell",
+    "name": "Speak with Animals",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-continual-light",
+    "kind": "spell",
+    "name": "Continual Light",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Continual Darkness"
+  },
+  {
+    "id": "bx:spell-cleric-cure-disease",
+    "kind": "spell",
+    "name": "Cure Disease",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Cause Disease"
+  },
+  {
+    "id": "bx:spell-cleric-growth-of-animals",
+    "kind": "spell",
+    "name": "Growth of Animals",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-locate-object",
+    "kind": "spell",
+    "name": "Locate Object",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-remove-curse",
+    "kind": "spell",
+    "name": "Remove Curse",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Curse"
+  },
+  {
+    "id": "bx:spell-cleric-striking",
+    "kind": "spell",
+    "name": "Striking",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-create-water",
+    "kind": "spell",
+    "name": "Create Water",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-cure-serious-wounds",
+    "kind": "spell",
+    "name": "Cure Serious Wounds",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Cause Serious Wounds"
+  },
+  {
+    "id": "bx:spell-cleric-neutralize-poison",
+    "kind": "spell",
+    "name": "Neutralize Poison",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-protection-from-evil-10-feet-radius",
+    "kind": "spell",
+    "name": "Protection from Evil 10 feet radius",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-speak-with-plants",
+    "kind": "spell",
+    "name": "Speak with Plants",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-sticks-to-snakes",
+    "kind": "spell",
+    "name": "Sticks to Snakes",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-commune",
+    "kind": "spell",
+    "name": "Commune",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-create-food",
+    "kind": "spell",
+    "name": "Create Food",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-dispel-evil",
+    "kind": "spell",
+    "name": "Dispel Evil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-insect-plague",
+    "kind": "spell",
+    "name": "Insect Plague",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-cleric-quest",
+    "kind": "spell",
+    "name": "Quest",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Remove Quest"
+  },
+  {
+    "id": "bx:spell-cleric-raise-dead",
+    "kind": "spell",
+    "name": "Raise Dead",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X11",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "cleric",
+    "reversible": true,
+    "reverseName": "Finger of Death"
+  },
+  {
+    "id": "bx:spell-magic-user-charm-person",
+    "kind": "spell",
+    "name": "Charm Person",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-detect-magic",
+    "kind": "spell",
+    "name": "Detect Magic",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-floating-disc",
+    "kind": "spell",
+    "name": "Floating Disc",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-hold-portal",
+    "kind": "spell",
+    "name": "Hold Portal",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-light",
+    "kind": "spell",
+    "name": "Light",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Darkness"
+  },
+  {
+    "id": "bx:spell-magic-user-magic-missile",
+    "kind": "spell",
+    "name": "Magic Missile",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-protection-from-evil",
+    "kind": "spell",
+    "name": "Protection from Evil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-read-languages",
+    "kind": "spell",
+    "name": "Read Languages",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-read-magic",
+    "kind": "spell",
+    "name": "Read Magic",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-shield",
+    "kind": "spell",
+    "name": "Shield",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-sleep",
+    "kind": "spell",
+    "name": "Sleep",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-ventriloquism",
+    "kind": "spell",
+    "name": "Ventriloquism",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 1,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-continual-light",
+    "kind": "spell",
+    "name": "Continual Light",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Continual Darkness"
+  },
+  {
+    "id": "bx:spell-magic-user-detect-evil",
+    "kind": "spell",
+    "name": "Detect Evil",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-detect-invisible",
+    "kind": "spell",
+    "name": "Detect Invisible",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-esp",
+    "kind": "spell",
+    "name": "ESP",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-invisibility",
+    "kind": "spell",
+    "name": "Invisibility",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-knock",
+    "kind": "spell",
+    "name": "Knock",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-levitate",
+    "kind": "spell",
+    "name": "Levitate",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-locate-object",
+    "kind": "spell",
+    "name": "Locate Object",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-mirror-image",
+    "kind": "spell",
+    "name": "Mirror Image",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-phantasmal-force",
+    "kind": "spell",
+    "name": "Phantasmal Force",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-web",
+    "kind": "spell",
+    "name": "Web",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-wizard-lock",
+    "kind": "spell",
+    "name": "Wizard Lock",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 2,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-clairvoyance",
+    "kind": "spell",
+    "name": "Clairvoyance",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-dispel-magic",
+    "kind": "spell",
+    "name": "Dispel Magic",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-fire-ball",
+    "kind": "spell",
+    "name": "Fire Ball",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-fly",
+    "kind": "spell",
+    "name": "Fly",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-haste",
+    "kind": "spell",
+    "name": "Haste",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-hold-person",
+    "kind": "spell",
+    "name": "Hold Person",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-infravision",
+    "kind": "spell",
+    "name": "Infravision",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-invisibility-10-feet-radius",
+    "kind": "spell",
+    "name": "Invisibility 10 feet radius",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-lightning-bolt",
+    "kind": "spell",
+    "name": "Lightning Bolt",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-protection-from-evil-10-feet-radius",
+    "kind": "spell",
+    "name": "Protection from Evil 10 feet radius",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-protection-from-normal-missiles",
+    "kind": "spell",
+    "name": "Protection from Normal Missiles",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-water-breathing",
+    "kind": "spell",
+    "name": "Water Breathing",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 3,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-charm-monster",
+    "kind": "spell",
+    "name": "Charm Monster",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-confusion",
+    "kind": "spell",
+    "name": "Confusion",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-dimension-door",
+    "kind": "spell",
+    "name": "Dimension Door",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-growth-of-plants",
+    "kind": "spell",
+    "name": "Growth of Plants",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-hallucinatory-terrain",
+    "kind": "spell",
+    "name": "Hallucinatory Terrain",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-massmorph",
+    "kind": "spell",
+    "name": "Massmorph",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-polymorph-others",
+    "kind": "spell",
+    "name": "Polymorph Others",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-polymorph-self",
+    "kind": "spell",
+    "name": "Polymorph Self",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-remove-curse",
+    "kind": "spell",
+    "name": "Remove Curse",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Curse"
+  },
+  {
+    "id": "bx:spell-magic-user-wall-of-fire",
+    "kind": "spell",
+    "name": "Wall of Fire",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-wall-of-ice",
+    "kind": "spell",
+    "name": "Wall of Ice",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-wizard-eye",
+    "kind": "spell",
+    "name": "Wizard Eye",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 4,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-animate-dead",
+    "kind": "spell",
+    "name": "Animate Dead",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-cloudkill",
+    "kind": "spell",
+    "name": "Cloudkill",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-conjure-elemental",
+    "kind": "spell",
+    "name": "Conjure Elemental",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-contact-higher-plane",
+    "kind": "spell",
+    "name": "Contact Higher Plane",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-feeblemind",
+    "kind": "spell",
+    "name": "Feeblemind",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-hold-monster",
+    "kind": "spell",
+    "name": "Hold Monster",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-magic-jar",
+    "kind": "spell",
+    "name": "Magic Jar",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-pass-wall",
+    "kind": "spell",
+    "name": "Pass-Wall",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-telekinesis",
+    "kind": "spell",
+    "name": "Telekinesis",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-teleport",
+    "kind": "spell",
+    "name": "Teleport",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-transmute-rock-to-mud",
+    "kind": "spell",
+    "name": "Transmute Rock to Mud",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Transmute Mud to Rock"
+  },
+  {
+    "id": "bx:spell-magic-user-wall-of-stone",
+    "kind": "spell",
+    "name": "Wall of Stone",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 5,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-anti-magic-shell",
+    "kind": "spell",
+    "name": "Anti-Magic Shell",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-control-weather",
+    "kind": "spell",
+    "name": "Control Weather",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-death-spell",
+    "kind": "spell",
+    "name": "Death Spell",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-disintegrate",
+    "kind": "spell",
+    "name": "Disintegrate",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-geas",
+    "kind": "spell",
+    "name": "Geas",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Remove Geas"
+  },
+  {
+    "id": "bx:spell-magic-user-invisible-stalker",
+    "kind": "spell",
+    "name": "Invisible Stalker",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-lower-water",
+    "kind": "spell",
+    "name": "Lower Water",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-move-earth",
+    "kind": "spell",
+    "name": "Move Earth",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-part-water",
+    "kind": "spell",
+    "name": "Part Water",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-projected-image",
+    "kind": "spell",
+    "name": "Projected Image",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-reincarnation",
+    "kind": "spell",
+    "name": "Reincarnation",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": false,
+    "reverseName": ""
+  },
+  {
+    "id": "bx:spell-magic-user-stone-to-flesh",
+    "kind": "spell",
+    "name": "Stone to Flesh",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X14",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    },
+    "spellLevel": 6,
+    "tradition": "magic-user",
+    "reversible": true,
+    "reverseName": "Flesh to Stone"
+  },
+  {
+    "id": "bx:coverage",
+    "kind": "coverage",
+    "name": "Verified original B/X character rules",
+    "source": {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X5",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110792-sample.pdf"
+    },
+    "status": "implemented",
+    "features": [
+      "seven core classes",
+      "levels 1-14 human tables",
+      "dwarf 1-12",
+      "elf 1-10",
+      "halfling 1-8",
+      "ability adjustments",
+      "alignment and languages",
+      "equipment and encumbrance",
+      "attack and saving throw matrices",
+      "hit points and XP",
+      "spellbook and memorization",
+      "thief and turning tables"
+    ],
+    "exclusions": [
+      "X8 suggested levels beyond14",
+      "spell effect resolution in combat",
+      "domain economy and followers simulation",
+      "magic item generation"
+    ],
+    "verification": "Original printed tables visually checked; see docs/sources-bx.md."
+  }
+]

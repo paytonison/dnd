@@ -1,0 +1,4923 @@
+[
+  {
+    "id": "srd55:athletics",
+    "kind": "skill",
+    "name": "Athletics",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "strength"
+  },
+  {
+    "id": "srd55:acrobatics",
+    "kind": "skill",
+    "name": "Acrobatics",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd55:sleight-of-hand",
+    "kind": "skill",
+    "name": "Sleight of Hand",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd55:stealth",
+    "kind": "skill",
+    "name": "Stealth",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd55:arcana",
+    "kind": "skill",
+    "name": "Arcana",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd55:history",
+    "kind": "skill",
+    "name": "History",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd55:investigation",
+    "kind": "skill",
+    "name": "Investigation",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd55:nature",
+    "kind": "skill",
+    "name": "Nature",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd55:religion",
+    "kind": "skill",
+    "name": "Religion",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd55:animal-handling",
+    "kind": "skill",
+    "name": "Animal Handling",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd55:insight",
+    "kind": "skill",
+    "name": "Insight",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd55:medicine",
+    "kind": "skill",
+    "name": "Medicine",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd55:perception",
+    "kind": "skill",
+    "name": "Perception",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd55:survival",
+    "kind": "skill",
+    "name": "Survival",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd55:deception",
+    "kind": "skill",
+    "name": "Deception",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd55:intimidation",
+    "kind": "skill",
+    "name": "Intimidation",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd55:performance",
+    "kind": "skill",
+    "name": "Performance",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd55:persuasion",
+    "kind": "skill",
+    "name": "Persuasion",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "8",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=8"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd55:common-sign-language",
+    "kind": "language",
+    "name": "Common Sign",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:draconic",
+    "kind": "language",
+    "name": "Draconic",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:dwarvish",
+    "kind": "language",
+    "name": "Dwarvish",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:elvish",
+    "kind": "language",
+    "name": "Elvish",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:giant",
+    "kind": "language",
+    "name": "Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:gnomish",
+    "kind": "language",
+    "name": "Gnomish",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:goblin",
+    "kind": "language",
+    "name": "Goblin",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:halfling-language",
+    "kind": "language",
+    "name": "Halfling",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:orc-language",
+    "kind": "language",
+    "name": "Orc",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "20",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=20"
+    }
+  },
+  {
+    "id": "srd55:acolyte",
+    "kind": "background",
+    "name": "Acolyte",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "83",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=83"
+    },
+    "abilities": [
+      "intelligence",
+      "wisdom",
+      "charisma"
+    ],
+    "skills": [
+      "srd55:insight",
+      "srd55:religion"
+    ],
+    "feat": "srd55:magic-initiate-cleric",
+    "tool": "srd55:calligraphers-supplies",
+    "kits": {
+      "A": {
+        "gold": 8,
+        "items": [
+          "srd55:calligraphers-supplies",
+          "srd55:holy-symbol",
+          "srd55:robe",
+          "srd55:book-prayers",
+          "srd55:parchment-10"
+        ]
+      },
+      "B": {
+        "gold": 50,
+        "items": []
+      }
+    }
+  },
+  {
+    "id": "srd55:criminal",
+    "kind": "background",
+    "name": "Criminal",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "83",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=83"
+    },
+    "abilities": [
+      "dexterity",
+      "constitution",
+      "intelligence"
+    ],
+    "skills": [
+      "srd55:sleight-of-hand",
+      "srd55:stealth"
+    ],
+    "feat": "srd55:alert",
+    "tool": "srd55:thieves-tools",
+    "kits": {
+      "A": {
+        "gold": 16,
+        "items": [
+          "srd55:dagger",
+          "srd55:dagger",
+          "srd55:thieves-tools",
+          "srd55:crowbar",
+          "srd55:pouch",
+          "srd55:pouch",
+          "srd55:travelers-clothes"
+        ]
+      },
+      "B": {
+        "gold": 50,
+        "items": []
+      }
+    }
+  },
+  {
+    "id": "srd55:sage",
+    "kind": "background",
+    "name": "Sage",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "83",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=83"
+    },
+    "abilities": [
+      "constitution",
+      "intelligence",
+      "wisdom"
+    ],
+    "skills": [
+      "srd55:arcana",
+      "srd55:history"
+    ],
+    "feat": "srd55:magic-initiate-wizard",
+    "tool": "srd55:calligraphers-supplies",
+    "kits": {
+      "A": {
+        "gold": 8,
+        "items": [
+          "srd55:quarterstaff",
+          "srd55:calligraphers-supplies",
+          "srd55:book-history",
+          "srd55:parchment-8",
+          "srd55:robe"
+        ]
+      },
+      "B": {
+        "gold": 50,
+        "items": []
+      }
+    }
+  },
+  {
+    "id": "srd55:soldier",
+    "kind": "background",
+    "name": "Soldier",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "83",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=83"
+    },
+    "abilities": [
+      "strength",
+      "dexterity",
+      "constitution"
+    ],
+    "skills": [
+      "srd55:athletics",
+      "srd55:intimidation"
+    ],
+    "feat": "srd55:savage-attacker",
+    "tool": "srd55:gaming-set",
+    "kits": {
+      "A": {
+        "gold": 14,
+        "items": [
+          "srd55:spear",
+          "srd55:shortbow",
+          "srd55:arrows-20",
+          "srd55:healers-kit",
+          "srd55:quiver",
+          "srd55:travelers-clothes"
+        ]
+      },
+      "B": {
+        "gold": 50,
+        "items": []
+      }
+    }
+  },
+  {
+    "id": "srd55:fighter",
+    "kind": "class",
+    "name": "Fighter",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "47",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=47"
+    },
+    "hitDie": 10,
+    "fixedHp": 6,
+    "maxLevel": 3,
+    "saves": [
+      "strength",
+      "constitution"
+    ],
+    "skills": [
+      "srd55:acrobatics",
+      "srd55:animal-handling",
+      "srd55:athletics",
+      "srd55:history",
+      "srd55:insight",
+      "srd55:intimidation",
+      "srd55:persuasion",
+      "srd55:perception",
+      "srd55:survival"
+    ],
+    "skillCount": 2,
+    "armorTraining": [
+      "light",
+      "medium",
+      "heavy",
+      "shield"
+    ],
+    "weaponTraining": [
+      "simple",
+      "martial"
+    ],
+    "kits": {
+      "A": {
+        "gold": 4,
+        "items": [
+          "srd55:chain-mail",
+          "srd55:greatsword",
+          "srd55:flail",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:javelin",
+          "srd55:dungeoneers-pack"
+        ]
+      },
+      "B": {
+        "gold": 11,
+        "items": [
+          "srd55:studded-leather-armor",
+          "srd55:scimitar",
+          "srd55:shortsword",
+          "srd55:longbow",
+          "srd55:arrows-20",
+          "srd55:quiver",
+          "srd55:dungeoneers-pack"
+        ]
+      },
+      "C": {
+        "gold": 155,
+        "items": []
+      }
+    },
+    "proficiency": [
+      2,
+      2,
+      2
+    ],
+    "xp": [
+      0,
+      300,
+      900
+    ],
+    "prepared": [
+      0,
+      0,
+      0
+    ],
+    "slots": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "id": "srd55:wizard",
+    "kind": "class",
+    "name": "Wizard",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "77",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=77"
+    },
+    "hitDie": 6,
+    "fixedHp": 4,
+    "maxLevel": 3,
+    "saves": [
+      "intelligence",
+      "wisdom"
+    ],
+    "skills": [
+      "srd55:arcana",
+      "srd55:history",
+      "srd55:insight",
+      "srd55:investigation",
+      "srd55:medicine",
+      "srd55:nature",
+      "srd55:religion"
+    ],
+    "skillCount": 2,
+    "armorTraining": [],
+    "weaponTraining": [
+      "simple"
+    ],
+    "kits": {
+      "A": {
+        "gold": 5,
+        "items": [
+          "srd55:dagger",
+          "srd55:dagger",
+          "srd55:quarterstaff",
+          "srd55:arcane-focus",
+          "srd55:robe",
+          "srd55:spellbook",
+          "srd55:scholars-pack"
+        ]
+      },
+      "B": {
+        "gold": 55,
+        "items": []
+      }
+    },
+    "proficiency": [
+      2,
+      2,
+      2
+    ],
+    "xp": [
+      0,
+      300,
+      900
+    ],
+    "prepared": [
+      4,
+      5,
+      6
+    ],
+    "slots": [
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        2
+      ]
+    ]
+  },
+  {
+    "id": "srd55:champion",
+    "kind": "subclass",
+    "name": "Champion",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "49",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=49"
+    },
+    "classId": "srd55:fighter",
+    "minimumLevel": 3,
+    "notes": [
+      "Improved Critical: weapon and Unarmed Strike critical hits on 19\u201320.",
+      "Remarkable Athlete: advantage on Initiative and Strength (Athletics); after a critical hit, move up to half Speed without provoking Opportunity Attacks."
+    ]
+  },
+  {
+    "id": "srd55:evoker",
+    "kind": "subclass",
+    "name": "Evoker",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "82",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=82"
+    },
+    "classId": "srd55:wizard",
+    "minimumLevel": 3,
+    "notes": [
+      "Evocation Savant: add two level 1\u20132 Wizard Evocation spells to your spellbook.",
+      "Potent Cantrip: a damaging cantrip deals half damage on a miss or successful save, with no additional effect."
+    ]
+  },
+  {
+    "id": "srd55:dragonborn",
+    "kind": "species",
+    "name": "Dragonborn",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speed": 30,
+    "sizes": [
+      "Medium"
+    ],
+    "darkvision": 60,
+    "hpPerLevel": 0,
+    "notes": [
+      "Breath Weapon: replace an attack with a 15-foot cone or 30-foot by 5-foot line; Dexterity save for half of 1d10 ancestry damage; uses equal to proficiency per Long Rest.",
+      "Resistance to ancestry damage."
+    ]
+  },
+  {
+    "id": "srd55:dwarf",
+    "kind": "species",
+    "name": "Dwarf",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speed": 30,
+    "sizes": [
+      "Medium"
+    ],
+    "darkvision": 120,
+    "hpPerLevel": 1,
+    "notes": [
+      "Dwarven Resilience: Poison resistance and advantage on saves against the Poisoned condition.",
+      "Dwarven Toughness: +1 maximum HP per level.",
+      "Stonecunning: bonus action for 60-foot Tremorsense on stone, 10 minutes, proficiency uses per Long Rest."
+    ]
+  },
+  {
+    "id": "srd55:elf",
+    "kind": "species",
+    "name": "Elf",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speed": 30,
+    "sizes": [
+      "Medium"
+    ],
+    "darkvision": 60,
+    "hpPerLevel": 0,
+    "notes": [
+      "Fey Ancestry: advantage on saves against the Charmed condition.",
+      "Trance: no sleep required, immune to magical sleep; four-hour conscious trance completes a Long Rest.",
+      "Keen Senses: proficiency in Insight, Perception, or Survival."
+    ]
+  },
+  {
+    "id": "srd55:gnome",
+    "kind": "species",
+    "name": "Gnome",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speed": 30,
+    "sizes": [
+      "Small"
+    ],
+    "darkvision": 60,
+    "hpPerLevel": 0,
+    "notes": [
+      "Gnomish Cunning: advantage on Intelligence, Wisdom, and Charisma saving throws."
+    ]
+  },
+  {
+    "id": "srd55:goliath",
+    "kind": "species",
+    "name": "Goliath",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speed": 35,
+    "sizes": [
+      "Medium"
+    ],
+    "darkvision": 0,
+    "hpPerLevel": 0,
+    "notes": [
+      "Powerful Build: advantage on checks to end Grappled; count as one size larger for carrying capacity.",
+      "Giant Ancestry: proficiency uses of the selected trait per Long Rest."
+    ]
+  },
+  {
+    "id": "srd55:halfling",
+    "kind": "species",
+    "name": "Halfling",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speed": 30,
+    "sizes": [
+      "Small"
+    ],
+    "darkvision": 0,
+    "hpPerLevel": 0,
+    "notes": [
+      "Brave: advantage on saves against Frightened.",
+      "Halfling Nimbleness: move through spaces of larger creatures.",
+      "Luck: reroll a natural 1 on a D20 Test; use the new result.",
+      "Naturally Stealthy: may Hide while obscured by a creature at least one size larger."
+    ]
+  },
+  {
+    "id": "srd55:human",
+    "kind": "species",
+    "name": "Human",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speed": 30,
+    "sizes": [
+      "Small",
+      "Medium"
+    ],
+    "darkvision": 0,
+    "hpPerLevel": 0,
+    "notes": [
+      "Resourceful: gain Heroic Inspiration after a Long Rest.",
+      "Skillful: one extra skill proficiency.",
+      "Versatile: one additional Origin feat."
+    ]
+  },
+  {
+    "id": "srd55:orc",
+    "kind": "species",
+    "name": "Orc",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speed": 30,
+    "sizes": [
+      "Medium"
+    ],
+    "darkvision": 120,
+    "hpPerLevel": 0,
+    "notes": [
+      "Adrenaline Rush: bonus action Dash grants temporary HP equal to proficiency; proficiency uses per Short or Long Rest.",
+      "Relentless Endurance: once per Long Rest, drop to 1 HP instead of 0 unless killed outright."
+    ]
+  },
+  {
+    "id": "srd55:tiefling",
+    "kind": "species",
+    "name": "Tiefling",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speed": 30,
+    "sizes": [
+      "Small",
+      "Medium"
+    ],
+    "darkvision": 60,
+    "hpPerLevel": 0,
+    "notes": [
+      "Otherworldly Presence: Thaumaturgy cantrip.",
+      "Fiendish Legacy provides resistance and spells."
+    ]
+  },
+  {
+    "id": "srd55:drow",
+    "kind": "lineage",
+    "name": "Drow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:elf",
+    "darkvision": 120,
+    "cantrips": [
+      "srd55:dancing-lights"
+    ],
+    "level3Spell": "srd55:faerie-fire"
+  },
+  {
+    "id": "srd55:high-elf",
+    "kind": "lineage",
+    "name": "High Elf",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:elf",
+    "cantrips": [
+      "srd55:prestidigitation"
+    ],
+    "level3Spell": "srd55:detect-magic",
+    "chooseCantrip": true
+  },
+  {
+    "id": "srd55:wood-elf",
+    "kind": "lineage",
+    "name": "Wood Elf",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:elf",
+    "speed": 35,
+    "cantrips": [
+      "srd55:druidcraft"
+    ],
+    "level3Spell": "srd55:longstrider"
+  },
+  {
+    "id": "srd55:forest-gnome",
+    "kind": "lineage",
+    "name": "Forest Gnome",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:gnome",
+    "cantrips": [
+      "srd55:minor-illusion"
+    ],
+    "level1Spell": "srd55:speak-with-animals",
+    "freeUses": 2
+  },
+  {
+    "id": "srd55:rock-gnome",
+    "kind": "lineage",
+    "name": "Rock Gnome",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:gnome",
+    "cantrips": [
+      "srd55:mending",
+      "srd55:prestidigitation"
+    ],
+    "notes": [
+      "Tinker: ten-minute Prestidigitation creates a Tiny device (AC 5, HP 1), at most three, lasting eight hours; touch and bonus action activate the selected spell effect."
+    ]
+  },
+  {
+    "id": "srd55:abyssal",
+    "kind": "lineage",
+    "name": "Abyssal",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speciesId": "srd55:tiefling",
+    "cantrips": [
+      "srd55:poison-spray"
+    ],
+    "level3Spell": "srd55:ray-of-sickness",
+    "resistance": "Poison"
+  },
+  {
+    "id": "srd55:chthonic",
+    "kind": "lineage",
+    "name": "Chthonic",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speciesId": "srd55:tiefling",
+    "cantrips": [
+      "srd55:chill-touch"
+    ],
+    "level3Spell": "srd55:false-life",
+    "resistance": "Necrotic"
+  },
+  {
+    "id": "srd55:infernal",
+    "kind": "lineage",
+    "name": "Infernal",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "86",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=86"
+    },
+    "speciesId": "srd55:tiefling",
+    "cantrips": [
+      "srd55:fire-bolt"
+    ],
+    "level3Spell": "srd55:hellish-rebuke",
+    "resistance": "Fire"
+  },
+  {
+    "id": "srd55:black-dragon",
+    "kind": "lineage",
+    "name": "Black Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Acid"
+  },
+  {
+    "id": "srd55:blue-dragon",
+    "kind": "lineage",
+    "name": "Blue Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Lightning"
+  },
+  {
+    "id": "srd55:brass-dragon",
+    "kind": "lineage",
+    "name": "Brass Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Fire"
+  },
+  {
+    "id": "srd55:bronze-dragon",
+    "kind": "lineage",
+    "name": "Bronze Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Lightning"
+  },
+  {
+    "id": "srd55:copper-dragon",
+    "kind": "lineage",
+    "name": "Copper Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Acid"
+  },
+  {
+    "id": "srd55:gold-dragon",
+    "kind": "lineage",
+    "name": "Gold Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Fire"
+  },
+  {
+    "id": "srd55:green-dragon",
+    "kind": "lineage",
+    "name": "Green Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Poison"
+  },
+  {
+    "id": "srd55:red-dragon",
+    "kind": "lineage",
+    "name": "Red Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Fire"
+  },
+  {
+    "id": "srd55:silver-dragon",
+    "kind": "lineage",
+    "name": "Silver Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Cold"
+  },
+  {
+    "id": "srd55:white-dragon",
+    "kind": "lineage",
+    "name": "White Dragon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "84",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=84"
+    },
+    "speciesId": "srd55:dragonborn",
+    "resistance": "Cold"
+  },
+  {
+    "id": "srd55:cloud-giant",
+    "kind": "lineage",
+    "name": "Cloud Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "Bonus action: teleport up to 30 feet to a visible unoccupied space."
+    ]
+  },
+  {
+    "id": "srd55:fire-giant",
+    "kind": "lineage",
+    "name": "Fire Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "After hitting and damaging a target, deal an additional 1d10 Fire damage."
+    ]
+  },
+  {
+    "id": "srd55:frost-giant",
+    "kind": "lineage",
+    "name": "Frost Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "After hitting and damaging a target, deal 1d6 Cold damage and reduce its Speed by 10 feet until your next turn."
+    ]
+  },
+  {
+    "id": "srd55:hill-giant",
+    "kind": "lineage",
+    "name": "Hill Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "After hitting and damaging a Large or smaller target, knock it Prone."
+    ]
+  },
+  {
+    "id": "srd55:stone-giant",
+    "kind": "lineage",
+    "name": "Stone Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "Reaction when damaged: reduce damage by 1d12 + Constitution modifier."
+    ]
+  },
+  {
+    "id": "srd55:storm-giant",
+    "kind": "lineage",
+    "name": "Storm Giant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "85",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=85"
+    },
+    "speciesId": "srd55:goliath",
+    "notes": [
+      "Reaction when damaged by a creature within 60 feet: deal 1d8 Thunder damage to it."
+    ]
+  },
+  {
+    "id": "srd55:alert",
+    "kind": "feat",
+    "name": "Alert",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "notes": [
+      "Add proficiency to Initiative; may exchange Initiative with a willing ally if neither is Incapacitated."
+    ]
+  },
+  {
+    "id": "srd55:savage-attacker",
+    "kind": "feat",
+    "name": "Savage Attacker",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "notes": [
+      "Once per turn on a weapon hit, roll weapon damage dice twice and use either result."
+    ]
+  },
+  {
+    "id": "srd55:skilled",
+    "kind": "feat",
+    "name": "Skilled",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "notes": [
+      "Gain proficiency in three skills or tools."
+    ]
+  },
+  {
+    "id": "srd55:archery",
+    "kind": "feat",
+    "name": "Archery",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "fighting-style",
+    "notes": [
+      "+2 to attack rolls with Ranged weapons."
+    ]
+  },
+  {
+    "id": "srd55:defense",
+    "kind": "feat",
+    "name": "Defense",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "88",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=88"
+    },
+    "category": "fighting-style",
+    "notes": [
+      "+1 AC while wearing Light, Medium, or Heavy armor."
+    ]
+  },
+  {
+    "id": "srd55:great-weapon-fighting",
+    "kind": "feat",
+    "name": "Great Weapon Fighting",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "88",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=88"
+    },
+    "category": "fighting-style",
+    "notes": [
+      "On damage dice for two-handed attacks with a Two-Handed or Versatile Melee weapon, treat rolls of 1 or 2 as 3."
+    ]
+  },
+  {
+    "id": "srd55:two-weapon-fighting",
+    "kind": "feat",
+    "name": "Two-Weapon Fighting",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "88",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=88"
+    },
+    "category": "fighting-style",
+    "notes": [
+      "Add the ability modifier to damage for the extra attack granted by the Light property."
+    ]
+  },
+  {
+    "id": "srd55:magic-initiate-cleric",
+    "kind": "feat",
+    "name": "Magic Initiate Cleric",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "spellList": "cleric",
+    "notes": [
+      "Learn two cantrips and prepare one level 1 spell from the selected list; choose Intelligence, Wisdom, or Charisma. One free cast of the level 1 spell per Long Rest; spell slots may also be used."
+    ]
+  },
+  {
+    "id": "srd55:magic-initiate-druid",
+    "kind": "feat",
+    "name": "Magic Initiate Druid",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "spellList": "druid",
+    "notes": [
+      "Learn two cantrips and prepare one level 1 spell from the selected list; choose Intelligence, Wisdom, or Charisma. One free cast of the level 1 spell per Long Rest; spell slots may also be used."
+    ]
+  },
+  {
+    "id": "srd55:magic-initiate-wizard",
+    "kind": "feat",
+    "name": "Magic Initiate Wizard",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=87"
+    },
+    "category": "origin",
+    "spellList": "wizard",
+    "notes": [
+      "Learn two cantrips and prepare one level 1 spell from the selected list; choose Intelligence, Wisdom, or Charisma. One free cast of the level 1 spell per Long Rest; spell slots may also be used."
+    ]
+  },
+  {
+    "id": "srd55:acid-splash",
+    "kind": "spell",
+    "name": "Acid Splash",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:chill-touch",
+    "kind": "spell",
+    "name": "Chill Touch",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:dancing-lights",
+    "kind": "spell",
+    "name": "Dancing Lights",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:elementalism",
+    "kind": "spell",
+    "name": "Elementalism",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:fire-bolt",
+    "kind": "spell",
+    "name": "Fire Bolt",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:light",
+    "kind": "spell",
+    "name": "Light",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:mage-hand",
+    "kind": "spell",
+    "name": "Mage Hand",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:mending",
+    "kind": "spell",
+    "name": "Mending",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:message",
+    "kind": "spell",
+    "name": "Message",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:minor-illusion",
+    "kind": "spell",
+    "name": "Minor Illusion",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:poison-spray",
+    "kind": "spell",
+    "name": "Poison Spray",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:prestidigitation",
+    "kind": "spell",
+    "name": "Prestidigitation",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:ray-of-frost",
+    "kind": "spell",
+    "name": "Ray of Frost",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:shocking-grasp",
+    "kind": "spell",
+    "name": "Shocking Grasp",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:true-strike",
+    "kind": "spell",
+    "name": "True Strike",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 0,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:alarm",
+    "kind": "spell",
+    "name": "Alarm",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:burning-hands",
+    "kind": "spell",
+    "name": "Burning Hands",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:charm-person",
+    "kind": "spell",
+    "name": "Charm Person",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:chromatic-orb",
+    "kind": "spell",
+    "name": "Chromatic Orb",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:color-spray",
+    "kind": "spell",
+    "name": "Color Spray",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:comprehend-languages",
+    "kind": "spell",
+    "name": "Comprehend Languages",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:detect-magic",
+    "kind": "spell",
+    "name": "Detect Magic",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:disguise-self",
+    "kind": "spell",
+    "name": "Disguise Self",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:expeditious-retreat",
+    "kind": "spell",
+    "name": "Expeditious Retreat",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:false-life",
+    "kind": "spell",
+    "name": "False Life",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:feather-fall",
+    "kind": "spell",
+    "name": "Feather Fall",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:find-familiar",
+    "kind": "spell",
+    "name": "Find Familiar",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:floating-disk",
+    "kind": "spell",
+    "name": "Floating Disk",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:fog-cloud",
+    "kind": "spell",
+    "name": "Fog Cloud",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:grease",
+    "kind": "spell",
+    "name": "Grease",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:hideous-laughter",
+    "kind": "spell",
+    "name": "Hideous Laughter",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:ice-knife",
+    "kind": "spell",
+    "name": "Ice Knife",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:identify",
+    "kind": "spell",
+    "name": "Identify",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:illusory-script",
+    "kind": "spell",
+    "name": "Illusory Script",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Illusion",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:jump",
+    "kind": "spell",
+    "name": "Jump",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:longstrider",
+    "kind": "spell",
+    "name": "Longstrider",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:mage-armor",
+    "kind": "spell",
+    "name": "Mage Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:magic-missile",
+    "kind": "spell",
+    "name": "Magic Missile",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:protection-from-evil-and-good",
+    "kind": "spell",
+    "name": "Protection from Evil and Good",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": true,
+    "lists": [
+      "wizard",
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:ray-of-sickness",
+    "kind": "spell",
+    "name": "Ray of Sickness",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:shield",
+    "kind": "spell",
+    "name": "Shield",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:silent-image",
+    "kind": "spell",
+    "name": "Silent Image",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:sleep",
+    "kind": "spell",
+    "name": "Sleep",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:thunderwave",
+    "kind": "spell",
+    "name": "Thunderwave",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:unseen-servant",
+    "kind": "spell",
+    "name": "Unseen Servant",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "79",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=79"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:acid-arrow",
+    "kind": "spell",
+    "name": "Acid Arrow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:alter-self",
+    "kind": "spell",
+    "name": "Alter Self",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:arcane-lock",
+    "kind": "spell",
+    "name": "Arcane Lock",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:arcanists-magic-aura",
+    "kind": "spell",
+    "name": "Arcanist\u2019s Magic Aura",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:augury",
+    "kind": "spell",
+    "name": "Augury",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:blindness-deafness",
+    "kind": "spell",
+    "name": "Blindness/Deafness",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:blur",
+    "kind": "spell",
+    "name": "Blur",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:continual-flame",
+    "kind": "spell",
+    "name": "Continual Flame",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:darkness",
+    "kind": "spell",
+    "name": "Darkness",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:darkvision",
+    "kind": "spell",
+    "name": "Darkvision",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:detect-thoughts",
+    "kind": "spell",
+    "name": "Detect Thoughts",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:dragons-breath",
+    "kind": "spell",
+    "name": "Dragon\u2019s Breath",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:enhance-ability",
+    "kind": "spell",
+    "name": "Enhance Ability",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:enlarge-reduce",
+    "kind": "spell",
+    "name": "Enlarge/Reduce",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:flaming-sphere",
+    "kind": "spell",
+    "name": "Flaming Sphere",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:gentle-repose",
+    "kind": "spell",
+    "name": "Gentle Repose",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Necromancy",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:gust-of-wind",
+    "kind": "spell",
+    "name": "Gust of Wind",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:hold-person",
+    "kind": "spell",
+    "name": "Hold Person",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:invisibility",
+    "kind": "spell",
+    "name": "Invisibility",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:knock",
+    "kind": "spell",
+    "name": "Knock",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:levitate",
+    "kind": "spell",
+    "name": "Levitate",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:locate-object",
+    "kind": "spell",
+    "name": "Locate Object",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:magic-mouth",
+    "kind": "spell",
+    "name": "Magic Mouth",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Illusion",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": true,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:magic-weapon",
+    "kind": "spell",
+    "name": "Magic Weapon",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:mind-spike",
+    "kind": "spell",
+    "name": "Mind Spike",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:mirror-image",
+    "kind": "spell",
+    "name": "Mirror Image",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Illusion",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:misty-step",
+    "kind": "spell",
+    "name": "Misty Step",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:ray-of-enfeeblement",
+    "kind": "spell",
+    "name": "Ray of Enfeeblement",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:rope-trick",
+    "kind": "spell",
+    "name": "Rope Trick",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:scorching-ray",
+    "kind": "spell",
+    "name": "Scorching Ray",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:see-invisibility",
+    "kind": "spell",
+    "name": "See Invisibility",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:shatter",
+    "kind": "spell",
+    "name": "Shatter",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:spider-climb",
+    "kind": "spell",
+    "name": "Spider Climb",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:suggestion",
+    "kind": "spell",
+    "name": "Suggestion",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:web",
+    "kind": "spell",
+    "name": "Web",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=80"
+    },
+    "level": 2,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "wizard"
+    ]
+  },
+  {
+    "id": "srd55:guidance",
+    "kind": "spell",
+    "name": "Guidance",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 0,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:resistance",
+    "kind": "spell",
+    "name": "Resistance",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 0,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:sacred-flame",
+    "kind": "spell",
+    "name": "Sacred Flame",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:spare-the-dying",
+    "kind": "spell",
+    "name": "Spare the Dying",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 0,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:thaumaturgy",
+    "kind": "spell",
+    "name": "Thaumaturgy",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:bane",
+    "kind": "spell",
+    "name": "Bane",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:bless",
+    "kind": "spell",
+    "name": "Bless",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": true,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:command",
+    "kind": "spell",
+    "name": "Command",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:create-or-destroy-water",
+    "kind": "spell",
+    "name": "Create or Destroy Water",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:cure-wounds",
+    "kind": "spell",
+    "name": "Cure Wounds",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:detect-evil-and-good",
+    "kind": "spell",
+    "name": "Detect Evil and Good",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:detect-poison-and-disease",
+    "kind": "spell",
+    "name": "Detect Poison and Disease",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:guiding-bolt",
+    "kind": "spell",
+    "name": "Guiding Bolt",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:healing-word",
+    "kind": "spell",
+    "name": "Healing Word",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:inflict-wounds",
+    "kind": "spell",
+    "name": "Inflict Wounds",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Necromancy",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:purify-food-and-drink",
+    "kind": "spell",
+    "name": "Purify Food and Drink",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Transmutation",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric",
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:sanctuary",
+    "kind": "spell",
+    "name": "Sanctuary",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:shield-of-faith",
+    "kind": "spell",
+    "name": "Shield of Faith",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "38",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=38"
+    },
+    "level": 1,
+    "school": "Abjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "cleric"
+    ]
+  },
+  {
+    "id": "srd55:druidcraft",
+    "kind": "spell",
+    "name": "Druidcraft",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:produce-flame",
+    "kind": "spell",
+    "name": "Produce Flame",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 0,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:shillelagh",
+    "kind": "spell",
+    "name": "Shillelagh",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 0,
+    "school": "Transmutation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:starry-wisp",
+    "kind": "spell",
+    "name": "Starry Wisp",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:animal-friendship",
+    "kind": "spell",
+    "name": "Animal Friendship",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 1,
+    "school": "Enchantment",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:entangle",
+    "kind": "spell",
+    "name": "Entangle",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:faerie-fire",
+    "kind": "spell",
+    "name": "Faerie Fire",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": true,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:goodberry",
+    "kind": "spell",
+    "name": "Goodberry",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 1,
+    "school": "Conjuration",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:speak-with-animals",
+    "kind": "spell",
+    "name": "Speak with Animals",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "44",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=44"
+    },
+    "level": 1,
+    "school": "Divination",
+    "ritual": true,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "druid"
+    ]
+  },
+  {
+    "id": "srd55:hellish-rebuke",
+    "kind": "spell",
+    "name": "Hellish Rebuke",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "74",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=74"
+    },
+    "level": 1,
+    "school": "Evocation",
+    "ritual": false,
+    "concentration": false,
+    "materialCost": false,
+    "lists": [
+      "warlock"
+    ]
+  },
+  {
+    "id": "srd55:club",
+    "kind": "weapon",
+    "name": "Club",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d4",
+    "damageType": "Bludgeoning",
+    "properties": "Light",
+    "mastery": "Slow",
+    "costCp": 10,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:dagger",
+    "kind": "weapon",
+    "name": "Dagger",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d4",
+    "damageType": "Piercing",
+    "properties": "Finesse, Light, Thrown (Range 20/60)",
+    "mastery": "Nick",
+    "costCp": 200,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:greatclub",
+    "kind": "weapon",
+    "name": "Greatclub",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Bludgeoning",
+    "properties": "Two-Handed",
+    "mastery": "Push",
+    "costCp": 20,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": false
+  },
+  {
+    "id": "srd55:handaxe",
+    "kind": "weapon",
+    "name": "Handaxe",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Slashing",
+    "properties": "Light, Thrown (Range 20/60)",
+    "mastery": "Vex",
+    "costCp": 500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:javelin",
+    "kind": "weapon",
+    "name": "Javelin",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Piercing",
+    "properties": "Thrown (Range 30/120)",
+    "mastery": "Slow",
+    "costCp": 50,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:light-hammer",
+    "kind": "weapon",
+    "name": "Light Hammer",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d4",
+    "damageType": "Bludgeoning",
+    "properties": "Light, Thrown (Range 20/60)",
+    "mastery": "Nick",
+    "costCp": 200,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:mace",
+    "kind": "weapon",
+    "name": "Mace",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Bludgeoning",
+    "properties": "\u2014",
+    "mastery": "Sap",
+    "costCp": 500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:quarterstaff",
+    "kind": "weapon",
+    "name": "Quarterstaff",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Bludgeoning",
+    "properties": "Versatile (1d8)",
+    "mastery": "Topple",
+    "costCp": 20,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:sickle",
+    "kind": "weapon",
+    "name": "Sickle",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d4",
+    "damageType": "Slashing",
+    "properties": "Light",
+    "mastery": "Nick",
+    "costCp": 100,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:spear",
+    "kind": "weapon",
+    "name": "Spear",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Piercing",
+    "properties": "Thrown (Range 20/60), Versatile (1d8)",
+    "mastery": "Sap",
+    "costCp": 100,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:dart",
+    "kind": "weapon",
+    "name": "Dart",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": true,
+    "damage": "1d4",
+    "damageType": "Piercing",
+    "properties": "Finesse, Thrown (Range 20/60)",
+    "mastery": "Vex",
+    "costCp": 5,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:light-crossbow",
+    "kind": "weapon",
+    "name": "Light Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": true,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 80/320; Bolt), Loading,  Two-Handed",
+    "mastery": "Slow",
+    "costCp": 2500,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": false
+  },
+  {
+    "id": "srd55:shortbow",
+    "kind": "weapon",
+    "name": "Shortbow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": true,
+    "damage": "1d6",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 80/320; Arrow), Two-Handed",
+    "mastery": "Vex",
+    "costCp": 2500,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": false
+  },
+  {
+    "id": "srd55:sling",
+    "kind": "weapon",
+    "name": "Sling",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "simple",
+    "ranged": true,
+    "damage": "1d4",
+    "damageType": "Bludgeoning",
+    "properties": "Ammunition (Range 30/120; Bullet)",
+    "mastery": "Slow",
+    "costCp": 10,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:battleaxe",
+    "kind": "weapon",
+    "name": "Battleaxe",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Slashing",
+    "properties": "Versatile (1d10)",
+    "mastery": "Topple",
+    "costCp": 1000,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:flail",
+    "kind": "weapon",
+    "name": "Flail",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Bludgeoning",
+    "properties": "\u2014",
+    "mastery": "Sap",
+    "costCp": 1000,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:glaive",
+    "kind": "weapon",
+    "name": "Glaive",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d10",
+    "damageType": "Slashing",
+    "properties": "Heavy, Reach, Two-Handed",
+    "mastery": "Graze",
+    "costCp": 2000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:greataxe",
+    "kind": "weapon",
+    "name": "Greataxe",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d12",
+    "damageType": "Slashing",
+    "properties": "Heavy, Two-Handed",
+    "mastery": "Cleave",
+    "costCp": 3000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:greatsword",
+    "kind": "weapon",
+    "name": "Greatsword",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "2d6",
+    "damageType": "Slashing",
+    "properties": "Heavy, Two-Handed",
+    "mastery": "Graze",
+    "costCp": 5000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:halberd",
+    "kind": "weapon",
+    "name": "Halberd",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d10",
+    "damageType": "Slashing",
+    "properties": "Heavy, Reach, Two-Handed",
+    "mastery": "Cleave",
+    "costCp": 2000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:lance",
+    "kind": "weapon",
+    "name": "Lance",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d10",
+    "damageType": "Piercing",
+    "properties": "Heavy, Reach, Two-Handed (unless mounted)",
+    "mastery": "Topple",
+    "costCp": 1000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:longsword",
+    "kind": "weapon",
+    "name": "Longsword",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Slashing",
+    "properties": "Versatile (1d10)",
+    "mastery": "Sap",
+    "costCp": 1500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:maul",
+    "kind": "weapon",
+    "name": "Maul",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "2d6",
+    "damageType": "Bludgeoning",
+    "properties": "Heavy, Two-Handed",
+    "mastery": "Topple",
+    "costCp": 1000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:morningstar",
+    "kind": "weapon",
+    "name": "Morningstar",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "\u2014",
+    "mastery": "Sap",
+    "costCp": 1500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:pike",
+    "kind": "weapon",
+    "name": "Pike",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d10",
+    "damageType": "Piercing",
+    "properties": "Heavy, Reach, Two-Handed",
+    "mastery": "Push",
+    "costCp": 500,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:rapier",
+    "kind": "weapon",
+    "name": "Rapier",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "Finesse",
+    "mastery": "Vex",
+    "costCp": 2500,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:scimitar",
+    "kind": "weapon",
+    "name": "Scimitar",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Slashing",
+    "properties": "Finesse, Light",
+    "mastery": "Nick",
+    "costCp": 2500,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:shortsword",
+    "kind": "weapon",
+    "name": "Shortsword",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d6",
+    "damageType": "Piercing",
+    "properties": "Finesse, Light",
+    "mastery": "Vex",
+    "costCp": 1000,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:trident",
+    "kind": "weapon",
+    "name": "Trident",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "Thrown (Range 20/60), Versatile (1d10)",
+    "mastery": "Topple",
+    "costCp": 500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:warhammer",
+    "kind": "weapon",
+    "name": "Warhammer",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Bludgeoning",
+    "properties": "Versatile (1d10)",
+    "mastery": "Push",
+    "costCp": 1500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:war-pick",
+    "kind": "weapon",
+    "name": "War Pick",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "Versatile (1d10)",
+    "mastery": "Sap",
+    "costCp": 500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:whip",
+    "kind": "weapon",
+    "name": "Whip",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": false,
+    "damage": "1d4",
+    "damageType": "Slashing",
+    "properties": "Finesse, Reach",
+    "mastery": "Slow",
+    "costCp": 200,
+    "finesse": true,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:blowgun",
+    "kind": "weapon",
+    "name": "Blowgun",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 25/100; Needle), Loading",
+    "mastery": "Vex",
+    "costCp": 1000,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:hand-crossbow",
+    "kind": "weapon",
+    "name": "Hand Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1d6",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 30/120; Bolt), Light, Loading",
+    "mastery": "Vex",
+    "costCp": 7500,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:heavy-crossbow",
+    "kind": "weapon",
+    "name": "Heavy Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1d10",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 100/400; Bolt), Heavy, Loading,  Two-Handed",
+    "mastery": "Push",
+    "costCp": 5000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:longbow",
+    "kind": "weapon",
+    "name": "Longbow",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1d8",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 150/600; Arrow), Heavy,  Two-Handed",
+    "mastery": "Slow",
+    "costCp": 5000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": true
+  },
+  {
+    "id": "srd55:musket",
+    "kind": "weapon",
+    "name": "Musket",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1d12",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 40/120; Bullet), Loading,  Two-Handed",
+    "mastery": "Slow",
+    "costCp": 50000,
+    "finesse": false,
+    "twoHanded": true,
+    "heavy": false
+  },
+  {
+    "id": "srd55:pistol",
+    "kind": "weapon",
+    "name": "Pistol",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "91",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    "category": "martial",
+    "ranged": true,
+    "damage": "1d10",
+    "damageType": "Piercing",
+    "properties": "Ammunition (Range 30/90; Bullet), Loading",
+    "mastery": "Vex",
+    "costCp": 25000,
+    "finesse": false,
+    "twoHanded": false,
+    "heavy": false
+  },
+  {
+    "id": "srd55:padded-armor",
+    "kind": "armor",
+    "name": "Padded Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "light",
+    "ac": 11,
+    "dexCap": 99,
+    "strength": 0,
+    "costCp": 500,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:leather-armor",
+    "kind": "armor",
+    "name": "Leather Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "light",
+    "ac": 11,
+    "dexCap": 99,
+    "strength": 0,
+    "costCp": 1000,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd55:studded-leather-armor",
+    "kind": "armor",
+    "name": "Studded Leather Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "light",
+    "ac": 12,
+    "dexCap": 99,
+    "strength": 0,
+    "costCp": 4500,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd55:hide-armor",
+    "kind": "armor",
+    "name": "Hide Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "medium",
+    "ac": 12,
+    "dexCap": 2,
+    "strength": 0,
+    "costCp": 1000,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd55:chain-shirt",
+    "kind": "armor",
+    "name": "Chain Shirt",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "medium",
+    "ac": 13,
+    "dexCap": 2,
+    "strength": 0,
+    "costCp": 5000,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd55:scale-mail",
+    "kind": "armor",
+    "name": "Scale Mail",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "medium",
+    "ac": 14,
+    "dexCap": 2,
+    "strength": 0,
+    "costCp": 5000,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:breastplate",
+    "kind": "armor",
+    "name": "Breastplate",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "medium",
+    "ac": 14,
+    "dexCap": 2,
+    "strength": 0,
+    "costCp": 40000,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd55:half-plate-armor",
+    "kind": "armor",
+    "name": "Half Plate Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "medium",
+    "ac": 15,
+    "dexCap": 2,
+    "strength": 0,
+    "costCp": 75000,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:ring-mail",
+    "kind": "armor",
+    "name": "Ring Mail",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "heavy",
+    "ac": 14,
+    "dexCap": 0,
+    "strength": 0,
+    "costCp": 3000,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:chain-mail",
+    "kind": "armor",
+    "name": "Chain Mail",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "heavy",
+    "ac": 16,
+    "dexCap": 0,
+    "strength": 13,
+    "costCp": 7500,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:splint-armor",
+    "kind": "armor",
+    "name": "Splint Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "heavy",
+    "ac": 17,
+    "dexCap": 0,
+    "strength": 15,
+    "costCp": 20000,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:plate-armor",
+    "kind": "armor",
+    "name": "Plate Armor",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "category": "heavy",
+    "ac": 18,
+    "dexCap": 0,
+    "strength": 15,
+    "costCp": 150000,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd55:shield-equipment",
+    "kind": "shield",
+    "name": "Shield",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "92",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    "costCp": 1000,
+    "ac": 2
+  },
+  {
+    "id": "srd55:alchemists-supplies",
+    "kind": "tool",
+    "name": "Alchemists Supplies",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "intelligence",
+    "costCp": 5000
+  },
+  {
+    "id": "srd55:brewers-supplies",
+    "kind": "tool",
+    "name": "Brewers Supplies",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "intelligence",
+    "costCp": 2000
+  },
+  {
+    "id": "srd55:calligraphers-supplies",
+    "kind": "tool",
+    "name": "Calligraphers Supplies",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "dexterity",
+    "costCp": 1000
+  },
+  {
+    "id": "srd55:carpenters-tools",
+    "kind": "tool",
+    "name": "Carpenters Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "strength",
+    "costCp": 800
+  },
+  {
+    "id": "srd55:cartographers-tools",
+    "kind": "tool",
+    "name": "Cartographers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "wisdom",
+    "costCp": 1500
+  },
+  {
+    "id": "srd55:cobblers-tools",
+    "kind": "tool",
+    "name": "Cobblers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "dexterity",
+    "costCp": 500
+  },
+  {
+    "id": "srd55:cooks-utensils",
+    "kind": "tool",
+    "name": "Cooks Utensils",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "wisdom",
+    "costCp": 100
+  },
+  {
+    "id": "srd55:glassblowers-tools",
+    "kind": "tool",
+    "name": "Glassblowers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "intelligence",
+    "costCp": 3000
+  },
+  {
+    "id": "srd55:jewelers-tools",
+    "kind": "tool",
+    "name": "Jewelers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "intelligence",
+    "costCp": 2500
+  },
+  {
+    "id": "srd55:leatherworkers-tools",
+    "kind": "tool",
+    "name": "Leatherworkers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "dexterity",
+    "costCp": 500
+  },
+  {
+    "id": "srd55:masons-tools",
+    "kind": "tool",
+    "name": "Masons Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "strength",
+    "costCp": 1000
+  },
+  {
+    "id": "srd55:painters-supplies",
+    "kind": "tool",
+    "name": "Painters Supplies",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "wisdom",
+    "costCp": 1000
+  },
+  {
+    "id": "srd55:potters-tools",
+    "kind": "tool",
+    "name": "Potters Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "intelligence",
+    "costCp": 1000
+  },
+  {
+    "id": "srd55:smiths-tools",
+    "kind": "tool",
+    "name": "Smiths Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "93",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    "ability": "strength",
+    "costCp": 2000
+  },
+  {
+    "id": "srd55:tinkers-tools",
+    "kind": "tool",
+    "name": "Tinkers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "dexterity",
+    "costCp": 5000
+  },
+  {
+    "id": "srd55:weavers-tools",
+    "kind": "tool",
+    "name": "Weavers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "dexterity",
+    "costCp": 100
+  },
+  {
+    "id": "srd55:woodcarvers-tools",
+    "kind": "tool",
+    "name": "Woodcarvers Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "dexterity",
+    "costCp": 100
+  },
+  {
+    "id": "srd55:disguise-kit",
+    "kind": "tool",
+    "name": "Disguise Kit",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 2500
+  },
+  {
+    "id": "srd55:forgery-kit",
+    "kind": "tool",
+    "name": "Forgery Kit",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "dexterity",
+    "costCp": 1500
+  },
+  {
+    "id": "srd55:herbalism-kit",
+    "kind": "tool",
+    "name": "Herbalism Kit",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "intelligence",
+    "costCp": 500
+  },
+  {
+    "id": "srd55:navigators-tools",
+    "kind": "tool",
+    "name": "Navigators Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "wisdom",
+    "costCp": 2500
+  },
+  {
+    "id": "srd55:poisoners-kit",
+    "kind": "tool",
+    "name": "Poisoners Kit",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "intelligence",
+    "costCp": 5000
+  },
+  {
+    "id": "srd55:thieves-tools",
+    "kind": "tool",
+    "name": "Thieves Tools",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "dexterity",
+    "costCp": 2500
+  },
+  {
+    "id": "srd55:dice",
+    "kind": "tool",
+    "name": "Dice",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "wisdom",
+    "costCp": 10,
+    "category": "gaming-set"
+  },
+  {
+    "id": "srd55:dragonchess",
+    "kind": "tool",
+    "name": "Dragonchess",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "wisdom",
+    "costCp": 100,
+    "category": "gaming-set"
+  },
+  {
+    "id": "srd55:playing-cards",
+    "kind": "tool",
+    "name": "Playing Cards",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "wisdom",
+    "costCp": 50,
+    "category": "gaming-set"
+  },
+  {
+    "id": "srd55:three-dragon-ante",
+    "kind": "tool",
+    "name": "Three-Dragon Ante",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "wisdom",
+    "costCp": 100,
+    "category": "gaming-set"
+  },
+  {
+    "id": "srd55:bagpipes",
+    "kind": "tool",
+    "name": "Bagpipes",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 3000,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:drum",
+    "kind": "tool",
+    "name": "Drum",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 600,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:dulcimer",
+    "kind": "tool",
+    "name": "Dulcimer",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 2500,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:flute",
+    "kind": "tool",
+    "name": "Flute",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 200,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:horn",
+    "kind": "tool",
+    "name": "Horn",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 300,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:lute",
+    "kind": "tool",
+    "name": "Lute",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 3500,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:lyre",
+    "kind": "tool",
+    "name": "Lyre",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 3000,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:pan-flute",
+    "kind": "tool",
+    "name": "Pan Flute",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 1200,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:shawm",
+    "kind": "tool",
+    "name": "Shawm",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 200,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:viol",
+    "kind": "tool",
+    "name": "Viol",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "94",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=94"
+    },
+    "ability": "charisma",
+    "costCp": 3000,
+    "category": "musical-instrument"
+  },
+  {
+    "id": "srd55:arrows-20",
+    "kind": "gear",
+    "name": "Arrows 20",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "96",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    "costCp": 100,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:bolts-20",
+    "kind": "gear",
+    "name": "Bolts 20",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "96",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    "costCp": 100,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:sling-bullets-20",
+    "kind": "gear",
+    "name": "Sling Bullets 20",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "96",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    "costCp": 4,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:arcane-focus",
+    "kind": "gear",
+    "name": "Arcane Focus",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "96",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    "costCp": 500,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:holy-symbol",
+    "kind": "gear",
+    "name": "Holy Symbol",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "97",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    "costCp": 500,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:spellbook",
+    "kind": "gear",
+    "name": "Spellbook",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=78"
+    },
+    "costCp": 0,
+    "startingOnly": true
+  },
+  {
+    "id": "srd55:robe",
+    "kind": "gear",
+    "name": "Robe",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 100,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:travelers-clothes",
+    "kind": "gear",
+    "name": "Travelers Clothes",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 200,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:dungeoneers-pack",
+    "kind": "gear",
+    "name": "Dungeoneers Pack",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 1200,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:scholars-pack",
+    "kind": "gear",
+    "name": "Scholars Pack",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 4000,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:healers-kit",
+    "kind": "gear",
+    "name": "Healers Kit",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 500,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:quiver",
+    "kind": "gear",
+    "name": "Quiver",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 100,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:crowbar",
+    "kind": "gear",
+    "name": "Crowbar",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 200,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:pouch",
+    "kind": "gear",
+    "name": "Pouch",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 50,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:book-prayers",
+    "kind": "gear",
+    "name": "Book prayers",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 2500,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:book-history",
+    "kind": "gear",
+    "name": "Book history",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 2500,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:parchment-10",
+    "kind": "gear",
+    "name": "Parchment 10",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 100,
+    "startingOnly": false
+  },
+  {
+    "id": "srd55:parchment-8",
+    "kind": "gear",
+    "name": "Parchment 8",
+    "source": {
+      "publication": "System Reference Document 5.2.1",
+      "page": "95",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    "costCp": 80,
+    "startingOnly": false
+  }
+]

@@ -1,0 +1,3 @@
+This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.
+
+Changes: Rules have been converted to structured data and implemented in C++. Descriptive feature summaries are abridged and paraphrased. This experimental pack covers Fighter and Wizard levels 1–3, including the character-origin options necessary for that lifecycle. It does not reproduce the complete SRD. The application code is separately licensed under BSD-3-Clause.

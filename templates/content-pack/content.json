@@ -1,0 +1,32 @@
+[
+  {
+    "id": "example-homebrew:iron-cudgel",
+    "kind": "weapon",
+    "name": "Iron cudgel",
+    "source": {
+      "publication": "Example homebrew equipment",
+      "page": "1",
+      "url": ""
+    },
+    "cost": 4,
+    "damageDie": 4,
+    "weightCoins": 30,
+    "twoHanded": false,
+    "missile": false,
+    "missileOnly": false,
+    "clericAllowed": true,
+    "demihumanForbidden": false,
+    "damageSource": {
+      "publication": "Example homebrew equipment",
+      "page": "1",
+      "url": ""
+    },
+    "weightSource": {
+      "publication": "Example homebrew equipment",
+      "page": "1",
+      "url": ""
+    },
+    "missileRange": [],
+    "magicUserAllowed": false
+  }
+]

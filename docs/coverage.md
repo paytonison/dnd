@@ -1,0 +1,24 @@
+# Coverage ledger
+
+Coverage is recorded by publication and feature. A catalog entry is not an implementation claim. The delivery gates are evaluated against `PLAN (1).md`; this ledger must not redefine that scope to match whichever tests currently pass.
+
+| Publication/profile | Current implementation | Verification |
+| --- | --- | --- |
+| Moldvay Basic (1981) | Implemented: seven classes, abilities, equipment, combat, spell selection and memorization | Original preview and full original pages inspected; independent acceptance suite passes; see `sources-bx.md` |
+| Cook/Marsh Expert (1981) | B/X progression through printed tables: humans 14, dwarf 12, elf 10, halfling 8 | Printed-page references and independent tests at every supported class level pass |
+| SRD 5.2.1 | Implemented experimental fighter and wizard levels 1–3, origins, equipment and spell choices | Official CC BY source; complete class/species/background acceptance passes; see `sources-srd55.md` |
+| SRD 5.2.1 expanded module 2.0.0 | All 12 classes/subclasses through 20, full spell catalog, ordered class gains, feat/feature capacities and current effects | Complete public fixtures for all 240 single-class states pass; full lifecycle still in progress, see `v2-progress.md` |
+| Original D&D | Planned | Not implemented or verified |
+| Holmes Basic | Planned | Not implemented or verified |
+| AD&D 1e | Planned | Not implemented or verified |
+| BECMI / Rules Cyclopedia | Planned, distinct profiles | Not implemented or verified |
+| AD&D 2e | Planned | Not implemented or verified |
+| D&D 3.0 | Planned | Not implemented or verified |
+| D&D 3.5 | Planned | Not implemented or verified |
+| D&D 4e | Planned | Not implemented or verified |
+| 2014 5e / SRD 5.1 | Planned | Not implemented or verified |
+| Supplemental publications | Per-edition expansion pending; common pack import interface implemented | No supplemental publication lifecycle is claimed as implemented |
+
+The B/X human tables stop at level 14. The Expert book's suggested extrapolation pending a future Companion expansion is distinct from the printed core class tables. It must not be silently substituted for verified progression. Detailed B/X source ambiguities belong in the B/X source ledger.
+
+Platform claims likewise remain separate: CI jobs are configured for macOS, Windows and Linux. A checked-in workflow is not proof that a hosted job ran. Initial local runtime and packaging acceptance are performed on macOS; unexecuted platforms remain unverified.

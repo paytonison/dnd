@@ -1,0 +1,21 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+const [root, output] = process.argv.slice(2);
+if (!root || !output) throw new Error('Usage: encode-ico.mjs PNG_DIRECTORY OUTPUT.ico');
+const sizes = [16, 24, 32, 48, 64, 128, 256];
+const pngs = sizes.map(size => readFileSync(join(root, `windows-${size}.png`)));
+const header = Buffer.alloc(6 + 16 * sizes.length);
+header.writeUInt16LE(1, 2);
+header.writeUInt16LE(sizes.length, 4);
+let offset = header.length;
+sizes.forEach((size, i) => {
+  const entry = 6 + 16 * i;
+  header[entry] = size === 256 ? 0 : size;
+  header[entry + 1] = size === 256 ? 0 : size;
+  header.writeUInt16LE(1, entry + 4);
+  header.writeUInt16LE(32, entry + 6);
+  header.writeUInt32LE(pngs[i].length, entry + 8);
+  header.writeUInt32LE(offset, entry + 12);
+  offset += pngs[i].length;
+});
+writeFileSync(output, Buffer.concat([header, ...pngs]));

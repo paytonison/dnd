@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "bx-core",
+  "version": "1.0.0",
+  "edition": "bx",
+  "name": "Original B/X 1981 core character rules",
+  "publisher": "TSR (source publications); independently encoded by project contributors",
+  "origin": "official",
+  "license": {
+    "id": "LicenseRef-Mechanics-Facts",
+    "text": "Independently encoded game-mechanical facts and names; original explanatory text copyright project contributors under BSD-3-Clause. Original TSR publications remain copyrighted by their respective rights holders. No scans, artwork, or copied book prose included. This is an unofficial implementation, not a grant of rights to the original books.",
+    "url": "https://www.copyright.gov/circs/circ33.pdf"
+  },
+  "sources": [
+    {
+      "publication": "D&D Basic Rulebook (Moldvay, 1981)",
+      "page": "B1",
+      "url": "https://d1vzi28wh99zvq.cloudfront.net/pdf_previews/110274-sample.pdf"
+    },
+    {
+      "publication": "D&D Expert Rulebook (Cook/Marsh, 1981)",
+      "page": "X1",
+      "url": "https://www.americanroads.us/DandD/DnD_Expert_Rules_Cook.pdf"
+    }
+  ],
+  "dependencies": [],
+  "conflicts": [],
+  "dataFiles": [
+    "content.json"
+  ]
+}

@@ -67,3 +67,9 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# macOS metadata and generated acceptance artifacts
+.DS_Store
+tmp/
+output/
+dist/
