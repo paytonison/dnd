@@ -222,6 +222,13 @@ QString ActionDialog::changesHtml(const TransitionResult& result) const {
             const std::string full = (field.scope=="resources" ? "/resources" : "/choices") + field.path;
             if (containsPath(full,path) && full.size() > match) { group = full; label = q(field.label); match = full.size(); }
         }
+        // JSON Patch uses '-' to append to an array; it is not an index that
+        // can be read from the resulting document. Review the whole list so
+        // multiple additions appear together with their actual before/after values.
+        if (group == path && path.ends_with("/-")) {
+            const auto parent = path.substr(0, path.size() - 2);
+            if (at(after,parent).is_array()) { group = parent; label = pathLabel(parent); }
+        }
         for (const auto& resource : evaluation_.resources) if (path == "/resources/" + resource.id) { label = q(resource.label); break; }
         if (!printed.insert(group).second) continue;
         html += "<tr><td>" + label.toHtmlEscaped() + "</td><td>" + valueText(at(expectedSource_,group),ruleset_).toHtmlEscaped() + "</td><td>" + valueText(at(after,group),ruleset_).toHtmlEscaped() + "</td></tr>";

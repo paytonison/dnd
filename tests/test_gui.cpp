@@ -68,12 +68,26 @@ private slots:
         QFile::remove(QString::fromStdString(dnd::autosavePath((QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/untitled.dnd.json").toStdString()).string()));
     }
 
+    void sheetSectionHeadingStaysWithItsFirstRow_data() {
+        QTest::addColumn<QString>("firstRowKind");
+        QTest::newRow("scalar") << QString("scalar");
+        QTest::newRow("nested-table") << QString("nested-table");
+        QTest::newRow("notes-only") << QString("notes-only");
+        QTest::newRow("additional") << QString("additional");
+        QTest::newRow("resources") << QString("resources");
+        QTest::newRow("overrides") << QString("overrides");
+        QTest::newRow("validation") << QString("validation");
+        QTest::newRow("sources") << QString("sources");
+    }
+
     void sheetSectionHeadingStaysWithItsFirstRow() {
+        QFETCH(QString, firstRowKind);
         // Vary the preceding content so this exercises real Qt page boundaries,
         // including a section whose first row contains a nested advancement table.
         for (int rows = 1; rows <= 40; ++rows) {
             dnd::CharacterDocument character;
             dnd::Evaluation evaluation;
+            dnd::ResolvedRuleset ruleset;
             dnd::SheetSection preceding{"Preceding statistics", {}, {}};
             for (int row = 0; row < rows; ++row) {
                 const auto id = "filler." + std::to_string(row);
@@ -81,28 +95,167 @@ private slots:
                 preceding.calculationIds.push_back(id);
             }
             evaluation.sections.push_back(preceding);
-            const auto values = dnd::Json::array({{{"level", 1}, {"hitDie", 7}, {"hpAdded", 8}},
-                                                   {{"level", 2}, {"hitDie", 5}, {"hpAdded", 6}}});
-            evaluation.calculations.push_back({"advancement", "Advancement inputs", values, values});
-            evaluation.sections.push_back({"Advancement", {"advancement"}, {}});
+            QString headingText = "Advancement";
+            QString firstRowText = "Advancement inputs";
+            if (firstRowKind == "notes-only") {
+                firstRowText = "First section note";
+                evaluation.sections.push_back({"Advancement", {}, {firstRowText.toStdString(), "Second section note"}});
+            } else if (firstRowKind == "resources") {
+                headingText = "Current resources";
+                firstRowText = "Remaining uses";
+                character.resources[firstRowText.toStdString()] = 2;
+            } else if (firstRowKind == "overrides") {
+                headingText = "DM overrides";
+                firstRowText = "Statistic 0: normal 0; effective 0. Reason: Test override";
+                evaluation.calculations.front().overrideReason = "Test override";
+            } else if (firstRowKind == "validation") {
+                headingText = "Validation";
+                firstRowText = "error: Correct this validation input";
+                evaluation.messages.push_back({"error", "test.validation", "/test", "Correct this validation input", {}});
+            } else if (firstRowKind == "sources") {
+                headingText = "Sources and campaign";
+                firstRowText = "Test source 1.0.0 - Test publisher (homebrew)";
+                ruleset.packs.push_back({{{"name", "Test source"}, {"version", "1.0.0"},
+                                         {"publisher", "Test publisher"}, {"origin", "homebrew"}}, {}, {}});
+            } else {
+                const auto values = firstRowKind == "scalar" ? dnd::Json(7)
+                    : dnd::Json::array({{{"level", 1}, {"hitDie", 7}, {"hpAdded", 8}},
+                                       {{"level", 2}, {"hitDie", 5}, {"hpAdded", 6}}});
+                evaluation.calculations.push_back({"advancement", "Advancement inputs", values, values});
+                if (firstRowKind == "additional") headingText = "Additional statistics";
+                else evaluation.sections.push_back({"Advancement", {"advancement"}, {}});
+            }
             QTextDocument sheet;
             const qreal pageHeight = 500;
             sheet.setPageSize(QSizeF(420, pageHeight));
-            sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml(character, evaluation, {})));
+            sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml(character, evaluation, ruleset)));
             sheet.documentLayout()->documentSize();
             int headingPage = -1, dataPage = -1;
             for (auto block = sheet.begin(); block.isValid(); block = block.next()) {
                 const auto text = block.text();
                 const int page = static_cast<int>(std::floor(
                     sheet.documentLayout()->blockBoundingRect(block).top() / pageHeight));
-                if (text == "Advancement") headingPage = page;
-                else if (text == "Advancement inputs") dataPage = page;
+                if (text == headingText) headingPage = page;
+                else if (text == firstRowText) dataPage = page;
             }
             QVERIFY(headingPage >= 0 && dataPage >= 0);
             QVERIFY2(headingPage == dataPage,
                      qPrintable(QString("Heading on page %1, data on page %2 after %3 preceding rows")
                                     .arg(headingPage).arg(dataPage).arg(rows)));
         }
+    }
+
+    void sheetCompositeCalculationLabelStaysWithItsFirstValue_data() {
+        QTest::addColumn<bool>("arrayValue");
+        QTest::newRow("resource-object") << false;
+        QTest::newRow("advancement-array") << true;
+    }
+
+    void sheetCompositeCalculationLabelStaysWithItsFirstValue() {
+        QFETCH(bool, arrayValue);
+        for (int rows = 1; rows <= 70; ++rows) {
+            dnd::Evaluation evaluation;
+            dnd::SheetSection section{"Class features", {}, {}};
+            for (int row = 0; row < rows; ++row) {
+                const auto id = "filler." + std::to_string(row);
+                evaluation.calculations.push_back({id, "Statistic " + std::to_string(row), row, row});
+                section.calculationIds.push_back(id);
+            }
+            const auto values = arrayValue
+                ? dnd::Json::array({{{"level", 1}, {"hitDie", 9876}, {"hpAdded", 8}}})
+                : dnd::Json{{"current", 9876}, {"maximum", 9999}, {"recharge", "long-rest:all"}};
+            evaluation.calculations.push_back({"restoration", "Sorcerous Restoration", values, values});
+            section.calculationIds.push_back("restoration");
+            evaluation.sections.push_back(section);
+            QTextDocument sheet;
+            const qreal pageHeight = 500;
+            sheet.setPageSize(QSizeF(420, pageHeight));
+            sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml({}, evaluation, {})));
+            sheet.documentLayout()->documentSize();
+            int labelPage = -1, valuePage = -1;
+            for (auto block = sheet.begin(); block.isValid(); block = block.next()) {
+                const int page = static_cast<int>(std::floor(
+                    sheet.documentLayout()->blockBoundingRect(block).top() / pageHeight));
+                if (block.text() == "Sorcerous Restoration") labelPage = page;
+                else if (block.text() == "9876") valuePage = page;
+            }
+            QVERIFY(labelPage >= 0 && valuePage >= 0);
+            QVERIFY2(labelPage == valuePage,
+                     qPrintable(QString("Label on page %1, first value on page %2 after %3 preceding rows")
+                                    .arg(labelPage).arg(valuePage).arg(rows)));
+        }
+    }
+
+    void sheetFeatNotesFlowAfterPrecedingSection() {
+        dnd::Evaluation evaluation;
+        evaluation.sections.push_back({"Class features", {}, {"First class feature", "Last class feature"}});
+        evaluation.sections.push_back({"Feats", {}, {"First feat", "Second feat", "Third feat", "Fourth feat", "Fifth feat"}});
+        QTextDocument sheet;
+        sheet.setPageSize(QSizeF(420, 700));
+        sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml({}, evaluation, {})));
+        QCOMPARE(sheet.pageCount(), 1);
+    }
+
+    void physicalSpellbookSheetShowsStateWithoutInternalLedgers() {
+        const auto rules = srd55fixtures::rules();
+        auto fixture = srd55fixtures::complete("wizard", 1, rules);
+        QVERIFY2(fixture.evaluation.complete(), srd55fixtures::errors(fixture.evaluation).c_str());
+        auto document = fixture.document;
+        const auto applyCommand = [&](const std::string& id, const dnd::Json& inputs = dnd::Json::object()) {
+            const auto result = dnd::executeCommand(document, rules, {id, inputs});
+            if (!result.valid()) return false;
+            document = result.document;
+            return true;
+        };
+        QVERIFY(applyCommand("srd55.inventory.initialize"));
+        QVERIFY(applyCommand("srd55.history.accept-baseline"));
+        std::string original;
+        for (const auto& item : document.resources["inventory"]["instances"])
+            if (item["itemId"] == "srd55:spellbook") original = item["id"];
+        QVERIFY(!original.empty());
+        QVERIFY(applyCommand("srd55.spellbooks.initialize", {{"instanceId", original}}));
+        QVERIFY(applyCommand("srd55.inventory.acquire", {{"itemId", "srd55:spellbook"}, {"quantity", 1},
+            {"source", "gift"}, {"paidCp", 0}, {"reason", "Campaign supplies a blank backup"}}));
+        const std::string backup = document.resources["inventory"]["instances"].back()["id"];
+        QVERIFY(applyCommand("srd55.spellbooks.register", {{"instanceId", backup}}));
+        QVERIFY(applyCommand("srd55.spellbooks.copy", {{"sourceId", original}, {"destinationId", backup},
+            {"spells", {"srd55:alarm"}}, {"minutes", 60}, {"paidCp", 1000}}));
+        document.resources["notes"] = "Keep the red cover dry";
+        document.resources["Camp supplies"] = {{"rations", 3}, {"water", 2}};
+        document.campaign["tableNote"] = "A visible campaign note";
+        document.overrides.push_back({{"target", "hp.maximum"}, {"value", 12}, {"reason", "DM award for recovering the book"}});
+        const auto before = dnd::toJson(document);
+        const auto evaluation = dnd::evaluate(document, rules);
+        QVERIFY2(evaluation.complete(), srd55fixtures::errors(evaluation).c_str());
+        QTextDocument sheet;
+        sheet.setPageSize(QSizeF(420, 700));
+        const auto html = dnd::renderSheetHtml(document, evaluation, rules);
+        sheet.setHtml(QString::fromStdString(html));
+        const auto text = sheet.toPlainText();
+        for (const auto* visible : {"Current owned inventory", "Physical spellbooks", "Alarm", "9500",
+             "Keep the red cover dry", "Camp supplies", "Rations:", "Water:", "A visible campaign note",
+             "DM award for recovering the book", "normal 10; effective 12", "System Reference Document 5.2.1"})
+            QVERIFY2(text.contains(visible), visible);
+        QVERIFY(!text.contains("creationCurrencyCp"));
+        QVERIFY(!text.contains("Receipts:"));
+        QVERIFY(!text.contains("Destination Id:"));
+        QVERIFY(!text.contains("Srd55 History:"));
+        QVERIFY(!text.contains("\"rations\""));
+        QVERIFY(!text.contains("restWindow"));
+        QCOMPARE(dnd::toJson(document), before);
+        QTemporaryDir directory;
+        const auto filename = (directory.path() + "/books.json").toStdString();
+        dnd::saveCharacter(filename, document);
+        QCOMPARE(dnd::toJson(dnd::loadCharacter(filename).document), before);
+        QCOMPARE(dnd::renderSheetHtml(document, dnd::evaluate(document, rules), rules), html);
+        // The edition's transient metadata, not record names in the renderer,
+        // decides which bookkeeping trees are omitted from the appendix.
+        auto unfiltered = evaluation;
+        unfiltered.moduleData.erase("sheet");
+        sheet.setHtml(QString::fromStdString(dnd::renderSheetHtml(document, unfiltered, rules)));
+        QVERIFY(sheet.toPlainText().contains("Receipts:"));
+        QVERIFY(sheet.toPlainText().contains("Destination Id:"));
+        QVERIFY(sheet.toPlainText().contains("Srd55 History:"));
     }
 
     void createEquipAdvanceInspectOverrideSaveReopenExport() {
@@ -593,6 +746,67 @@ private slots:
         QVERIFY(window.saveTo(path)); QVERIFY(window.openPath(path, false));
         QCOMPARE(window.document().resources[definition.id].get<int>(), definition.maximum - 1);
         QCOMPARE(window.document().choices, choices);
+    }
+
+    void appendedSpellbookContentsAreVisibleBeforeApply() {
+        QTemporaryDir directory;
+        const auto rules = srd55fixtures::rules();
+        auto fixture = srd55fixtures::complete("wizard", 1, rules);
+        QVERIFY2(fixture.evaluation.complete(), srd55fixtures::errors(fixture.evaluation).c_str());
+        auto document = fixture.document;
+        const auto applyCommand = [&](const std::string& id, const dnd::Json& inputs = dnd::Json::object()) {
+            const auto result = dnd::executeCommand(document, rules, {id, inputs});
+            if (!result.valid()) return false;
+            document = result.document;
+            return true;
+        };
+        QVERIFY(applyCommand("srd55.inventory.initialize"));
+        QVERIFY(applyCommand("srd55.history.accept-baseline"));
+        std::string original;
+        for (const auto& item : document.resources["inventory"]["instances"])
+            if (item["itemId"] == "srd55:spellbook") original = item["id"];
+        QVERIFY(!original.empty());
+        QVERIFY(applyCommand("srd55.spellbooks.initialize", {{"instanceId", original}}));
+        QVERIFY(applyCommand("srd55.inventory.acquire", {{"itemId", "srd55:spellbook"}, {"quantity", 1},
+            {"source", "gift"}, {"paidCp", 0}, {"reason", "Campaign supplies a blank backup"}}));
+        const std::string backup = document.resources["inventory"]["instances"].back()["id"];
+        QVERIFY(applyCommand("srd55.spellbooks.register", {{"instanceId", backup}}));
+        const auto before = dnd::toJson(document);
+        const QString filename = directory.path() + "/books.json";
+        dnd::saveCharacter(filename.toStdString(), document);
+        dnd::MainWindow window;
+        QVERIFY(window.openPath(filename, false));
+        bool previewed = false, sawSpells = false, sourcePreserved = false;
+        QTimer::singleShot(0, &window, [&] {
+            auto* dialog = window.findChild<QDialog*>("characterActionsDialog");
+            if (!dialog) return;
+            auto* picker = dialog->findChild<QComboBox*>("actionPicker");
+            if (!picker) { dialog->reject(); return; }
+            picker->setCurrentIndex(picker->findData("srd55.spellbooks.copy"));
+            auto* source = dialog->findChild<QComboBox*>("actionInput:/sourceId");
+            auto* target = dialog->findChild<QComboBox*>("actionInput:/destinationId");
+            auto* spells = dialog->findChild<QListWidget*>("actionInput:/spells");
+            auto* minutes = dialog->findChild<QSpinBox*>("actionInput:/minutes");
+            auto* cost = dialog->findChild<QSpinBox*>("actionInput:/paidCp");
+            if (!source || !target || !spells || !minutes || !cost) { dialog->reject(); return; }
+            source->setCurrentIndex(source->findData(QString::fromStdString(original)));
+            target->setCurrentIndex(target->findData(QString::fromStdString(backup)));
+            for (int i = 0; i < spells->count(); ++i)
+                if (spells->item(i)->data(Qt::UserRole) == "srd55:alarm" ||
+                    spells->item(i)->data(Qt::UserRole) == "srd55:burning-hands")
+                    spells->item(i)->setCheckState(Qt::Checked);
+            minutes->setValue(120); cost->setValue(2000); // Two first-level spells: 2 hours, 20 GP.
+            dialog->findChild<QPushButton*>("previewActionButton")->click();
+            previewed = dialog->findChild<QPushButton*>("applyActionButton")->isEnabled();
+            const auto text = dialog->findChild<QTextBrowser*>("actionChanges")->toPlainText();
+            sawSpells = text.contains("Alarm, Burning Hands") && text.contains("2000") && !text.contains("spells · -");
+            sourcePreserved = dnd::toJson(window.document()) == before;
+            dialog->reject();
+        });
+        window.findChild<QAction*>("characterActionsAction")->trigger();
+        QVERIFY(previewed); QVERIFY(sawSpells); QVERIFY(sourcePreserved);
+        QCOMPARE(dnd::toJson(window.document()), before);
+        QCOMPARE(dnd::loadCharacter(filename.toStdString()).original, before);
     }
 
     void actionPreviewIsPureAndOnlyApplyCommits() {

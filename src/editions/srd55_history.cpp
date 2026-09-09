@@ -312,6 +312,8 @@ void appendHistoryActionsInternal(const CharacterDocument& d,const ResolvedRules
     for(const auto& p:policies(d.choices,r)){const auto f=fields.find(p.path);if(f==fields.end())continue;auto input=f->second;input.path="/value";input.scope="choices";input.editable=true;input.readOnlyReason.clear();const auto used=state.used.find(p.budget);const bool permitted=allowance(p,state)>(used==state.used.end()?0:used->second);const std::string reason=permitted?"":cadence(p)+" is required, or its replacement allowance is already used.";
         e.actions.push_back({std::string(prefix)+"replace."+p.id,"Change "+f->second.label,cadence(p)+". Retain unchanged selections; limited replacements share their owning feature's allowance.",{input},permitted&&e.complete(),reason,{srd55v2::ref(p.page)}});
         e.actions.back().initialInputs={{"value",get(d.choices,p.path)}};
+        const auto books=resolveWizardSpellbooks(d,r);
+        if(!books.hasAccessibleBook&&(p.path=="/spellcasting/wizard/preparedSpells"||p.path.starts_with("/features/wizard/spellMastery"))){e.actions.back().available=false;e.actions.back().reason="Carry an owned spellbook to study before changing these Wizard preparations.";}
     }
 }
 
@@ -343,6 +345,7 @@ TransitionResult applyHistoryCommandInternal(const CharacterDocument& original,c
         if(state.pending.empty())return rejected(original,"pending","There is no pending change to commit.");
         const auto checked=core(original,rules);if(!checked.complete()){appendErrors(result.messages,checked);return result;}
         auto candidate=original;const bool advancement=state.pending.value("kind","")==std::string(prefix)+"begin-advance";auto next=state;updateAcquisitions(next,state.stable.at("choices"),candidate.choices,&rules);
+        if(advancement){auto accepted=original;accepted.choices=state.stable.at("choices");recordWizardBookAdvancement(accepted,candidate,rules);}
         appendEvent(candidate,state,advancement?"commit-advance":"commit-change",state.stable,snapshot(candidate),{{"beginSequence",integerChoice(state.pending,"sequence",-1)},{"inputs",command.inputs},{"acquisitions",next.acquisitions}});
         const auto verified=evaluate(candidate,rules);if(!verified.complete()){appendErrors(result.messages,verified);return result;}result.document=std::move(candidate);return result;
     }
@@ -350,6 +353,8 @@ TransitionResult applyHistoryCommandInternal(const CharacterDocument& original,c
     const auto current=core(original,rules);if(!current.complete()){appendErrors(result.messages,current);return result;}
     if(id==std::string(prefix)+"begin-advance"){
         const auto target=text(command.inputs,"/classId");const auto* cls=rules.find(target);if(!cls||cls->value("kind","")!="class")return rejected(original,"class","Choose an available class for advancement.");
+        const auto books=resolveWizardSpellbooks(original,rules);
+        if(profileLevel(original.choices,rules,"wizard")>0&&classProfile(rules,target)=="wizard"&&(!books.hasAccessibleBook||(books.tracked&&!books.destinationAccessible)))return rejected(original,"spellbook-destination","Carry and choose a registered destination book before recording new Wizard research.");
         const int nextLevel=total(original.choices)+1;if(nextLevel>20)return rejected(original,"level-cap","Character level cannot exceed20.");
         auto candidate=original;const auto order=classOrder(original.choices);candidate.choices["level"]=nextLevel;
         if(get(original.choices,"/multiclass")==true||target!=text(original.choices,"/classId")){
@@ -363,6 +368,8 @@ TransitionResult applyHistoryCommandInternal(const CharacterDocument& original,c
     const std::string replacePrefix=std::string(prefix)+"replace.";
     if(id.starts_with(replacePrefix)){
         const auto available=policies(original.choices,rules);const auto key=id.substr(replacePrefix.size());const auto found=std::find_if(available.begin(),available.end(),[&](const auto& p){return p.id==key;});if(found==available.end())return rejected(original,"choice","Unknown replacement group.");
+        const auto books=resolveWizardSpellbooks(original,rules);
+        if(!books.hasAccessibleBook&&(found->path=="/spellcasting/wizard/preparedSpells"||found->path.starts_with("/features/wizard/spellMastery")))return rejected(original,"spellbook-study","Carry an owned spellbook to study before changing these Wizard preparations.");
         const auto fields=fieldMap(current);const auto f=fields.find(found->path);if(f==fields.end())return rejected(original,"inactive-choice","This choice is not currently granted by the character.");
         const auto used=state.used.find(found->budget);if(allowance(*found,state)<=(used==state.used.end()?0:used->second))return rejected(original,"cadence","The latest recorded trigger does not allow this replacement, or its allowance is already used.");
         if(!command.inputs.contains("value"))return rejected(original,"value","Provide the replacement value or complete selection list.");

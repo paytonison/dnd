@@ -83,6 +83,8 @@ Retain the repository’s BSD-3-Clause license for application code. Track conte
 
 Execute the following in order. Each step should retain the existing B/X and legacy SRD acceptance cases. Scope completion is determined by the requirements and source evidence, not by test totals or catalog size.
 
+**Current scope decision — September 8, 2026:** The user explicitly requested that human B/X levels above 14 remain unavailable for now. The existing printed-table boundary is retained; the original human level-36 continuation requirement is deferred, not completed or redefined as a level-14 normal maximum. No continuation tables or campaign policy are inferred from another edition. Continue the independently verifiable foundation, delivery, and SRD lifecycle work within that boundary.
+
 ### 1. Make content validation agree with the mechanics the engine executes
 
 - **Fix supported-profile dispatch.** The SRD validator accepts a class with `rulesProfile: "fighter"`, but feature evaluation dispatches through literal `srd55:fighter` identifiers. A copy of the Fighter with only its ID/name changed currently validates and evaluates as complete while losing class features and Second Wind. Resolve class behavior through the supported profile and preserve the selected content's identity and sources. Explicitly reject unsupported bindings until their interpretation exists; a valid-looking character must not silently lose mechanics. Inspect the equivalent assumptions in subclasses, progression, and feature handlers.
@@ -124,7 +126,7 @@ For each edition or publication, establish its original-source ledger and reuse 
 
 ## Validation and defaults
 
-Implementation follow-through is recorded in [the September 8 checkpoint](docs/plan-followthrough.md). It distinguishes implemented fixes and completed automated checks from the unfinished PDF regression, native acceptance, B/X continuation decision, and later lifecycle/edition work. The remaining gates below are not waived by that checkpoint.
+Implementation follow-through is recorded in [the initial September 8 checkpoint](docs/plan-followthrough.md) and [the subsequent continuation checkpoint](docs/continuation-status.md). These distinguish implemented fixes and completed checks from each newer artifact's pending validation, deferred B/X continuation, and later lifecycle/edition work. The remaining gates below are not waived by a checkpoint.
 
 - Verify every B/X class at first level, progression boundaries, and its normal maximum level. Cover ability and eligibility thresholds, XP changes, hit-point progression, equipment restrictions, saves, attacks, and spell progression.
 - Test incomplete drafts, invalid combinations, source removal, pack conflicts, DM overrides, and deterministic recalculation.

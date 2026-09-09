@@ -2,6 +2,8 @@
 
 The expanded module is an additional exact-version implementation, not a replacement for the version-1 fighter/wizard slice. It remains experimental. The full original plan is still active, including completing the SRD character lifecycle and implementing the other listed editions and publications.
 
+Current implementation and verification status is recorded in [the continuation checkpoint](continuation-status.md). The counts and native/PDF milestones below describe earlier artifacts; they do not certify later working-tree changes.
+
 Implemented and exercised so far:
 
 - 12 classes and 12 SRD subclasses, their 20-level progression data, 339 spell records, all SRD Origin/General/Fighting Style/Epic Boon feat records, 28 invocations, 10 Metamagic options, and the relevant Beast/familiar forms. Source disagreements in spell-list membership are preserved explicitly in the source ledger.
@@ -16,10 +18,12 @@ Implemented and exercised so far:
 - Explicit resource spending, complete and partial rests, accepted Hit Die healing, Arcane Recovery, Sorcerous Restoration, Magical Cunning, Font of Magic, and Font of Inspiration. Wizard copying now couples current funds and learned-spell history; owned scroll copying records the Arcana check and consumes the scroll on either outcome. The focused lifecycle suite passes 145 assertions in 10 cases. See `srd55-lifecycle.md`.
 - Owned inventory instances, acquisitions/dispositions, equipment selection, attunement and supported item effects, charges, consumables, permanent ability changes, and optional higher-level starting allowances. A full magic-item catalog retains per-record implementation status; cataloged entries do not count as implemented mechanics. Inventory coverage and the new companion/class-action integrations are undergoing combined validation.
 
+- Physical Wizard spellbook ownership, backup, loss, reconstruction and exact recovery, with selected-profile progression, history/advancement integration and native packaged save/reopen acceptance. See `srd55-lifecycle.md` and the continuation checkpoint for the source boundaries and unsupported legacy migration case.
+
 Still required before claiming the full SRD lifecycle complete:
 
 1. Complete the remaining magic-item mechanics and general equipment coverage, retaining explicit per-record statuses. Validate combinations of item effects, class features, forms, and attunement rather than treating catalog text as executable rules.
-2. Complete the remaining persistent character-owned states and workflows, including spellbook loss/backup/replacement, applicable crafting, and companion states. Familiar casting/state and additional class recovery actions are in integration; current source coverage is distinct from final native acceptance.
+2. Complete the remaining persistent character-owned states and workflows, including applicable crafting, remaining companion states, and unsupported legacy physical-book migrations. Familiar casting/state and additional class recovery actions are in integration; current source coverage is distinct from final native acceptance.
 3. Finish source-specific recovery exceptions and activation/cost transactions that materially affect persistent character state. Druid slot conversion requires an explicit campaign ruling because the source omits slot expiration; the chosen interpretation and reason are shown on the sheet.
 4. Run the combined regression suite after the new inventory, history, resource, companion, and class-action modules stabilize. The previous complete combined milestone remains recorded below until replaced by a fresh full run.
 5. Extend native/PDF acceptance to the remaining lifecycle transactions and broader multiclass combinations as they are implemented. Current upper-level Wizard/Sorcerer native and PDF acceptance is complete; source/data/unit coverage is not interchangeable with these workflows.
@@ -30,4 +34,4 @@ Other D&D editions, edition profiles, and supplemental publications listed in th
 
 Evidence: `tests/test_srd55_complete.cpp`, `tests/test_srd55_features.cpp`, `tests/test_srd55_v2_content.cpp`, `tests/test_srd55_v2.cpp`, `tests/test_gui.cpp`, and `docs/sources-srd55-v2.md`. The combined test log is `output/validation/ctest-v2.txt`; rendered/native QA artifacts are under `output/complete-qa`.
 
-Latest validation milestone: 34,980 assertions across 76 core test cases and all 14 QtTest entries pass. A current separate headless build links no Qt libraries and evaluates the complete Wizard20. Native Wizard20 opening, DC inspection, explicit resource editing, Save As, reopening, and original-file preservation passed. All 16 final Wizard/Sorcerer/override PDF pages were visually reviewed, with no clipping, blank pages, orphaned Feats heading, or omitted version/source/license/override information. See `docs/gui-versioning.md` and `output/complete-qa` for that evidence.
+Earlier expanded-module validation milestone: 34,980 assertions across 76 core test cases and all 14 QtTest entries pass. A current separate headless build links no Qt libraries and evaluates the complete Wizard20. Native Wizard20 opening, DC inspection, explicit resource editing, Save As, reopening, and original-file preservation passed. All 16 final Wizard/Sorcerer/override PDF pages were visually reviewed, with no clipping, blank pages, orphaned Feats heading, or omitted version/source/license/override information. See `docs/gui-versioning.md` and `output/complete-qa` for that evidence.

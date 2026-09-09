@@ -68,3 +68,7 @@ The automated package test uses Qt's offscreen platform, so it establishes reloc
 The September 8, 2026 validation used macOS 27 on Apple Silicon and Qt 6.11.2. The final icon-inclusive archive contained 30 ARM64 Mach-O files, five Qt frameworks, and six plugins. Every non-system dependency resolved within the bundle; all nested signatures and the extracted application's signature passed strict verification. The extracted archive passed the complete strict smoke workflow, including the embedded icon check. Its runtime minimum was macOS 26.0 because of the bundled Homebrew dependencies. Earlier macOS versions and Intel Macs were not tested.
 
 References: [Qt's macOS deployment guide](https://doc.qt.io/qt-6/macos-deployment.html), [Qt licensing](https://doc.qt.io/qt-6/licensing.html), and [Qt third-party components](https://doc.qt.io/qt-6/licenses-used-in-qt.html).
+
+## September 8 continuation artifact
+
+The final continuation package is under `output/continuation-20260908/package`, built from base `15a44da` plus the source hashes recorded in `output/validation/continuation-20260908/final-source-inputs.json`. Its ZIP SHA-256 is `32cac257c66407dc3f9e0987ab43c61c734fad080bdf887e23d33e1ed45dde30`. Dependency/signature audits, extracted-ZIP smoke, nine-file content parity, final native book workflow and 17-page PDF acceptance are recorded in [the continuation checkpoint](continuation-status.md). It remains an ARM64, macOS 26.0-minimum, Qt 6.11.2, ad hoc signed local artifact. Hosted platform runs and notarization are not established by this result.

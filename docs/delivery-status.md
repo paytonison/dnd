@@ -1,6 +1,8 @@
 # Delivery status against the supplied plan
 
-This is a requirement audit, not a claim that the whole plan is finished. The active goal includes the expansion sequence. The first-release architecture, B/X lifecycle, experimental second-edition proof, and initial Mac acceptance have been implemented. Full edition expansion remains work to execute.
+This is a requirement audit, not a claim that the whole plan is finished. The active goal includes the expansion sequence. The first-release architecture, B/X through the reviewed printed tables, experimental second-edition proof, and initial Mac acceptance have been implemented. Full edition expansion remains work to execute.
+
+Current artifact-specific evidence is in [the continuation checkpoint](continuation-status.md). The older milestones below are historical; human B/X continuation remains deferred at the user's request.
 
 | Plan requirement | Current evidence | Status |
 | --- | --- | --- |
@@ -33,4 +35,4 @@ The count of tests or source entries does not by itself prove full publication c
 
 First-release milestone verification: `ctest --test-dir build-dev -V` passed 10,189 assertions in 30 Catch2 cases plus all 9 QtTest entries (including setup/cleanup); exact output is in `output/validation/ctest.txt`. The self-contained icon-inclusive archive passed the extracted-bundle smoke and strict signature/dependency audit.
 
-Expanded module 2.0.0 is now implemented and tested through all 240 single-class states, with focused multiclass and migration regressions. The latest combined expanded-module run passed 34,980 assertions in 76 core cases and all 14 QtTest entries. See `v2-progress.md` for remaining full-SRD lifecycle work; the wider edition/supplement expansion remains incomplete.
+Expanded module 2.0.0 is now implemented and tested through all 240 single-class states, with focused multiclass and migration regressions. An earlier combined expanded-module run passed 34,980 assertions in 76 core cases and all 14 QtTest entries. See `v2-progress.md` for remaining full-SRD lifecycle work; the wider edition/supplement expansion remains incomplete.

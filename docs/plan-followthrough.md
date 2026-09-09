@@ -1,6 +1,6 @@
 # Plan implementation checkpoint — September 8, 2026
 
-This checkpoint preserves the foundation work against `PLAN.md`. The entire plan is not complete.
+This checkpoint preserves the earlier foundation work against `PLAN.md`. The entire plan is not complete. Its stopping-point observations are historical; [the subsequent continuation checkpoint](continuation-status.md) records the completed pagination/native work, further content fixes, physical spellbooks, fresh tests and package, and the user's B/X scope decision.
 
 ## Implemented changes
 
@@ -32,7 +32,7 @@ The fresh local macOS package passed dependency, signature, bundled-pack parity,
 2. **Native acceptance is partial.** The current app was opened and a B/X character's name, six accepted ability scores, Fighter class, first level, and XP were entered through native controls. The complete native equip/advance/explain/override/save/reopen/export workflow was interrupted before completion. Automated workflow and offscreen smoke results are separate evidence.
 3. **Repeat the combined suite after the pagination change**, regenerate representative B/X/Wizard/Sorcerer PDFs, inspect every page, and rebuild the package. The existing Wizard/Sorcerer exports in `output/plan-followthrough` have not received complete final visual acceptance.
 4. **Hosted platforms remain unverified.** The repository's hosted run listing returned no runs. The workflow definition is not execution evidence for macOS, Windows, or Linux.
-5. **The human B/X continuation decision is unresolved.** No unsupported level-15–36 spells, saves, turning, or thief-ability progression was invented. The first-release normal-maximum gate remains open.
+5. **The human B/X continuation decision is unresolved.** No unsupported level-15–36 spells, saves, or thief-ability progression was invented. The subsequent source recheck confirmed X5 turning already covers 11+; see the corrected source ledger. The first-release normal-maximum gate remains open.
 6. **Expanded SRD lifecycle and later editions remain open.** Spellbook loss/backup/reconstruction was researched against original SRD pages 78–79 and 104, but no implementation was added. Existing item/lifecycle coverage labels and all later edition/publication requirements remain in force.
 
 No source-publication, edition-module, pack, or save-format version was changed. Generated packages and acceptance artifacts remain outside version control.

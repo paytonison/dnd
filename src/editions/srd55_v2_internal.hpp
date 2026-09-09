@@ -81,6 +81,30 @@ FeatureResult resolveClassChoices(const Context& context);
 FeatureResult evaluateClassFeatures(const Context& context);
 FeatureResult advancementAbilityGrant(const std::string& profile, int classLevel);
 
+struct WizardBookState {
+    bool tracked = false;
+    bool hasAccessibleBook = false;
+    bool destinationAccessible = false;
+    std::string destinationId;
+    std::set<std::string> accessibleSpells;
+    std::set<std::string> destinationSpells;
+    std::set<std::string> prepared;
+    std::vector<Message> messages;
+};
+std::set<std::string> wizardAcquiredSpells(const CharacterDocument&, const ResolvedRuleset&);
+std::set<std::string> wizardAcquiredSpells(const Context&);
+int wizardPreparationLimit(const CharacterDocument&, const ResolvedRuleset&, int classLevel = -1);
+std::string originalWizardBookId(const CharacterDocument&, const ResolvedRuleset&);
+std::set<std::string> wizardPreparedSpells(const CharacterDocument&, const ResolvedRuleset&);
+std::set<std::string> wizardRetainedSelection(const CharacterDocument&, const std::string& path);
+WizardBookState resolveWizardSpellbooks(const CharacterDocument&, const ResolvedRuleset&);
+void appendWizardSpellbookState(const CharacterDocument&, const ResolvedRuleset&, Evaluation&);
+void appendWizardSpellbookActions(const CharacterDocument&, const ResolvedRuleset&, Evaluation&);
+TransitionResult applyWizardSpellbookCommand(const CharacterDocument&, const ResolvedRuleset&, const CharacterCommand&);
+void recordWizardBookExternalCopy(CharacterDocument&, const ResolvedRuleset&, const std::string& spell,
+                                  int minutes, int paidCp, const std::string& source);
+void recordWizardBookAdvancement(const CharacterDocument&, CharacterDocument&, const ResolvedRuleset&);
+
 SourceRef ref(const std::string& page);
 const Json* at(const Json& value, const std::string& pointer);
 int number(const Json& value, const std::string& pointer, int fallback = 0);

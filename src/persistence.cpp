@@ -34,7 +34,7 @@ std::string labelText(const std::string& key) {
     if (!result.empty() && result.front() >= 'a' && result.front() <= 'z') result.front() -= ('a' - 'A');
     return escape(result);
 }
-std::string valueHtml(const Json& value) {
+std::string valueHtml(const Json& value, const std::string& headingHtml = {}) {
     if (value.is_object()) {
         std::vector<std::string> keys;
         bool numeric = !value.empty();
@@ -46,8 +46,11 @@ std::string valueHtml(const Json& value) {
             catch (...) { numeric = false; }
         }
         std::ostringstream out;
-        if (value.contains("label") && value["label"].is_string()) out << "<p><b>" << escape(value["label"].get<std::string>()) << "</b></p>";
+        std::string heading = headingHtml;
+        if (value.contains("label") && value["label"].is_string()) heading += "<p><b>" + escape(value["label"].get<std::string>()) + "</b></p>";
         out << "<table width='100%' cellspacing='0' cellpadding='2'>";
+        if (!heading.empty()) out << "<thead><tr><td colspan='" << (numeric && keys.size() <= 20 ? keys.size() : 2)
+                                  << "' style='padding:0;border:0'>" << heading << "</td></tr></thead>";
         if (numeric && keys.size() <= 20) {
             std::sort(keys.begin(), keys.end(), [](const auto& a, const auto& b) { return std::stoi(a) > std::stoi(b); });
             out << "<tr>";
@@ -72,7 +75,9 @@ std::string valueHtml(const Json& value) {
         if (spellProfiles) keys = {"spell", "source", "ability", "DC", "attack", "casting"};
         std::ostringstream out;
         if (objects && keys.size() <= 6) {
-            out << "<table width='100%' cellspacing='0' cellpadding='4' border='1' style='font-size:9pt;border-color:#d6dcdf'><thead><tr>";
+            out << "<table width='100%' cellspacing='0' cellpadding='4' border='1' style='font-size:9pt;border-color:#d6dcdf'><thead>";
+            if (!headingHtml.empty()) out << "<tr><td colspan='" << keys.size() << "' style='padding:0;border:0'>" << headingHtml << "</td></tr>";
+            out << "<tr>";
             const std::map<std::string,int> widths{{"spell",24},{"source",23},{"ability",15},{"DC",7},{"attack",8},{"casting",23}};
             for (const auto& key : keys) out << "<th" << (spellProfiles ? " width='" + std::to_string(widths.at(key)) + "%'" : "") << ">" << (spellProfiles && key=="attack" ? "Atk" : labelText(key)) << "&nbsp;</th>";
             out << "</tr></thead>";
@@ -84,7 +89,7 @@ std::string valueHtml(const Json& value) {
             out << "</table>";
         } else {
             bool first = true;
-            for (const auto& item : value) { if (!first) out << (item.is_primitive() ? ", " : "<br>"); out << valueHtml(item); first = false; }
+            for (const auto& item : value) { if (!first) out << (item.is_primitive() ? ", " : "<br>"); out << valueHtml(item, first ? headingHtml : ""); first = false; }
         }
         return out.str();
     }
@@ -159,6 +164,16 @@ std::filesystem::path autosavePath(const std::filesystem::path& path) {
 }
 void writeAutosave(const std::filesystem::path& path, const CharacterDocument& document) { saveCharacter(autosavePath(path), document); }
 std::string renderSheetHtml(const CharacterDocument& document, const Evaluation& evaluation, const ResolvedRuleset& ruleset) {
+    const auto visibleSheetData = [&](Json data, const std::string& exclusionKey) {
+        const auto metadata = evaluation.moduleData.find("sheet");
+        if (!data.is_object() || metadata == evaluation.moduleData.end() || !metadata->is_object()) return data;
+        const auto exclusions = metadata->find(exclusionKey);
+        if (exclusions != metadata->end() && exclusions->is_array())
+            for (const auto& key : *exclusions) if (key.is_string()) data.erase(key.get<std::string>());
+        return data;
+    };
+    const auto resources = visibleSheetData(document.resources, "excludedResourceKeys");
+    const auto campaign = visibleSheetData(document.campaign, "excludedCampaignKeys");
     std::ostringstream html;
     html << "<!DOCTYPE html><html><head><meta charset='utf-8'><style>"
          << "body{font-family:Helvetica,Arial,sans-serif;font-size:10pt;color:#20242a;}a{color:#20242a;text-decoration:none;}h1{font-size:23pt;margin-bottom:4pt;}"
@@ -171,15 +186,27 @@ std::string renderSheetHtml(const CharacterDocument& document, const Evaluation&
     if (module && module->experimental) html << " &middot; <b>Experimental coverage</b>";
     html << "</p>";
     if (!evaluation.complete()) html << "<p class='warning'><b>Draft - unresolved validation messages below.</b></p>";
+    auto beginSection = [&](const std::string& title, bool headingInFirstValue = false) {
+        // Qt repeats table headers across pages and keeps them with the first row.
+        html << "<table width='100%' cellspacing='0' cellpadding='3'>";
+        if (!headingInFirstValue) html << "<thead><tr><td colspan='2' style='padding:0;border:0'><h2>"
+                                      << escape(title) << "</h2></td></tr></thead>";
+    };
+    const auto textRow = "<tr><td colspan='2' style='padding:0;border:0'>";
     std::set<std::string> shown;
-    auto row = [&](const Calculation& c) {
+    const auto composite = [](const Calculation& c) {
+        return c.effective.is_object() || (c.effective.is_array() && !c.effective.empty()
+            && std::all_of(c.effective.begin(), c.effective.end(), [](const Json& item) { return item.is_object(); }));
+    };
+    auto row = [&](const Calculation& c, const std::string& sectionTitle = "") {
         shown.insert(c.id);
-        if (c.effective.is_object() || (c.effective.is_array() && !c.effective.empty() && std::all_of(c.effective.begin(), c.effective.end(), [](const Json& item) { return item.is_object(); }))) {
+        if (composite(c)) {
             auto displayed=c.effective;
             if(displayed.is_object() && displayed.contains("label") && displayed["label"].is_string() && displayed["label"].get<std::string>() == c.label) displayed.erase("label");
-            html << "<tr><td colspan='2'><b><a href='explain:" << escape(c.id) << "'>" << escape(c.label) << "</a></b>" << valueHtml(displayed);
-            if (!c.overrideReason.empty()) html << " <span class='override'>[DM override]</span>";
-            html << "</td></tr>";
+            auto heading = sectionTitle.empty() ? "" : "<h2>" + escape(sectionTitle) + "</h2>";
+            heading += "<b><a href='explain:" + escape(c.id) + "'>" + escape(c.label) + "</a></b>";
+            if (!c.overrideReason.empty()) heading += " <span class='override'>[DM override]</span>";
+            html << "<tr><td colspan='2'>" << valueHtml(displayed, heading) << "</td></tr>";
             return;
         }
         html << "<tr><td width='48%'><a href='explain:" << escape(c.id) << "'>" << escape(c.label) << "</a></td><td width='52%'>" << valueHtml(c.effective);
@@ -188,48 +215,57 @@ std::string renderSheetHtml(const CharacterDocument& document, const Evaluation&
     };
     for (const auto& section : evaluation.sections) {
         if (section.notes.empty() && std::none_of(section.calculationIds.begin(), section.calculationIds.end(), [&](const auto& id) { return evaluation.find(id) != nullptr; })) continue;
-        html << "<h2" << (section.title=="Feats" && section.notes.size()>=5 ? " style='page-break-before:always'" : "") << ">" << escape(section.title) << "</h2><table width='100%' cellspacing='0' cellpadding='3'>";
-        for (const auto& id : section.calculationIds) if (const auto* c = evaluation.find(id)) row(*c);
+        const Calculation* first = nullptr;
+        for (const auto& id : section.calculationIds) if ((first = evaluation.find(id))) break;
+        // Put both headings in the same header when the section begins with a
+        // nested value table; Qt can otherwise split the two table headers.
+        const bool headingInFirstValue = first && composite(*first);
+        beginSection(section.title, headingInFirstValue);
+        for (const auto& id : section.calculationIds) if (const auto* c = evaluation.find(id)) row(*c, headingInFirstValue && c == first ? section.title : "");
+        for (const auto& note : section.notes) html << textRow << "<p>" << escape(note) << "</p></td></tr>";
         html << "</table>";
-        for (const auto& note : section.notes) html << "<p>" << escape(note) << "</p>";
     }
     bool opened = false;
     for (const auto& c : evaluation.calculations) if (!shown.contains(c.id)) {
-        if (!opened) { html << "<h2>Additional statistics</h2><table width='100%' cellspacing='0' cellpadding='3'>"; opened = true; }
-        row(c);
+        const bool headingInFirstValue = !opened && composite(c);
+        if (!opened) { beginSection("Additional statistics", headingInFirstValue); opened = true; }
+        row(c, headingInFirstValue ? "Additional statistics" : "");
     }
     if (opened) html << "</table>";
-    if (!document.resources.empty()) {
-        html << "<h2>Current resources</h2><table>";
-        for (auto it = document.resources.begin(); it != document.resources.end(); ++it) html << "<tr><td>" << escape(it.key()) << "</td><td>" << escape(valueText(it.value())) << "</td></tr>";
+    if (!resources.empty()) {
+        beginSection("Current resources");
+        for (auto it = resources.begin(); it != resources.end(); ++it) html << "<tr><td>" << escape(it.key()) << "</td><td>" << valueHtml(it.value()) << "</td></tr>";
         html << "</table>";
     }
     bool overridesHeading = false;
     for (const auto& c : evaluation.calculations) if (!c.overrideReason.empty()) {
-        if (!overridesHeading) { html << "<h2>DM overrides</h2>"; overridesHeading = true; }
-        html << "<p><b>" << escape(c.label) << ":</b> normal " << escape(valueText(c.normal)) << "; effective " << escape(valueText(c.effective)) << ". Reason: " << escape(c.overrideReason) << "</p>";
+        if (!overridesHeading) { beginSection("DM overrides"); overridesHeading = true; }
+        html << textRow << "<p><b>" << escape(c.label) << ":</b> normal " << escape(valueText(c.normal)) << "; effective " << escape(valueText(c.effective)) << ". Reason: " << escape(c.overrideReason) << "</p>";
         for (const auto& step : c.steps) html << "<p class='small'>" << escape(step) << "</p>";
+        html << "</td></tr>";
     }
+    if (overridesHeading) html << "</table>";
     if (!evaluation.messages.empty()) {
-        html << "<h2>Validation</h2>";
-        for (const auto& m : evaluation.messages) html << "<p><b>" << escape(m.severity) << ":</b> " << escape(m.text) << "</p>";
+        beginSection("Validation");
+        for (const auto& m : evaluation.messages) html << textRow << "<p><b>" << escape(m.severity) << ":</b> " << escape(m.text) << "</p></td></tr>";
+        html << "</table>";
     }
-    html << "<h2>Sources and campaign</h2>";
+    beginSection("Sources and campaign");
     for (const auto& pack : ruleset.packs) {
         const auto& m = pack.manifest;
-        html << "<p><b>" << escape(m.value("name", "")) << "</b> " << escape(m.value("version", "")) << " - " << escape(m.value("publisher", "")) << " (" << escape(m.value("origin", "")) << ")</p>";
+        html << textRow << "<p><b>" << escape(m.value("name", "")) << "</b> " << escape(m.value("version", "")) << " - " << escape(m.value("publisher", "")) << " (" << escape(m.value("origin", "")) << ")</p></td></tr>";
     }
     std::map<std::string, std::set<std::string>> refs;
     for (const auto& c : evaluation.calculations) for (const auto& s : c.sources) refs[s.publication].insert(s.page);
     for (const auto& [publication, pages] : refs) {
-        html << "<p class='small'>" << escape(publication) << ": ";
+        html << textRow << "<p class='small'>" << escape(publication) << ": ";
         bool first = true;
         for (const auto& page : pages) { if (!first) html << "; "; html << escape(page); first = false; }
-        html << "</p>";
+        html << "</p></td></tr>";
     }
-    if (!document.campaign.empty()) html << "<p class='small'>Campaign settings:</p>" << valueHtml(document.campaign);
-    for (const auto& pack : ruleset.packs) if (pack.manifest.contains("license")) html << "<p class='small'>" << escape(pack.manifest["license"].value("text", "")) << "</p>";
-    html << "<p class='small'>Dungeoning a Dragon - " << escape(document.id) << "</p></body></html>";
+    if (!campaign.empty()) html << textRow << "<p class='small'>Campaign settings:</p>" << valueHtml(campaign) << "</td></tr>";
+    for (const auto& pack : ruleset.packs) if (pack.manifest.contains("license")) html << textRow << "<p class='small'>" << escape(pack.manifest["license"].value("text", "")) << "</p></td></tr>";
+    html << "</table><p class='small'>Dungeoning a Dragon - " << escape(document.id) << "</p></body></html>";
     return html.str();
 }
 } // namespace dnd

@@ -5,6 +5,7 @@
 #include <array>
 #include <fstream>
 #include <set>
+#include <tuple>
 
 namespace {
 using dnd::Json;
@@ -260,6 +261,94 @@ TEST_CASE("Supported profile progression reads the selected definition", "[srd55
     const auto result=dnd::evaluate(original.document,rules);INFO(srd55fixtures::errors(result));REQUIRE(result.complete());
     REQUIRE(result.find("feature.fighter.resource-second-wind"));CHECK(result.find("feature.fighter.resource-second-wind")->normal["maximum"]==3);
     REQUIRE(result.find("attacks"));CHECK(result.find("attacks")->normal==2);
+}
+
+TEST_CASE("Unsupported species bindings and progression fail before availability", "[srd55-v2-content][profiles][species]") {
+    ProfilePackFixture fixture;
+    REQUIRE_FALSE(profileErrors(dnd::installPack(fixture.core.directory,fixture.root/"installed")));
+    const auto installedCore=dnd::loadPack(fixture.root/"installed"/"srd55-core-2.0.0");REQUIRE(installedCore.valid());
+    const auto stock=dnd::resolveRuleset(dnd::newCharacter("srd55","2.0.0"),{installedCore.pack});REQUIRE(stock.valid());
+    auto baseline=srd55fixtures::base("fighter",stock);baseline.choices["speciesId"]="srd55:human";
+    baseline.choices["size"]="Medium";baseline.choices["speciesSkill"]="srd55:arcana";baseline.choices["humanFeat"]="srd55:alert";
+    const auto complete=srd55fixtures::finish(baseline,stock);INFO(srd55fixtures::errors(complete.evaluation));REQUIRE(complete.evaluation.complete());
+    for(const auto& species:{"dragonborn","dwarf","elf","gnome","goliath","halfling","human","orc","tiefling"}){
+        CAPTURE(species);auto invalid=fixture.definition("srd55:"+std::string(species));invalid["id"]="profile-fixture:species";
+        fixture.entries=Json::array({invalid});fixture.write();
+        const auto loaded=dnd::loadPack(fixture.root/"input");CHECK_FALSE(loaded.valid());
+        CHECK(std::any_of(loaded.messages.begin(),loaded.messages.end(),[](const auto& message){return message.path=="/packs/profile-fixture/profile-fixture:species/id";}));
+        CHECK(profileErrors(dnd::installPack(fixture.root/"input",fixture.root/"installed",{installedCore.pack})));
+        CHECK_FALSE(std::filesystem::exists(fixture.root/"installed"/"profile-fixture-1.0.0"));
+        auto document=complete.document;document.packs=fixture.document().packs;document.choices["speciesId"]="profile-fixture:species";
+        const auto preserved=dnd::toJson(document);auto direct=fixture.core;direct.manifest=fixture.manifest;direct.entries={invalid};
+        const auto resolved=dnd::resolveRuleset(document,{installedCore.pack,direct});CHECK_FALSE(resolved.valid());
+        const auto evaluated=dnd::evaluate(document,resolved);CHECK_FALSE(evaluated.complete());CHECK(evaluated.calculations.empty());CHECK(dnd::toJson(document)==preserved);
+    }
+    for(const auto& change:std::vector<std::tuple<std::string,std::string,Json>>{
+        {"dragonborn","/progression",123},{"dragonborn","/progression/breathDice/0","9d10"},
+        {"dragonborn","/progression/flightMinimumLevel",1},{"dragonborn","/progression/uses","unlimited"},
+        {"goliath","/progression/largeFormMinimumLevel",1},{"goliath","/progression/extraEffect",true},
+        {"human","/progression",Json::object()}}){
+        const auto& [species,path,value]=change;CAPTURE(species,path,value);
+        auto invalid=fixture.definition("srd55:"+species);invalid["id"]="profile-fixture:species";invalid["replaces"]="srd55:"+species;invalid[Json::json_pointer(path)]=value;
+        fixture.entries=Json::array({invalid});fixture.write();const auto loaded=dnd::loadPack(fixture.root/"input");CHECK_FALSE(loaded.valid());
+        CHECK(std::any_of(loaded.messages.begin(),loaded.messages.end(),[](const auto& message){return message.path.starts_with("/packs/profile-fixture/profile-fixture:species/progression");}));
+        CHECK(profileErrors(dnd::installPack(fixture.root/"input",fixture.root/"installed",{installedCore.pack})));
+        auto direct=fixture.core;direct.manifest=fixture.manifest;direct.entries={invalid};
+        const auto resolved=dnd::resolveRuleset(fixture.document(),{installedCore.pack,direct});CHECK_FALSE(resolved.valid());CHECK_FALSE(dnd::evaluate(fixture.document(),resolved).complete());
+    }
+    const auto unchanged=dnd::loadPack(fixture.root/"installed"/"srd55-core-2.0.0");REQUIRE(unchanged.valid());CHECK(unchanged.pack.entries==installedCore.pack.entries);
+    CHECK(dnd::toJson(dnd::evaluate(complete.document,dnd::resolveRuleset(complete.document,{unchanged.pack})))==dnd::toJson(complete.evaluation));
+}
+
+TEST_CASE("Compatible Human replacements retain Origin feat and skill through public contracts", "[srd55-v2-content][profiles][species]") {
+    ProfilePackFixture fixture;auto human=fixture.definition("srd55:human");human["id"]="profile-fixture:human";human["replaces"]="srd55:human";
+    human["name"]="Campaign Human";human["source"]={{"publication","Species Fixture"},{"page","Human"}};
+    fixture.entries=Json::array({human});fixture.write();REQUIRE(dnd::loadPack(fixture.root/"input").valid());
+    REQUIRE_FALSE(profileErrors(dnd::installPack(fixture.root/"input",fixture.root/"installed",{fixture.core})));
+    const auto installed=dnd::loadPack(fixture.root/"installed"/"profile-fixture-1.0.0");REQUIRE(installed.valid());
+    const auto rules=dnd::resolveRuleset(fixture.document(),{fixture.core,installed.pack});REQUIRE(rules.valid());
+    auto reversed=fixture.document();std::reverse(reversed.packs.begin(),reversed.packs.end());
+    CHECK(dnd::resolveRuleset(reversed,{installed.pack,fixture.core}).content==rules.content);
+    REQUIRE(rules.find("srd55:human"));CHECK(rules.find("srd55:human")->at("replacementId")=="profile-fixture:human");
+    CHECK(rules.find("srd55:human")->at("source")==human.at("source"));
+    const auto stock=srd55fixtures::rules();auto baseline=srd55fixtures::base("fighter",stock);
+    baseline.choices["speciesId"]="srd55:human";baseline.choices["size"]="Medium";baseline.choices["speciesSkill"]="srd55:arcana";baseline.choices["humanFeat"]="srd55:alert";
+    const auto original=srd55fixtures::finish(baseline,stock);INFO(srd55fixtures::errors(original.evaluation));REQUIRE(original.evaluation.complete());
+    auto document=original.document;document.packs=fixture.document().packs;const auto evaluated=dnd::evaluate(document,rules);
+    INFO(srd55fixtures::errors(evaluated));REQUIRE(evaluated.complete());
+    std::set<std::string> fields;for(const auto& stage:evaluated.stages)for(const auto& field:stage.fields)fields.insert(field.path);
+    CHECK(fields.contains("/speciesSkill"));CHECK(fields.contains("/humanFeat"));
+    // SRD Human Skillful adds proficiency to Arcana; Alert adds proficiency
+    // to initiative. With Intelligence/Dexterity 15 and level 1 PB 2, both are 4.
+    REQUIRE(evaluated.find("skill.arcana"));CHECK(evaluated.find("skill.arcana")->normal==4);
+    REQUIRE(evaluated.find("initiative"));CHECK(evaluated.find("initiative")->normal==4);
+    for(const auto& id:{"skill.arcana","initiative","hp.maximum"})CHECK(evaluated.find(id)->normal==original.evaluation.find(id)->normal);
+    REQUIRE(evaluated.find("species"));CHECK(evaluated.find("species")->normal=="Campaign Human");
+    CHECK(std::any_of(evaluated.find("species")->sources.begin(),evaluated.find("species")->sources.end(),[](const auto& source){return source.publication=="Species Fixture"&&source.page=="Human";}));
+    CHECK(dnd::renderSheetHtml(document,evaluated,rules).find("Campaign Human")!=std::string::npos);
+    const auto path=fixture.root/"human.dnd.json";dnd::saveCharacter(path,document);const auto reopened=dnd::loadCharacter(path);REQUIRE_FALSE(reopened.inspectOnly);
+    CHECK(dnd::toJson(reopened.document)==dnd::toJson(document));CHECK(dnd::toJson(dnd::evaluate(reopened.document,rules))==dnd::toJson(evaluated));
+}
+
+TEST_CASE("Malformed lineage controls are pack errors before installation or evaluation", "[srd55-v2-content][profiles][lineage]") {
+    ProfilePackFixture fixture;
+    for(const auto& change:std::vector<std::pair<std::string,Json>>{
+        {"chooseCantrip",123},{"chooseCantrip","true"},{"chooseCantrip",nullptr},{"chooseCantrip",Json::array()},
+        {"freeUses","two"},{"freeUses",-1},{"freeUses",1.5},{"freeUses",3}}){
+        const auto& [field,value]=change;CAPTURE(field,value);
+        auto invalid=fixture.definition(field=="chooseCantrip"?"srd55:high-elf":"srd55:forest-gnome");
+        invalid["id"]="profile-fixture:lineage";invalid[field]=value;fixture.entries=Json::array({invalid});fixture.write();
+        const auto loaded=dnd::loadPack(fixture.root/"input");CHECK_FALSE(loaded.valid());
+        const auto expected="/packs/profile-fixture/profile-fixture:lineage/"+field;
+        CHECK(std::any_of(loaded.messages.begin(),loaded.messages.end(),[&](const auto& message){return message.path==expected;}));
+        CHECK(profileErrors(dnd::installPack(fixture.root/"input",fixture.root/"installed",{fixture.core})));
+        CHECK_FALSE(std::filesystem::exists(fixture.root/"installed"/"profile-fixture-1.0.0"));
+        auto direct=fixture.core;direct.manifest=fixture.manifest;direct.entries={invalid};
+        auto document=fixture.document();document.choices["lineageId"]="profile-fixture:lineage";const auto preserved=dnd::toJson(document);
+        const auto rules=dnd::resolveRuleset(document,{fixture.core,direct});CHECK_FALSE(rules.valid());
+        const auto evaluated=dnd::evaluate(document,rules);CHECK_FALSE(evaluated.complete());CHECK(evaluated.calculations.empty());CHECK(dnd::toJson(document)==preserved);
+        CHECK(std::any_of(evaluated.messages.begin(),evaluated.messages.end(),[&](const auto& message){return message.path==expected;}));
+    }
 }
 
 TEST_CASE("Unsupported profile bindings and malformed progression fail before installation", "[srd55-v2-content][profiles]") {

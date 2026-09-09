@@ -1137,6 +1137,8 @@ TransitionResult applySrd55InventoryCommand(const CharacterDocument &d,
                 !owned(instance))
                 throw Invalid("This physical item is no longer owned.");
             if (action == "dispose") {
+                if (!d.resources.contains("wizardSpellbooks") && id == originalWizardBookId(d, rules))
+                    throw Invalid("Track the original physical spellbook before recording its sale, gift, loss, or destruction, so its exact contents remain recoverable.");
                 const auto qty = amount(in, "quantity", 1, n(instance, "quantity", 1), 1),
                            proceeds = amount(in, "proceedsCp", 0, 1000000000, 0);
                 const auto disposition = s(in, "disposition", "lost");
@@ -1184,6 +1186,8 @@ TransitionResult applySrd55InventoryCommand(const CharacterDocument &d,
                 instance.erase("dormantYears");
             } else if (action == "move") {
                 const auto location = need(in, "location");
+                if (location == "stored" && !d.resources.contains("wizardSpellbooks") && id == originalWizardBookId(d, rules))
+                    throw Invalid("Track the original physical spellbook before storing it, so book-dependent actions use its actual availability.");
                 if (location != "carried" && location != "stored")
                     throw Invalid("An item can be carried or stored.");
                 if (location == "stored" && b(instance, "curseActive") &&

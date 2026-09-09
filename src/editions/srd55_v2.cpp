@@ -235,6 +235,9 @@ struct FeatSelection {
 };
 Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     Evaluation e;
+    e.moduleData["sheet"] = {
+        {"excludedResourceKeys", {"inventory", "lifecycle", "wizardSpellbooks"}},
+        {"excludedCampaignKeys", {"srd55History"}}};
     const auto &c = d.choices;
     Context ctx{d, rules};
     const auto historyMessages = validateSrd55History(d, rules);
@@ -1071,6 +1074,10 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
             " determines initial training, saving throws, starting equipment and first-level "
             "maximum Hit Die."},
            "25");
+    if (species)
+        record(e, summary, "species", "Species", species->value("name", speciesId),
+               CalculationTrace{{"Selected species content: " + species->value("replacementId", speciesId) + "."},
+                                {sourceFromJson(species->at("source"))}});
     CalculationTrace proficiencyTrace = {{"2 + floor((" + std::to_string(ctx.totalLevel) + " - 1) / 4) + equipped-item modifier " +
         std::to_string(itemState.proficiencyBonus) + " = " + std::to_string(ctx.proficiency) + "."}, {ref("23")}};
     for (const auto& effect : itemState.effects) if (effect.value("op", "") == "proficiency-bonus") {
@@ -1999,11 +2006,20 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
                                   "This spell is already in the spellbook.", "78");
                     }
             }
-            record(e, magic, "wizard.spellbook", "Wizard spellbook", names(rules, book),
+            const auto physical = resolveWizardSpellbooks(d, rules);
+            const auto& readable = physical.accessibleSpells;
+            record(e, magic, "wizard.spellbook", "Wizard spellbook", names(rules, readable),
                    {"Initial six, two each Wizard level, applicable Savant grants, and separately "
-                    "recorded copying transactions."},
+                    "recorded copying transactions. When physical books are tracked, only carried books supply readable spells; their independent contents are preserved."},
                    "78");
-            e.moduleData["spellbooks"][classSlug] = Json(book);
+            e.moduleData["spellbooks"][classSlug] = Json(readable);
+            if (physical.tracked || !physical.hasAccessibleBook) {
+                book = readable;
+                // Losing a book never unprepares an accepted spell. Only newly
+                // selected replacements require readable book contents.
+                const auto retained = strings(c, base + "/preparedSpells");
+                for (const auto& id : retained) if (physical.prepared.contains(id)) book.insert(id);
+            }
         }
         auto preparedOpts = spellOptions(list, 1, highest);
         if (casting.value("learnMode", "") == "book")
@@ -2199,6 +2215,7 @@ Evaluation run(const CharacterDocument &d, const ResolvedRuleset &rules) {
     e.moduleData["castingAbilities"] = Json(ctx.castingAbilities);
     e.moduleData["skillProficiencies"] = Json(ctx.skillProficiencies);
     appendSrd55CompanionState(d, rules, e);
+    appendWizardSpellbookState(d, rules, e);
     return e;
 }
 } // namespace

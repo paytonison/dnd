@@ -20,27 +20,6 @@ bool subclass(const Context& x,const std::string& cls){return selectedSubclass(x
 int spellLevel(const Json& item){return item.value("spellLevel",item.value("level",0));}
 bool inList(const Json& item,const std::string& cls){for(const auto& key:{"lists","classes","classLists","spellLists"})if(item.contains(key) && item[key].is_array())for(const auto& value:item[key])if(value==cls || value=="srd55:"+cls)return true;return false;}
 std::string name(const Context& x,const std::string& id){const auto* item=x.rules.find(id);return item?item->value("name",id):id;}
-std::set<std::string> knownWizard(const Context& x){
-    std::set<std::string> result;const int wizardLevel=level(x,"wizard");
-    auto eligible=[&](const std::string& id,int highest,bool evocation){const auto* spell=x.rules.find(id);return spell&&spell->value("kind","")=="spell"&&inList(*spell,"wizard")&&spellLevel(*spell)>=1&&spellLevel(*spell)<=highest&&(!evocation||spell->value("school","")=="Evocation");};
-    auto learn=[&](const std::string& pointer,bool savant){const auto* records=at(x.document.choices,pointer);if(!records||(!records->is_array()&&!records->is_object()))return;
-        for(const auto& [key,learned]:records->items()){
-            int acquiredLevel=0;try{std::size_t end=0;acquiredLevel=std::stoi(key,&end);if(end!=key.size())continue;}catch(...){continue;}
-            if(acquiredLevel<1||acquiredLevel>wizardLevel||!learned.is_array())continue;
-            if(savant&&(acquiredLevel!=3&&(acquiredLevel<5||acquiredLevel>17||acquiredLevel%2==0)))continue;
-            if(savant&&!subclass(x,"wizard"))continue;
-            const int highest=std::min(9,(acquiredLevel+1)/2);
-            for(const auto& id:learned)if(id.is_string()&&eligible(id.get<std::string>(),highest,savant))result.insert(id.get<std::string>());
-        }
-    };
-    learn("/spellcasting/wizard/spellbook",false);learn("/spellcasting/wizard/savant",true);
-    const auto* copies=at(x.document.choices,"/spellcasting/wizard/copiedSpells");if(copies&&copies->is_array())for(const auto& copy:*copies){
-        if(!copy.is_object())continue;const auto id=text(copy,"/spellId");const auto* spell=x.rules.find(id);if(!spell||!eligible(id,std::min(9,(wizardLevel+1)/2),false))continue;
-        const int spellRank=spellLevel(*spell);if(number(copy,"/paidCp",-1)<spellRank*5000||number(copy,"/minutes",-1)<spellRank*120)continue;
-        result.insert(id);
-    }
-    return result;
-}
 std::vector<Choice> constants(std::initializer_list<std::pair<const char*,const char*>> values,const std::string& page){std::vector<Choice> out;for(const auto& [id,label]:values)out.push_back({id,label,true,{}, {srd55v2::ref(page)}});return out;}
 struct Builder {
     const Context& x;FeatureResult& out;std::string cls,page;int l;Stage stage;
@@ -248,9 +227,24 @@ FeatureResult resolveClassChoices(const Context& sourceX){
         for(const auto& [threshold,sl]:std::vector<std::pair<int,int>>{{11,6},{13,7},{15,8},{17,9}})if(l>=threshold){const auto spell=b.single("arcanum/"+std::to_string(sl),"Mystic Arcanum: spell level "+std::to_string(sl),b.spells({"warlock"},sl,sl));if(!spell.empty())b.grant(spell,"charisma","Mystic Arcanum",1);}
     }
     if(int l=level(x,"wizard")){
-        Builder b(x,out,"wizard","78-82");if(l>=2)b.skills("scholar","Scholar Expertise",1,true,2,{"arcana","history","investigation","medicine","nature","religion"});const auto known=knownWizard(x);
-        if(l>=18)for(int sl:{1,2}){auto opts=b.spells({"wizard"},sl,sl,&known);for(auto& o:opts){const auto* spell=x.rules.find(o.id);const auto casting=spell->value("castingTime","");if(casting!="Action" && casting!="1 action" && casting!="1 Action"){o.available=false;o.reason="Spell Mastery requires a casting time of an action.";}}const auto id=b.single("spellMastery/"+std::to_string(sl),"Spell Mastery level "+std::to_string(sl),opts);if(!id.empty())b.grant(id,"intelligence","Spell Mastery",-1);}
-        if(l>=20)for(const auto& id:b.multi("signatureSpells","Signature Spells",b.spells({"wizard"},3,3,&known),2))b.grant(id,"intelligence","Signature Spells",1,"short-rest");
+        Builder b(x,out,"wizard","78-82");
+        if(l>=2)b.skills("scholar","Scholar Expertise",1,true,2,{"arcana","history","investigation","medicine","nature","religion"});
+        const auto acquired=wizardAcquiredSpells(x);
+        const auto books=resolveWizardSpellbooks(x.document,x.rules);
+        if(l>=18)for(int sl:{1,2}){
+            auto eligible=books.tracked?books.accessibleSpells:acquired;
+            for(const auto& retained:wizardRetainedSelection(x.document,b.path("spellMastery/"+std::to_string(sl))))
+                if(acquired.contains(retained))eligible.insert(retained);
+            auto opts=b.spells({"wizard"},sl,sl,&eligible);
+            for(auto& o:opts){const auto* spell=x.rules.find(o.id);const auto casting=spell->value("castingTime","");if(casting!="Action" && casting!="1 action" && casting!="1 Action"){o.available=false;o.reason="Spell Mastery requires a casting time of an action.";}}
+            const auto id=b.single("spellMastery/"+std::to_string(sl),"Spell Mastery level "+std::to_string(sl),opts);
+            if(!id.empty())b.grant(id,"intelligence","Spell Mastery",-1);
+        }
+        if(l>=20){
+            auto eligible=books.tracked?books.accessibleSpells:acquired;
+            for(const auto& id:wizardRetainedSelection(x.document,b.path("signatureSpells")))if(acquired.contains(id))eligible.insert(id);
+            for(const auto& id:b.multi("signatureSpells","Signature Spells",b.spells({"wizard"},3,3,&eligible),2))b.grant(id,"intelligence","Signature Spells",1,"short-rest");
+        }
     }
     for(const auto& cls:{"barbarian","fighter","paladin","ranger","rogue"})if(level(x,cls)>0) {
         Builder b(x,out,cls,cls==std::string("barbarian")?"29":cls==std::string("fighter")?"48":cls==std::string("paladin")?"54":cls==std::string("ranger")?"58-59":"62");

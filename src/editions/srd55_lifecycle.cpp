@@ -237,6 +237,7 @@ void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &r
         e.actions.push_back(hd);
     }
     if (classLevel("wizard")) {
+        const auto books = resolveWizardSpellbooks(d, rules);
         std::vector<Field> slots;
         for (int i = 1; i <= 5; ++i)
             slots.push_back(integer("/slots/" + std::to_string(i),
@@ -249,16 +250,17 @@ void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &r
         auto a = action("srd55.resources.arcane-recovery", "Use Arcane Recovery",
                         "Recover expended spell slots totaling no more than half Wizard "
                         "level, rounded up. Level 6+ slots are excluded.",
-                        slots, valid && text(d.resources, "/lifecycle/restWindow") == "short-rest",
+                        slots, valid && books.hasAccessibleBook && text(d.resources, "/lifecycle/restWindow") == "short-rest",
                         "78");
         if (!a.available)
-            a.reason = "Record the Short Rest at which Arcane Recovery is used.";
+            a.reason = !books.hasAccessibleBook ? "Carry an owned spellbook to study for Arcane Recovery." : "Record the Short Rest at which Arcane Recovery is used.";
         e.actions.push_back(a);
         std::set<std::string> known;
-        if (e.moduleData.contains("spellbooks") && e.moduleData["spellbooks"].contains("wizard"))
+        if (books.tracked) known = books.destinationSpells;
+        else if (e.moduleData.contains("spellbooks") && e.moduleData["spellbooks"].contains("wizard"))
             for (const auto &id : e.moduleData["spellbooks"]["wizard"])
                 known.insert(id.get<std::string>());
-        const int highest = std::min(9, (classLevel("wizard") + 1) / 2);
+        const int highest = wizardPreparationLimit(d, rules);
         std::vector<Choice> spells;
         for (const auto &[id, spell] : rules.content)
             if (spell.value("kind", "") == "spell" && spell.value("level", 0) > 0 &&
@@ -289,8 +291,10 @@ void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &r
                      {},
                      false,
                      "Identify the spellbook provided by the campaign."}},
-                   valid, "78"));
+                   valid && books.hasAccessibleBook && (!books.tracked || books.destinationAccessible), "78"));
         e.actions.back().initialInputs = {{"sourceType", "spellbook"}};
+        if (!books.hasAccessibleBook || (books.tracked && !books.destinationAccessible))
+            e.actions.back().reason = "Carry and choose a registered destination book before copying.";
         std::vector<Choice> scrolls;
         const auto *owned = at(d.resources, "/inventory/instances");
         if (owned && owned->is_array())
@@ -328,12 +332,13 @@ void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &r
                      "Include only bonuses not already in the displayed Arcana modifier; explain "
                      "any nonzero bonus."),
              {"/bonusReason", "Reason for other check bonus", "text", 0, 0, {}, false, {}}},
-            valid && std::any_of(scrolls.begin(), scrolls.end(),
+            valid && books.hasAccessibleBook && (!books.tracked || books.destinationAccessible) && std::any_of(scrolls.begin(), scrolls.end(),
                                  [](const auto &option) { return option.available; }),
             "78, 244");
         if (!copy.available && valid)
-            copy.reason = "Acquire an eligible Spell Scroll containing a Wizard spell that is not "
-                          "already in the spellbook.";
+            copy.reason = !books.hasAccessibleBook || (books.tracked && !books.destinationAccessible)
+                ? "Carry and choose a registered destination book before copying."
+                : "Acquire an eligible Spell Scroll containing a Wizard spell that is not already in the destination spellbook.";
         copy.initialInputs = {{"bonus", 0}, {"bonusReason", ""}};
         e.actions.push_back(std::move(copy));
     }
@@ -382,6 +387,7 @@ void appendLifecycleActions(const CharacterDocument &d, const ResolvedRuleset &r
     appendSrd55InventoryActions(d, rules, e);
     appendSrd55CompanionActions(d, rules, e);
     appendSrd55ClassActions(d, rules, e);
+    appendWizardSpellbookActions(d, rules, e);
     appendSrd55HistoryActions(d, rules, e);
 }
 
@@ -396,6 +402,8 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
         return applySrd55ClassCommand(before, rules, command);
     if (command.id.starts_with("srd55.history."))
         return applySrd55HistoryCommand(before, rules, command);
+    if (command.id.starts_with("srd55.spellbooks."))
+        return applyWizardSpellbookCommand(before, rules, command);
     TransitionResult result{before, {}};
     auto &d = result.document;
     const auto &input = command.inputs;
@@ -501,6 +509,8 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
             requireRestWindow(d);
             if (!level("wizard"))
                 throw std::runtime_error("Arcane Recovery requires Wizard levels.");
+            if (!resolveWizardSpellbooks(before, rules).hasAccessibleBook)
+                throw std::runtime_error("Arcane Recovery requires an accessible owned spellbook to study.");
             int cost = 0;
             for (int rank = 1; rank <= 5; ++rank) {
                 const int count = number(input, "/slots/" + std::to_string(rank));
@@ -598,12 +608,15 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
                 throw std::runtime_error("Choose an existing spell source.");
             const int rank = spell->at("level").get<int>();
             const auto lists = strings(*spell, "/lists");
-            if (rank < 1 || rank > std::min(9, (level("wizard") + 1) / 2) ||
+            if (rank < 1 || rank > wizardPreparationLimit(before, rules) ||
                 std::find(lists.begin(), lists.end(), "wizard") == lists.end())
                 throw std::runtime_error(
                     "Only a Wizard spell of a level you can prepare can be copied.");
-            const auto known = strings(e.moduleData, "/spellbooks/wizard");
-            if (std::find(known.begin(), known.end(), id) != known.end())
+            const auto books = resolveWizardSpellbooks(before, rules);
+            const auto known = books.tracked ? books.destinationSpells : wizardAcquiredSpells(before, rules);
+            if (!books.hasAccessibleBook || (books.tracked && !books.destinationAccessible))
+                throw std::runtime_error("Choose a carried registered destination spellbook before copying.");
+            if (known.contains(id))
                 throw std::runtime_error("This spell is already in the spellbook.");
             const int minutes = integerArg(input, "minutes", rank * 120, 1000000),
                       cost = integerArg(input, "paidCp", rank * 5000, 1000000000);
@@ -654,6 +667,9 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
             d.resources["currencyCp"] = d.resources["currencyCp"].get<long long>() - cost;
             d.resources["lifecycle"]["restWindow"] = "";
             if (success) {
+                recordWizardBookExternalCopy(d, rules, id, minutes, cost, fromScroll ? instanceId : note);
+                const bool newLearning = !wizardAcquiredSpells(before, rules).contains(id);
+                if (newLearning) {
                 auto &copies = d.choices["spellcasting"]["wizard"]["copiedSpells"];
                 if (copies.is_null())
                     copies = Json::array();
@@ -671,6 +687,7 @@ static TransitionResult applyLifecycleCommandImpl(const CharacterDocument &befor
                 }
                 copies.push_back(std::move(record));
                 recordSrd55HistoryChange(before, d, "copy-spell", input);
+                }
             }
             if (fromScroll)
                 result.messages.push_back(
@@ -703,6 +720,13 @@ TransitionResult applyLifecycleCommand(const CharacterDocument &before,
                                        const ResolvedRuleset &rules,
                                        const CharacterCommand &command) {
     auto result = applyLifecycleCommandImpl(before, rules, command);
+    if (result.valid() && result.document.resources.contains("wizardSpellbooks")) {
+        const auto books = resolveWizardSpellbooks(result.document, rules);
+        if (!books.messages.empty()) {
+            result.messages.insert(result.messages.end(), books.messages.begin(), books.messages.end());
+            result.document = before;
+        }
+    }
     if (!result.valid() || command.id == "srd55.resources.long-rest")
         return result;
     // A campaign ruling may make a Druid conversion a single additional slot

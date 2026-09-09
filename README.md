@@ -52,4 +52,6 @@ Application code retains the repository's BSD-3-Clause license. Content license 
 
 Run `./scripts/package-macos.sh` to build a Release app, bundle Qt and its dependencies, verify all library paths and signatures, and test an extracted ZIP away from the checkout. See [packaging notes](docs/packaging.md) for the actual architecture and minimum macOS version of the generated package. This is a local ad hoc signed build.
 
+The expanded Wizard supports explicit physical spellbook tracking, backup, loss, reconstruction and recovery through **Character → Actions…**. Each book keeps its own contents and copying costs; [the lifecycle guide](docs/srd55-lifecycle.md#physical-wizard-spellbooks) explains activation and legacy limits. [The latest continuation checkpoint](docs/continuation-status.md) records current automated, native, PDF and package evidence and the remaining roadmap.
+
 The expanded SRD module uses version `2.0.0` and its matching pack. Version `1.0.0` remains compiled and available for exact legacy saves. Select the version in the New menu; upgrades are explicit copies with a comparison preview. See [current expanded-module progress and remaining lifecycle work](docs/v2-progress.md).
