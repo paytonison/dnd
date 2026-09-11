@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include "actiondialog.hpp"
 #include "srd55_fixture.hpp"
+#include "srd51_fixture.hpp"
 #include <QAction>
 #include <QAbstractButton>
 #include <QAbstractTextDocumentLayout>
@@ -66,6 +67,143 @@ private slots:
         QSettings::setDefaultFormat(QSettings::IniFormat);
         QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, settings_.path());
         QFile::remove(QString::fromStdString(dnd::autosavePath((QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/untitled.dnd.json").toStdString()).string()));
+    }
+
+    void original5eCreationActionsAndPersistence() {
+        QTemporaryDir directory;
+        int rolls = 0;
+        dnd::MainWindow window({}, nullptr, [&](int sides) { ++rolls; return std::min(sides, 4); });
+        auto* create = window.findChild<QAction*>("new:srd51:1.0.0");
+        QVERIFY(create && create->text().contains("5E (2014)"));
+        QVERIFY(window.findChild<QAction*>("new:srd55:1.0.0")->text().contains("5.5E"));
+        QVERIFY(window.findChild<QAction*>("new:srd55:2.0.0")->text().contains("5.5E"));
+        create->trigger();
+        QCOMPARE(window.document().edition, std::string("srd51"));
+        QCOMPARE(window.document().packs.front().id, std::string("srd51-core"));
+        auto* name = window.findChild<QLineEdit*>("characterName");
+        QVERIFY(name);
+        name->setText("Mara Ashford");
+        QMetaObject::invokeMethod(name, "editingFinished", Qt::DirectConnection);
+        QCOMPARE(window.document().name, std::string("Mara Ashford"));
+        const auto fixture = srd51fixtures::fighter();
+        // Exercise actual leaf paths from an empty draft: whole fixture assignment
+        // would conceal json_pointer accidentally creating numeric-key arrays.
+        std::function<void(const std::string&, const dnd::Json&)> enter = [&](const auto& path, const auto& value) {
+            if (value.is_object()) for (auto it = value.begin(); it != value.end(); ++it) enter(path + "/" + it.key(), it.value());
+            else QVERIFY2(window.setChoice(path, value), qPrintable(window.lastError()));
+        };
+        enter("", fixture.choices);
+        QVERIFY2(window.evaluation().complete(), dnd::toJson(window.evaluation())["messages"].dump().c_str());
+        QVERIFY(window.document().choices.at("startingWeapons").is_object());
+        QCOMPARE(window.evaluation().find("armorClass")->normal, dnd::Json(19));
+        QCOMPARE(window.evaluation().find("hp.maximum")->normal, dnd::Json(12));
+        QVERIFY(window.inspectionHtml("armorClass").contains("16 + (0) + 2 + 1 = 19"));
+        QVERIFY(window.setResource("/hp", 5));
+        const auto before = dnd::toJson(window.document());
+        bool previewed = false, unchanged = false;
+        QTimer::singleShot(0, &window, [&] {
+            auto* dialog = window.findChild<QDialog*>("characterActionsDialog");
+            if (!dialog) return;
+            auto* picker = dialog->findChild<QComboBox*>("actionPicker");
+            picker->setCurrentIndex(picker->findData("srd51.second-wind"));
+            auto* die = dialog->findChild<QSpinBox*>("actionInput:/roll");
+            if (!die) { dialog->reject(); return; }
+            die->setValue(3);
+            dialog->findChild<QPushButton*>("previewActionButton")->click();
+            auto* apply = dialog->findChild<QPushButton*>("applyActionButton");
+            previewed = apply->isEnabled();
+            unchanged = dnd::toJson(window.document()) == before;
+            if (previewed) apply->click(); else dialog->reject();
+        });
+        window.findChild<QAction*>("characterActionsAction")->trigger();
+        QVERIFY(previewed && unchanged);
+        QCOMPARE(window.document().resources.at("hp"), dnd::Json(9));
+        QCOMPARE(window.document().resources.at("secondWind"), dnd::Json(0));
+        QVERIFY(window.setChoice("/xp", 300));
+        QVERIFY2(window.executeAction("srd51.advance-fixed"), qPrintable(window.lastError()));
+        QCOMPARE(window.evaluation().find("hp.maximum")->normal, dnd::Json(20));
+        QCOMPARE(window.document().resources.at("hp"), dnd::Json(17));
+        QCOMPARE(window.document().resources.at("secondWind"), dnd::Json(0));
+        QVERIFY(window.document().choices.at("hp").is_object());
+        QVERIFY(!window.setChoice("/hp/level2", 10));
+        QVERIFY(!window.setChoice("/level", 1));
+        QVERIFY(window.setChoice("/hpMethod", "rolled"));
+        QCOMPARE(window.document().choices.at("hp").at("level2"), dnd::Json(6));
+        QVERIFY(window.setChoice("/xp", 900));
+        QVERIFY2(window.executeAction("srd51.advance-rolled", {{"hpRoll", 4}, {"subclassId", "srd51:champion"}}), qPrintable(window.lastError()));
+        QCOMPARE(window.evaluation().find("hp.maximum")->normal, dnd::Json(26));
+        QCOMPARE(window.evaluation().find("critical.minimum")->normal, dnd::Json(19));
+        QVERIFY(window.setResource("/hitDice", 0));
+        const auto priorRest = dnd::toJson(window.document());
+        QVERIFY(!window.executeAction("srd51.long-rest", {{"eligible", false}}));
+        QCOMPARE(dnd::toJson(window.document()), priorRest);
+        QVERIFY(window.executeAction("srd51.long-rest", {{"eligible", true}}));
+        QCOMPARE(window.document().resources.at("hp"), dnd::Json(26));
+        QCOMPARE(window.document().resources.at("hitDice"), dnd::Json(1));
+        QCOMPARE(window.document().resources.at("secondWind"), dnd::Json(1));
+        QVERIFY(window.applyOverride("armorClass", 20, "DM-approved protective charm"));
+        window.setAdvanced(false);
+        const QString path = directory.path() + "/2014-fighter.dnd.json";
+        QVERIFY(window.saveTo(path));
+        const auto saved = dnd::toJson(window.document());
+        window.newDocument("srd55", "2.0.0");
+        QVERIFY(window.openPath(path, false));
+        QCOMPARE(dnd::toJson(window.document()), saved);
+        QCOMPARE(window.evaluation().find("armorClass")->normal, dnd::Json(19));
+        QCOMPARE(window.evaluation().find("armorClass")->effective, dnd::Json(20));
+        QCOMPARE(rolls, 0); // All action inputs were explicit; evaluation and reopening never rolled.
+        const auto artifactDir = qEnvironmentVariable("DND_SRD51_QA_DIR");
+        const auto pdf = (artifactDir.isEmpty() ? directory.path() : artifactDir) + "/5E-Human-Champion.pdf";
+        QVERIFY2(window.exportPdf(pdf), qPrintable(window.lastError()));
+        QVERIFY(QFileInfo(pdf).size() > 1000);
+        if (!artifactDir.isEmpty()) QVERIFY(window.saveTo(artifactDir + "/5E-Human-Champion.dnd.json"));
+        auto missing = window.document(); missing.packs.front().version = "99.0.0";
+        const auto missingPath = directory.path() + "/missing.json";
+        dnd::saveCharacter(missingPath.toStdString(), missing);
+        QVERIFY(window.openPath(missingPath, false));
+        QVERIFY(window.readOnlyMode());
+        QVERIFY(!window.saveTo(missingPath));
+        QCOMPARE(dnd::loadCharacter(missingPath.toStdString()).original, dnd::toJson(missing));
+    }
+
+    void original5eDiceAndInheritedPointBuy() {
+        QTemporaryDir directory;
+        auto fixture = srd51fixtures::fighter(2);
+        fixture.choices["hpMethod"] = "rolled";
+        dnd::saveCharacter((directory.path() + "/fighter.json").toStdString(), fixture);
+        int rolls = 0;
+        dnd::MainWindow window({}, nullptr, [&](int) { ++rolls; return 4; });
+        QVERIFY(window.openPath(directory.path() + "/fighter.json", false));
+        QVERIFY(window.acceptRoll("hp.2"));
+        QCOMPARE(rolls, 1);
+        QVERIFY(window.document().choices.at("hp").is_object());
+        QCOMPARE(window.document().choices.at("hp").at("level2"), dnd::Json(4));
+        QCOMPARE(window.evaluation().find("hp.maximum")->normal, dnd::Json(18));
+        QVERIFY(window.setChoice("/hpMethod", "fixed"));
+        QCOMPARE(window.evaluation().find("hp.maximum")->normal, dnd::Json(18));
+        QVERIFY(window.saveTo(directory.path() + "/rolled.json"));
+        QVERIFY(window.openPath(directory.path() + "/rolled.json", false));
+        QCOMPARE(rolls, 1);
+        const auto accepted = window.document().rolls;
+        window.setAdvanced(true); window.setAdvanced(false);
+        QCOMPARE(window.document().rolls, accepted);
+        fixture = srd51fixtures::fighter();
+        fixture.campaign["allowPointBuy"] = true;
+        fixture.choices["options"] = dnd::Json::object();
+        fixture.choices["abilityMethod"] = "point-buy";
+        fixture.choices["abilities"] = {{"strength",15},{"dexterity",15},{"constitution",15},{"intelligence",8},{"wisdom",8},{"charisma",8}};
+        dnd::saveCharacter((directory.path() + "/point-buy.json").toStdString(), fixture);
+        QVERIFY(window.openPath(directory.path() + "/point-buy.json", false));
+        QVERIFY(window.evaluation().complete());
+        window.setAdvanced(true);
+        auto* stages = window.findChild<QListWidget*>("builderStages");
+        QVERIFY(stages);
+        stages->setCurrentRow(2); // The shared identity page precedes edition stages.
+        auto* permission = window.findChild<QCheckBox*>("/options/allowPointBuy");
+        QVERIFY(permission && permission->isChecked());
+        permission->setChecked(false);
+        QVERIFY(!window.evaluation().complete());
+        QVERIFY(window.saveTo(directory.path() + "/point-buy.json"));
     }
 
     void sheetSectionHeadingStaysWithItsFirstRow_data() {

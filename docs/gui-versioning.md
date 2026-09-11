@@ -1,5 +1,7 @@
 # GUI rules-module versions and current state
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The desktop treats an edition identifier and its rules-module version as a pair. New-character menu entries show both the module's name and exact version. Selecting one calls `newCharacter(edition, version)` and retains the module's default content-pack pins. The GUI does not select a newer module or a different pack version while opening an existing character. The no-version API remains the legacy default for existing callers.
 
 The document header and identity pane display the saved module version. Legacy SRD module 1.0.0 continues to identify its limited fighter/wizard, level 1–3 scope. Expanded module 2.0.0 uses its own stages and labels. The edition-generated form does not impose that legacy level limit or a universal single-class model: ordered advancement rows and hit-point fields are ordinary JSON pointers.
@@ -44,7 +46,7 @@ The expanded Qt interface suite passed all 23 entries on September 8, 2026. It c
 
 A native macOS Actions check used an isolated copy at `output/action-qa/fighter-preview.dnd.json`. Preview showed a one-point HP cost and one proposed journal entry; cancelling left the character clean and its HP at 14. Repeating the preview and explicitly applying it produced current HP 13. Native Save and Open preserved HP 13, and file inspection confirmed exactly one `srd55.resources.spend` command entry with unchanged creation choices and ability-roll evidence. The original fixture remained unchanged. `output/action-qa/native-actions.json` records this check. No PDF or package regeneration was part of the Actions implementation.
 
-## Verified version-2 desktop and print workflow
+## Verified rules-module 2.0.0 desktop and print workflow
 
 On September 8, 2026, the native macOS app built in `build-gui-qa/Dungeoning a Dragon.app` opened the complete level-20 Wizard fixture through the macOS Open panel. The header identified module 2.0.0 and reported Ready to play. The native calculation inspector showed Wizard spell-save DC 16 as both normal and effective, with its Intelligence/proficiency formula and SRD page 104 reference.
 

@@ -1,5 +1,7 @@
 # OD&D (1974) source ledger
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 OD&D remains planned. This initial ledger records naming evidence for the [original-class and typewritten-sheet requirements](../PLAN.md#odd-1974-original-class-names-and-typewritten-character-sheets); it does not establish implemented or verified rules coverage.
 
 ## Naming reference inspected

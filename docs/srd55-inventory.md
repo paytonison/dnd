@@ -1,5 +1,7 @@
 # SRD 5.2.1 owned inventory and magic items
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 This module adds an explicit owned-item lifecycle to SRD module `2.0.0`. Creation kits and purchases remain character-creation choices until the user runs **Begin owned inventory**. The accepted physical items and remaining money are then frozen into an instance ledger. Recalculation displays the ledger and derives eligible item effects; it never purchases items, accepts rolls, restores charges, or completes rests.
 
 The packaged catalog contains **all 258 named magic-item headings** from SRD pages 209–253. Its current coverage labels are **45 implemented, 14 partial, and 199 cataloged**. These counts refer to parent item records; templates such as Ioun Stone contain more specific variant coverage. There are 140 attunement-required records and 48 records with charge, daily-use, or consumable counters. Catalog inclusion is not proof of executable mechanics. The application remains experimental, and this increment does not complete every magic-item rule in the plan.

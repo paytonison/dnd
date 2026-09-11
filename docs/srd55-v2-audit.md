@@ -1,4 +1,8 @@
-# SRD version-2 functional audit
+# SRD rules-module 2.0.0 functional audit
+
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Dated results below retain their original tested snapshots; the current documentation version does not relabel or rerun those artifacts.
 
 Read-only review performed September 8, 2026 against the in-progress `src/editions/srd55_v2.cpp`, `src/content.cpp`, and the feature helpers called by the evaluator. Findings were sent to the implementation owners as they were identified. The owners changed code concurrently; the status below distinguishes a code correction observed in the working tree from a regression whose integrated execution still needs verification. This audit did not edit application code.
 

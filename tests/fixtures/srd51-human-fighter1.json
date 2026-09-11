@@ -1,0 +1,66 @@
+{
+  "format": "dungeoning-a-dragon",
+  "schemaVersion": 1,
+  "id": "srd51-human-fighter1-acceptance",
+  "name": "Rowan",
+  "edition": "srd51",
+  "moduleVersion": "1.0.0",
+  "campaign": {},
+  "packs": [
+    {
+      "id": "srd51-core",
+      "version": "1.0.0"
+    }
+  ],
+  "choices": {
+    "classId": "srd51:fighter",
+    "raceId": "srd51:human",
+    "backgroundId": "srd51:acolyte",
+    "level": 1,
+    "xp": 0,
+    "alignment": "Neutral Good",
+    "abilityMethod": "standard-array",
+    "abilities": {
+      "strength": 15,
+      "dexterity": 14,
+      "constitution": 13,
+      "intelligence": 8,
+      "wisdom": 12,
+      "charisma": 10
+    },
+    "classSkills": [
+      "srd51:athletics",
+      "srd51:perception"
+    ],
+    "replacementSkills": [],
+    "languages": [
+      "srd51:dwarvish",
+      "srd51:elvish",
+      "srd51:orc"
+    ],
+    "fightingStyle": "srd51:defense",
+    "hpMethod": "fixed",
+    "startingEquipment": {
+      "armor": "chain",
+      "weapons": "shield",
+      "secondary": "axes",
+      "pack": "explorer"
+    },
+    "backgroundEquipment": {
+      "devotion": "book"
+    },
+    "startingWeapons": {
+      "weapon1": "srd51:longsword"
+    },
+    "armorId": "srd51:chain-mail",
+    "shieldId": "srd51:shield",
+    "weaponId": "srd51:longsword",
+    "offhandId": "none",
+    "twoHands": false,
+    "purchases": []
+  },
+  "advancement": [],
+  "rolls": {},
+  "resources": {},
+  "overrides": []
+}

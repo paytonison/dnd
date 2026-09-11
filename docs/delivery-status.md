@@ -1,8 +1,14 @@
 # Delivery status against the supplied plan
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Dated results below retain their original tested snapshots; the current documentation version does not relabel or rerun those artifacts.
+
 This is a requirement audit, not a claim that the whole plan is finished. The active goal includes the expansion sequence. The first-release architecture, B/X through the reviewed printed tables, experimental second-edition proof, and initial Mac acceptance have been implemented. Full edition expansion remains work to execute.
 
 Current artifact-specific evidence is in [the continuation checkpoint](continuation-status.md). The older milestones below are historical; human B/X continuation remains deferred at the user's request.
+
+The September 11, 2026 branding update replaces the earlier Welsh Dragon with a ruby glass adaptation of the newly supplied seated dragon, plus a frosted rounded app-icon tile in the requested macOS Golden Gate style. [The branding guide](branding.md) records the new assets and their validation status. The older icon and archive checks below apply to their original artwork; they do not validate this replacement. The application remains **v1.0.0**.
 
 | Plan requirement | Current evidence | Status |
 | --- | --- | --- |
@@ -25,11 +31,11 @@ Current artifact-specific evidence is in [the continuation checkpoint](continuat
 | Original source verification, printed-page references, ambiguities | `sources-bx.md`, original preview/full-scan overlap, visual tables and source snapshots | Recorded |
 | Experimental SRD5.2.1 fighter/wizard1–3 through same interface | 11 SRD tests, complete fighter/wizard GUI roundtrips, all9 species/all4 backgrounds | Implemented and tested |
 | Full SRD lifecycle, OD&D, Holmes, AD&D1e, BECMI/RC, AD&D2e,3.0,3.5,4e,2014 5e, supplements | `coverage.md`, next full-SRD implementation handoff | **Not completed** |
-| BSD application code, separately licensed content, no distributed book scans/prose | Repository license, pack manifests, package notices, icon CC BY-SA credit | Implemented |
+| BSD application code, separately licensed content, no distributed book scans/prose | Repository license, pack manifests, package notices; current artwork provenance and source CC0 record in `assets/icons/ATTRIBUTION.md` | Implemented; current package notice validation is recorded in the branding guide |
 | macOS/Windows/Linux automated build checks | `.github/workflows/build.yml` matrix | Added; hosted Windows/Linux jobs not executed in this local task |
 | Mac packaging and actual runtime | Release bundle/dependency/signature audit plus relocated extracted-ZIP smoke; `docs/packaging.md` | Local package acceptance recorded there |
 | Offline operation, no account, no automatic edition conversion | Local-only application paths and explicit edition-specific documents | Implemented |
-| User-supplied dragon as app icon | PNG, multi-resolution ICNS/ICO, Qt resource, Mac plist, Windows RC, Linux desktop entry; source attribution | Added and built |
+| User-supplied dragon as app icon | PNG, multi-resolution ICNS/ICO, Qt resource, Mac plist, Windows RC, Linux desktop entry; source attribution | Earlier artwork added and built; replacement artwork validation is recorded in the branding guide |
 
 The count of tests or source entries does not by itself prove full publication coverage. The edition ledgers describe what the tests exercise and what remains outside the builder. The next work is the full SRD lifecycle, preserving all current B/X and experimental acceptance cases, followed by the other specified edition profiles and supplements.
 

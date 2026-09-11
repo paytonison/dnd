@@ -159,6 +159,7 @@ struct EditionModule {
 };
 
 EditionModule bxModule();
+EditionModule srd51Module();
 EditionModule srd55Module();
 EditionModule srd55FullModule();
 const std::vector<EditionModule> &editions();

@@ -1,5 +1,7 @@
 # SRD 5.2.1 familiars and companion state
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The companion module implements **Find Familiar casting and persistent state** through the shared `CharacterCommand` interface. It consumes resolved spellcasting profiles and the verified current Wizard spellbook from `Evaluation.moduleData`; it does not search raw future spellbook entries or infer a missing casting permission.
 
 The primary references are [Find Familiar, page130](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=130), [general ritual casting, page104](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=104), [Wizard Ritual Adept, page78](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=78), [Pact of the Chain and its Investment, pages73–74](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=73), and [Druid Wild Companion, page43](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=43).

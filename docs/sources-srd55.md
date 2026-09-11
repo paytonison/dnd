@@ -1,5 +1,7 @@
 # SRD 5.2.1 implementation ledger
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The experimental `srd55` module implements single-class Fighter and Wizard creation and advancement through level 3. It uses the same `CharacterDocument`, `ResolvedRuleset`, `Evaluation`, choice fields, explanation model, and pack loader as B/X. It deliberately stops at level 3; multiclassing and further advancement require additional implementation.
 
 The reference is the English **System Reference Document 5.2.1**, published May 1, 2025, linked by the [official SRD resource page](https://www.dndbeyond.com/srd). The [official PDF](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf) was inspected on September 8, 2026. It has 364 pages; printed page numbers equal one-based PDF page numbers. No book scans are distributed. The exact attribution and modification statement is in `data/packs/srd55-core/ATTRIBUTION.md` and embedded in the pack manifest. SRD data is CC BY 4.0; application code retains BSD-3-Clause.

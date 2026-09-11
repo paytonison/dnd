@@ -1,5 +1,11 @@
 # AGENTS.md — Dungeoning a Dragon
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](docs/versioning.md).
+
+## Application version policy
+
+The application is **v1.0.0**, its basic, minimum version. Subsequent major releases (**vX.0.0**) require full implementations of game systems and their applicable acceptance checks. Updates (**v1.X.0**) add content and new features; patches (**v1.0.X**) provide fixes and corrections. Follow [docs/versioning.md](docs/versioning.md); keep the CMake application version and documentation aligned. Do not use this baseline designation to mark incomplete systems complete, or renumber source publications, exact rules modules, content packs or save schemas.
+
 ## Project contract
 
 This is an existing desktop D&D character builder, not a greenfield scaffold. Extend the implementation rather than replacing working systems.

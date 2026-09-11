@@ -1,5 +1,7 @@
 # SRD class resource actions
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The expanded SRD module exposes these transactions through the generic **Character → Actions…** dialog and the public `executeCommand` API. Preview is deterministic: it creates a candidate document, applies no random rolls, and leaves the open character unchanged. Apply commits the reviewed candidate only while the source document still matches the preview. A failed command returns the original document, including its resources, campaign settings, and accepted roll evidence.
 
 The rules below were checked against the official [SRD 5.2.1](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf). Page references use the document's printed page numbers.

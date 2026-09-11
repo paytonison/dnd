@@ -1,0 +1,3 @@
+This work includes material taken from the System Reference Document 5.1 (“SRD 5.1”) by Wizards of the Coast LLC and available at https://dnd.wizards.com/resources/systems-reference-document. The SRD 5.1 is licensed under the Creative Commons Attribution 4.0 International License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+
+Changes: Selected mechanics are encoded as data and C++, with original summaries. Ability generation follows Basic Rules v0.3 pp. 7-8; 2014 HP/rest corrections follow Basic Rules (2018) pp. 12, 70. Basic Rules prose, artwork and PDFs are excluded. Code: BSD-3-Clause.

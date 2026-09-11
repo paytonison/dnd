@@ -2,7 +2,7 @@
 #include <algorithm>
 namespace dnd {
 const std::vector<EditionModule>& editions() {
-    static const std::vector<EditionModule> modules{bxModule(), srd55Module(), srd55FullModule()};
+    static const std::vector<EditionModule> modules{bxModule(), srd51Module(), srd55Module(), srd55FullModule()};
     return modules;
 }
 const EditionModule* findEdition(const std::string& id, const std::string& version) {

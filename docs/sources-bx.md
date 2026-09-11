@@ -1,5 +1,7 @@
 # Original B/X source and verification ledger
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The bundled `bx-core` pack implements character creation and the complete **published 1981 Basic/Expert class tables**: cleric, fighter, magic-user, and thief through level 14; dwarf through 12; elf through 10; halfling through 8. This ledger records what was checked against the original books, what the builder calculates, and the few places that require an explicit interpretation or DM decision. It does not certify a retroclone or the 1983 Mentzer books as equivalent sources.
 
 ## Source identity and inspection

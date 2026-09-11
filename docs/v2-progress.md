@@ -1,5 +1,7 @@
 # Expanded SRD module 2.0.0: current progress
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The expanded module is an additional exact-version implementation, not a replacement for the version-1 fighter/wizard slice. It remains experimental. The full original plan is still active, including completing the SRD character lifecycle and implementing the other listed editions and publications.
 
 Current implementation and verification status is recorded in [the continuation checkpoint](continuation-status.md). The counts and native/PDF milestones below describe earlier artifacts; they do not certify later working-tree changes.

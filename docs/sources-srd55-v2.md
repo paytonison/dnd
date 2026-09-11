@@ -1,5 +1,7 @@
 # SRD 5.2.1 version-2 data ledger
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 `data/packs/srd55-core-v2` is a separate pack with ID **srd55-core**, version **2.0.0**, edition **srd55**, and supported module version **2.0.0**. The legacy version-1 pack and its tests remain independent. This ledger records data coverage and verification; it does not claim that a cataloged description is an executed mechanic. The module and feature acceptance suites establish execution coverage separately.
 
 The source is the [official English SRD 5.2.1 PDF](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf), linked from the [official SRD resource page](https://www.dndbeyond.com/srd), inspected September 8, 2026. It has **364 pages**, with printed page numbers matching one-based PDF pages. Its SHA-256 is:

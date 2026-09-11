@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("DungeoningADragon");
     QCoreApplication::setApplicationName("Dungeoning a Dragon");
-    QCoreApplication::setApplicationVersion("0.1.0");
+    QCoreApplication::setApplicationVersion(DND_APP_VERSION);
     QApplication::setWindowIcon(QIcon(":/icons/app-icon.png"));
     QGuiApplication::setDesktopFileName("dungeoning-a-dragon");
     dnd::MainWindow window;

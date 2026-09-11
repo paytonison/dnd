@@ -1,5 +1,9 @@
 # Plan implementation checkpoint — September 8, 2026
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Dated results below retain their original tested snapshots; the current documentation version does not relabel or rerun those artifacts.
+
 This checkpoint preserves the earlier foundation work against `PLAN.md`. The entire plan is not complete. Its stopping-point observations are historical; [the subsequent continuation checkpoint](continuation-status.md) records the completed pagination/native work, further content fixes, physical spellbooks, fresh tests and package, and the user's B/X scope decision.
 
 ## Implemented changes

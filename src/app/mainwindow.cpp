@@ -228,7 +228,7 @@ void MainWindow::buildMenus() {
     auto* file = menuBar()->addMenu("&File");
     auto* create = file->addMenu("&New character");
     for (const auto& module : editions()) {
-        auto* action = create->addAction(moduleLabel(module) + " · v" + q(module.version));
+        auto* action = create->addAction(moduleLabel(module) + " · module v" + q(module.version));
         action->setObjectName("new:" + q(module.id) + ":" + q(module.version));
         connect(action, &QAction::triggered, this, [this, id = module.id, version = module.version] { if (confirmDiscard()) newDocument(id, version); });
     }
@@ -293,7 +293,7 @@ void MainWindow::buildMenus() {
     });
     auto* help = menuBar()->addMenu("&Help");
     connect(help->addAction("About Dungeoning a Dragon"), &QAction::triggered, this, [this] {
-        QMessageBox::about(this, "Dungeoning a Dragon", "<h3>Dungeoning a Dragon</h3><p>Offline C++ character builder.</p><p>Original 1981 B/X and experimental SRD 5.2.1.</p><p>Use the source browser for publication, coverage, and content license details. Application code: BSD-3-Clause.</p><p>Icon adapted from <a href='https://commons.wikimedia.org/wiki/File:Welsh_Dragon_(Y_Ddraig_Goch).svg'>Welsh Dragon (Y Ddraig Goch)</a> by Sodacan, with AI-assisted square framing and transparent-background adaptation. Icon licensed under <a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC BY-SA 3.0</a>.</p>");
+        QMessageBox::about(this, "Dungeoning a Dragon", "<h3>Dungeoning a Dragon v" DND_APP_VERSION "</h3><p>Basic, minimum application. Offline C++ character builder.</p><p>Original 1981 B/X, experimental 5E (2014 / SRD 5.1), and 5.5E (2024 / SRD 5.2.1).</p><p>Use the source browser for publication, coverage, and content license details. Application code: BSD-3-Clause.</p><p>Logo and icon adapted with AI assistance from <a href='https://pixabay.com/vectors/dragon-red-symbol-fantasy-isolated-312035/'>Dragon</a> by Clker-Free-Vector-Images, published in 2014 on Pixabay. Source: <a href='https://pixabay.com/service/terms/'>CC0 under Pixabay's pre-2019 terms</a>. Ruby glass artwork with local transparency cleanup; see the packaged artwork notice for provenance.</p>");
     });
 }
 
@@ -338,7 +338,7 @@ void MainWindow::refresh(bool rebuildEditor) {
     setWindowFilePath(path_);
     QString state = readOnlyMode() ? "<b>Inspection only.</b> Resolve the file or source errors before editing or saving." :
         (evaluation_.complete() ? "Ready to play" : "Draft — follow the validation notes to finish this character");
-    summary_->setText("<b>" + name.toHtmlEscaped() + "</b> · " + editionName.toHtmlEscaped() + " · v" + esc(document_.moduleVersion) + " · " + state);
+    summary_->setText("<b>" + name.toHtmlEscaped() + "</b> · " + editionName.toHtmlEscaped() + " · module v" + esc(document_.moduleVersion) + " · " + state);
     QString messages;
     std::vector<Message> combined = loadMessages_;
     combined.insert(combined.end(), ruleset_.messages.begin(), ruleset_.messages.end());
@@ -779,7 +779,7 @@ void MainWindow::upgradeDialog() {
     auto* versions = new QComboBox;
     for (const auto& candidate : editions())
         if (candidate.id == document_.edition && QVersionNumber::fromString(q(candidate.version)) > QVersionNumber::fromString(q(document_.moduleVersion)))
-            versions->addItem(moduleLabel(candidate) + " · v" + q(candidate.version), q(candidate.version));
+            versions->addItem(moduleLabel(candidate) + " · module v" + q(candidate.version), q(candidate.version));
     layout->addWidget(versions);
     auto* messages = new QLabel; messages->setWordWrap(true); layout->addWidget(messages);
     auto* tabs = new QTabWidget; auto* sheet = new QTextBrowser; auto* inputs = new QTextBrowser;
@@ -1102,7 +1102,7 @@ void MainWindow::rollRequestsDialog(const std::string& category) {
 
 void MainWindow::rollAbilities() {
     if (readOnlyMode()) return;
-    if (document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("abilities"); return; }
+    if (document_.edition == "srd51" || document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("abilities"); return; }
     const bool bx = document_.edition == "bx";
     if (QMessageBox::question(this, "Roll ability scores", bx ? "Roll 3d6 in order and replace the six ability inputs? Accepted results will be saved." : "Roll 4d6, drop the lowest, for each ability and select the rolled method? Accepted results will be saved.") != QMessageBox::Yes) return;
     const std::vector<std::string> names = bx ? std::vector<std::string>{"str", "int", "wis", "dex", "con", "cha"} : std::vector<std::string>{"strength", "intelligence", "wisdom", "dexterity", "constitution", "charisma"};
@@ -1119,7 +1119,7 @@ void MainWindow::rollAbilities() {
 
 void MainWindow::rollHitPoints() {
     if (readOnlyMode()) return;
-    if (document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("hitPoints"); return; }
+    if (document_.edition == "srd51" || document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("hitPoints"); return; }
     const bool bx = document_.edition == "bx";
     const int level = integerChoice(document_.choices, "level", 1);
     const std::string cls = stringChoice(document_.choices, bx ? "class" : "classId");
@@ -1147,7 +1147,7 @@ void MainWindow::rollHitPoints() {
 }
 void MainWindow::rollMoney() {
     if (readOnlyMode()) return;
-    if (document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("money"); return; }
+    if (document_.edition == "srd51" || document_.moduleVersion != "1.0.0" || !evaluation_.rollRequests.empty()) { rollRequestsDialog("money"); return; }
     if (document_.edition != "bx") return;
     if (QMessageBox::question(this, "Roll starting money", "Roll 3d6 × 10 gold pieces and replace the creation-time money roll? Current gold is separate.") != QMessageBox::Yes) return;
     const std::vector<int> dice{rollDie_(6), rollDie_(6), rollDie_(6)}; const int total = dice[0] + dice[1] + dice[2];

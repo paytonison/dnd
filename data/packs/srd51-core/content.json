@@ -1,0 +1,1735 @@
+[
+  {
+    "id": "srd51:creation",
+    "kind": "table",
+    "name": "Ability generation",
+    "source": {
+      "publication": "D&D Player's Basic Rules, version 0.3 (2015)",
+      "page": "7-8",
+      "url": "https://media.wizards.com/2015/downloads/dnd/BasicRules_Playerv3.4.pdf#page=7"
+    },
+    "rulesProfile": "creation",
+    "standardArray": [
+      15,
+      14,
+      13,
+      12,
+      10,
+      8
+    ],
+    "pointCosts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9
+    ],
+    "pointBudget": 27
+  },
+  {
+    "id": "srd51:human",
+    "kind": "race",
+    "name": "Human",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "5",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=5"
+    },
+    "rulesProfile": "human",
+    "abilityIncreases": {
+      "strength": 1,
+      "dexterity": 1,
+      "constitution": 1,
+      "intelligence": 1,
+      "wisdom": 1,
+      "charisma": 1
+    },
+    "size": "Medium",
+    "speed": 30,
+    "languages": [
+      "srd51:common"
+    ],
+    "languageChoices": 1
+  },
+  {
+    "id": "srd51:archery",
+    "kind": "fighting-style",
+    "name": "Archery",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "archery",
+    "description": "Add 2 to attack rolls with ranged weapons."
+  },
+  {
+    "id": "srd51:defense",
+    "kind": "fighting-style",
+    "name": "Defense",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "defense",
+    "description": "Add 1 to AC while wearing armor."
+  },
+  {
+    "id": "srd51:dueling",
+    "kind": "fighting-style",
+    "name": "Dueling",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "dueling",
+    "description": "Add 2 to damage with a melee weapon wielded in one hand when no other weapon is wielded."
+  },
+  {
+    "id": "srd51:great-weapon-fighting",
+    "kind": "fighting-style",
+    "name": "Great Weapon Fighting",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "great-weapon-fighting",
+    "description": "For a melee attack wielding a two-handed or versatile weapon in two hands, reroll each damage die showing 1 or 2 once; keep the new result."
+  },
+  {
+    "id": "srd51:protection",
+    "kind": "fighting-style",
+    "name": "Protection",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "protection",
+    "description": "While wielding a shield, use your reaction when a creature you can see attacks someone else within 5 feet of you; impose disadvantage on that attack."
+  },
+  {
+    "id": "srd51:two-weapon-fighting",
+    "kind": "fighting-style",
+    "name": "Two Weapon Fighting",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "two-weapon-fighting",
+    "description": "When fighting with two light melee weapons, add the ability modifier to the second attack's damage."
+  },
+  {
+    "id": "srd51:fighter",
+    "kind": "class",
+    "name": "Fighter",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "24",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    "rulesProfile": "fighter",
+    "creationId": "srd51:creation",
+    "hitDie": 10,
+    "fixedHp": 6,
+    "maxLevel": 3,
+    "savingThrows": [
+      "strength",
+      "constitution"
+    ],
+    "skillChoices": 2,
+    "skills": [
+      "srd51:acrobatics",
+      "srd51:animal-handling",
+      "srd51:athletics",
+      "srd51:history",
+      "srd51:insight",
+      "srd51:intimidation",
+      "srd51:perception",
+      "srd51:survival"
+    ],
+    "styles": [
+      "srd51:archery",
+      "srd51:defense",
+      "srd51:dueling",
+      "srd51:great-weapon-fighting",
+      "srd51:protection",
+      "srd51:two-weapon-fighting"
+    ],
+    "equipmentGroups": [
+      {
+        "key": "armor",
+        "name": "Starting armor",
+        "options": [
+          {
+            "id": "chain",
+            "name": "Chain mail",
+            "items": [
+              "srd51:chain-mail"
+            ]
+          },
+          {
+            "id": "leather",
+            "name": "Leather armor, longbow, 20 arrows",
+            "items": [
+              "srd51:leather",
+              "srd51:longbow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow",
+              "srd51:arrow"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "weapons",
+        "name": "Starting martial weapons",
+        "options": [
+          {
+            "id": "shield",
+            "name": "One martial weapon and a shield",
+            "items": [
+              "srd51:shield"
+            ],
+            "martialWeapons": 1
+          },
+          {
+            "id": "pair",
+            "name": "Two martial weapons",
+            "items": [],
+            "martialWeapons": 2
+          }
+        ]
+      },
+      {
+        "key": "secondary",
+        "name": "Secondary weapons",
+        "options": [
+          {
+            "id": "crossbow",
+            "name": "Light crossbow and 20 bolts",
+            "items": [
+              "srd51:light-crossbow",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt",
+              "srd51:bolt"
+            ]
+          },
+          {
+            "id": "axes",
+            "name": "Two handaxes",
+            "items": [
+              "srd51:handaxe",
+              "srd51:handaxe"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pack",
+        "name": "Adventuring pack",
+        "options": [
+          {
+            "id": "dungeoneer",
+            "name": "Dungeoneer's pack",
+            "items": [
+              "srd51:dungeoneer-pack"
+            ]
+          },
+          {
+            "id": "explorer",
+            "name": "Explorer's pack",
+            "items": [
+              "srd51:explorer-pack"
+            ]
+          }
+        ]
+      }
+    ],
+    "progression": [
+      {
+        "level": 1,
+        "xp": 0,
+        "proficiency": 2,
+        "secondWind": 1,
+        "actionSurge": 0
+      },
+      {
+        "level": 2,
+        "xp": 300,
+        "proficiency": 2,
+        "secondWind": 1,
+        "actionSurge": 1
+      },
+      {
+        "level": 3,
+        "xp": 900,
+        "proficiency": 2,
+        "secondWind": 1,
+        "actionSurge": 1
+      }
+    ]
+  },
+  {
+    "id": "srd51:champion",
+    "kind": "subclass",
+    "name": "Champion",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "25",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=25"
+    },
+    "rulesProfile": "champion",
+    "classId": "srd51:fighter",
+    "level": 3,
+    "criticalMinimum": 19
+  },
+  {
+    "id": "srd51:acolyte",
+    "kind": "background",
+    "name": "Acolyte",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "rulesProfile": "acolyte",
+    "skills": [
+      "srd51:insight",
+      "srd51:religion"
+    ],
+    "languageChoices": 2,
+    "goldCp": 1500,
+    "items": [
+      "srd51:holy-symbol",
+      "srd51:incense",
+      "srd51:incense",
+      "srd51:incense",
+      "srd51:incense",
+      "srd51:incense",
+      "srd51:vestments",
+      "srd51:common-clothes",
+      "srd51:pouch"
+    ],
+    "equipmentGroups": [
+      {
+        "key": "devotion",
+        "name": "Devotional item",
+        "options": [
+          {
+            "id": "book",
+            "name": "Prayer book",
+            "items": [
+              "srd51:prayer-book"
+            ]
+          },
+          {
+            "id": "wheel",
+            "name": "Prayer wheel",
+            "items": [
+              "srd51:prayer-wheel"
+            ]
+          }
+        ]
+      }
+    ],
+    "description": "Shelter of the Faithful: you and your companions can receive healing and care from your faith, supplying required spell components. Fellow worshipers support your own modest lifestyle. In good standing near your temple, you can request assistance that is not hazardous."
+  },
+  {
+    "id": "srd51:common",
+    "kind": "language",
+    "name": "Common",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:dwarvish",
+    "kind": "language",
+    "name": "Dwarvish",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:elvish",
+    "kind": "language",
+    "name": "Elvish",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:giant",
+    "kind": "language",
+    "name": "Giant",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:gnomish",
+    "kind": "language",
+    "name": "Gnomish",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:goblin",
+    "kind": "language",
+    "name": "Goblin",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:halfling",
+    "kind": "language",
+    "name": "Halfling",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:orc",
+    "kind": "language",
+    "name": "Orc",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "59",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    }
+  },
+  {
+    "id": "srd51:athletics",
+    "kind": "skill",
+    "name": "Athletics",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "strength"
+  },
+  {
+    "id": "srd51:acrobatics",
+    "kind": "skill",
+    "name": "Acrobatics",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd51:sleight-of-hand",
+    "kind": "skill",
+    "name": "Sleight Of Hand",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd51:stealth",
+    "kind": "skill",
+    "name": "Stealth",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "srd51:arcana",
+    "kind": "skill",
+    "name": "Arcana",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd51:history",
+    "kind": "skill",
+    "name": "History",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd51:investigation",
+    "kind": "skill",
+    "name": "Investigation",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd51:nature",
+    "kind": "skill",
+    "name": "Nature",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd51:religion",
+    "kind": "skill",
+    "name": "Religion",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "srd51:animal-handling",
+    "kind": "skill",
+    "name": "Animal Handling",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd51:insight",
+    "kind": "skill",
+    "name": "Insight",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd51:medicine",
+    "kind": "skill",
+    "name": "Medicine",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd51:perception",
+    "kind": "skill",
+    "name": "Perception",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd51:survival",
+    "kind": "skill",
+    "name": "Survival",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "srd51:deception",
+    "kind": "skill",
+    "name": "Deception",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd51:intimidation",
+    "kind": "skill",
+    "name": "Intimidation",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd51:performance",
+    "kind": "skill",
+    "name": "Performance",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd51:persuasion",
+    "kind": "skill",
+    "name": "Persuasion",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "78",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=78"
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "srd51:padded",
+    "kind": "armor",
+    "name": "Padded",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "63",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=63"
+    },
+    "category": "light",
+    "baseAc": 11,
+    "costCp": 500,
+    "strength": 0,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:leather",
+    "kind": "armor",
+    "name": "Leather",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "light",
+    "baseAc": 11,
+    "costCp": 1000,
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd51:studded-leather",
+    "kind": "armor",
+    "name": "Studded Leather",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "light",
+    "baseAc": 12,
+    "costCp": 4500,
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd51:hide",
+    "kind": "armor",
+    "name": "Hide",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "medium",
+    "baseAc": 12,
+    "costCp": 1000,
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd51:chain-shirt",
+    "kind": "armor",
+    "name": "Chain Shirt",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "medium",
+    "baseAc": 13,
+    "costCp": 5000,
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd51:scale-mail",
+    "kind": "armor",
+    "name": "Scale Mail",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "medium",
+    "baseAc": 14,
+    "costCp": 5000,
+    "strength": 0,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:breastplate",
+    "kind": "armor",
+    "name": "Breastplate",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "medium",
+    "baseAc": 14,
+    "costCp": 40000,
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  {
+    "id": "srd51:half-plate",
+    "kind": "armor",
+    "name": "Half Plate",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "medium",
+    "baseAc": 15,
+    "costCp": 75000,
+    "strength": 0,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:ring-mail",
+    "kind": "armor",
+    "name": "Ring Mail",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "heavy",
+    "baseAc": 14,
+    "costCp": 3000,
+    "strength": 0,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:chain-mail",
+    "kind": "armor",
+    "name": "Chain Mail",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "heavy",
+    "baseAc": 16,
+    "costCp": 7500,
+    "strength": 13,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:splint",
+    "kind": "armor",
+    "name": "Splint",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "heavy",
+    "baseAc": 17,
+    "costCp": 20000,
+    "strength": 15,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:plate",
+    "kind": "armor",
+    "name": "Plate",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "category": "heavy",
+    "baseAc": 18,
+    "costCp": 150000,
+    "strength": 15,
+    "stealthDisadvantage": true
+  },
+  {
+    "id": "srd51:shield",
+    "kind": "shield",
+    "name": "Shield",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "64",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=64"
+    },
+    "bonusAc": 2,
+    "costCp": 1000
+  },
+  {
+    "id": "srd51:club",
+    "kind": "weapon",
+    "name": "Club",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "costCp": 10,
+    "properties": [
+      "light"
+    ]
+  },
+  {
+    "id": "srd51:dagger",
+    "kind": "weapon",
+    "name": "Dagger",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d4",
+    "damageType": "piercing",
+    "costCp": 200,
+    "properties": [
+      "light",
+      "finesse",
+      "thrown"
+    ],
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:greatclub",
+    "kind": "weapon",
+    "name": "Greatclub",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "costCp": 20,
+    "properties": [
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:handaxe",
+    "kind": "weapon",
+    "name": "Handaxe",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "slashing",
+    "costCp": 500,
+    "properties": [
+      "light",
+      "thrown"
+    ],
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:javelin",
+    "kind": "weapon",
+    "name": "Javelin",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 50,
+    "properties": [
+      "thrown"
+    ],
+    "range": [
+      30,
+      120
+    ]
+  },
+  {
+    "id": "srd51:light-hammer",
+    "kind": "weapon",
+    "name": "Light Hammer",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "costCp": 200,
+    "properties": [
+      "light",
+      "thrown"
+    ],
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:mace",
+    "kind": "weapon",
+    "name": "Mace",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "bludgeoning",
+    "costCp": 500,
+    "properties": []
+  },
+  {
+    "id": "srd51:quarterstaff",
+    "kind": "weapon",
+    "name": "Quarterstaff",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "bludgeoning",
+    "costCp": 20,
+    "properties": [],
+    "versatile": "1d8"
+  },
+  {
+    "id": "srd51:sickle",
+    "kind": "weapon",
+    "name": "Sickle",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d4",
+    "damageType": "slashing",
+    "costCp": 100,
+    "properties": [
+      "light"
+    ]
+  },
+  {
+    "id": "srd51:spear",
+    "kind": "weapon",
+    "name": "Spear",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 100,
+    "properties": [
+      "thrown"
+    ],
+    "versatile": "1d8",
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:light-crossbow",
+    "kind": "weapon",
+    "name": "Light Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "ranged",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "costCp": 2500,
+    "properties": [
+      "ammunition",
+      "loading",
+      "two-handed"
+    ],
+    "range": [
+      80,
+      320
+    ],
+    "ammunitionId": "srd51:bolt"
+  },
+  {
+    "id": "srd51:dart",
+    "kind": "weapon",
+    "name": "Dart",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "ranged",
+    "damage": "1d4",
+    "damageType": "piercing",
+    "costCp": 5,
+    "properties": [
+      "finesse",
+      "thrown"
+    ],
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:shortbow",
+    "kind": "weapon",
+    "name": "Shortbow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "ranged",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 2500,
+    "properties": [
+      "ammunition",
+      "two-handed"
+    ],
+    "range": [
+      80,
+      320
+    ],
+    "ammunitionId": "srd51:arrow"
+  },
+  {
+    "id": "srd51:sling",
+    "kind": "weapon",
+    "name": "Sling",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "simple",
+    "mode": "ranged",
+    "damage": "1d4",
+    "damageType": "bludgeoning",
+    "costCp": 10,
+    "properties": [
+      "ammunition"
+    ],
+    "range": [
+      30,
+      120
+    ],
+    "ammunitionId": "srd51:bullet"
+  },
+  {
+    "id": "srd51:battleaxe",
+    "kind": "weapon",
+    "name": "Battleaxe",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "slashing",
+    "costCp": 1000,
+    "properties": [],
+    "versatile": "1d10"
+  },
+  {
+    "id": "srd51:flail",
+    "kind": "weapon",
+    "name": "Flail",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "costCp": 1000,
+    "properties": []
+  },
+  {
+    "id": "srd51:glaive",
+    "kind": "weapon",
+    "name": "Glaive",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d10",
+    "damageType": "slashing",
+    "costCp": 2000,
+    "properties": [
+      "heavy",
+      "reach",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:greataxe",
+    "kind": "weapon",
+    "name": "Greataxe",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d12",
+    "damageType": "slashing",
+    "costCp": 3000,
+    "properties": [
+      "heavy",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:greatsword",
+    "kind": "weapon",
+    "name": "Greatsword",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "2d6",
+    "damageType": "slashing",
+    "costCp": 5000,
+    "properties": [
+      "heavy",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:halberd",
+    "kind": "weapon",
+    "name": "Halberd",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d10",
+    "damageType": "slashing",
+    "costCp": 2000,
+    "properties": [
+      "heavy",
+      "reach",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:longsword",
+    "kind": "weapon",
+    "name": "Longsword",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "slashing",
+    "costCp": 1500,
+    "properties": [],
+    "versatile": "1d10"
+  },
+  {
+    "id": "srd51:maul",
+    "kind": "weapon",
+    "name": "Maul",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "2d6",
+    "damageType": "bludgeoning",
+    "costCp": 1000,
+    "properties": [
+      "heavy",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:morningstar",
+    "kind": "weapon",
+    "name": "Morningstar",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "costCp": 1500,
+    "properties": []
+  },
+  {
+    "id": "srd51:pike",
+    "kind": "weapon",
+    "name": "Pike",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d10",
+    "damageType": "piercing",
+    "costCp": 500,
+    "properties": [
+      "heavy",
+      "reach",
+      "two-handed"
+    ]
+  },
+  {
+    "id": "srd51:rapier",
+    "kind": "weapon",
+    "name": "Rapier",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "costCp": 2500,
+    "properties": [
+      "finesse"
+    ]
+  },
+  {
+    "id": "srd51:scimitar",
+    "kind": "weapon",
+    "name": "Scimitar",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "slashing",
+    "costCp": 2500,
+    "properties": [
+      "light",
+      "finesse"
+    ]
+  },
+  {
+    "id": "srd51:shortsword",
+    "kind": "weapon",
+    "name": "Shortsword",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 1000,
+    "properties": [
+      "light",
+      "finesse"
+    ]
+  },
+  {
+    "id": "srd51:trident",
+    "kind": "weapon",
+    "name": "Trident",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 500,
+    "properties": [
+      "thrown"
+    ],
+    "versatile": "1d8",
+    "range": [
+      20,
+      60
+    ]
+  },
+  {
+    "id": "srd51:war-pick",
+    "kind": "weapon",
+    "name": "War Pick",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "costCp": 500,
+    "properties": []
+  },
+  {
+    "id": "srd51:warhammer",
+    "kind": "weapon",
+    "name": "Warhammer",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d8",
+    "damageType": "bludgeoning",
+    "costCp": 1500,
+    "properties": [],
+    "versatile": "1d10"
+  },
+  {
+    "id": "srd51:whip",
+    "kind": "weapon",
+    "name": "Whip",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "melee",
+    "damage": "1d4",
+    "damageType": "slashing",
+    "costCp": 200,
+    "properties": [
+      "finesse",
+      "reach"
+    ]
+  },
+  {
+    "id": "srd51:blowgun",
+    "kind": "weapon",
+    "name": "Blowgun",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "ranged",
+    "damage": "1",
+    "damageType": "piercing",
+    "costCp": 1000,
+    "properties": [
+      "ammunition",
+      "loading"
+    ],
+    "range": [
+      25,
+      100
+    ],
+    "ammunitionId": "srd51:needle"
+  },
+  {
+    "id": "srd51:hand-crossbow",
+    "kind": "weapon",
+    "name": "Hand Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "ranged",
+    "damage": "1d6",
+    "damageType": "piercing",
+    "costCp": 7500,
+    "properties": [
+      "ammunition",
+      "light",
+      "loading"
+    ],
+    "range": [
+      30,
+      120
+    ],
+    "ammunitionId": "srd51:bolt"
+  },
+  {
+    "id": "srd51:heavy-crossbow",
+    "kind": "weapon",
+    "name": "Heavy Crossbow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "ranged",
+    "damage": "1d10",
+    "damageType": "piercing",
+    "costCp": 5000,
+    "properties": [
+      "ammunition",
+      "heavy",
+      "loading",
+      "two-handed"
+    ],
+    "range": [
+      100,
+      400
+    ],
+    "ammunitionId": "srd51:bolt"
+  },
+  {
+    "id": "srd51:longbow",
+    "kind": "weapon",
+    "name": "Longbow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=66"
+    },
+    "category": "martial",
+    "mode": "ranged",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "costCp": 5000,
+    "properties": [
+      "ammunition",
+      "heavy",
+      "two-handed"
+    ],
+    "range": [
+      150,
+      600
+    ],
+    "ammunitionId": "srd51:arrow"
+  },
+  {
+    "id": "srd51:arrow",
+    "kind": "gear",
+    "name": "Arrow",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "69",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=69"
+    },
+    "description": "Ammunition for a bow.",
+    "costCp": 100,
+    "purchasable": true,
+    "purchaseQuantity": 20
+  },
+  {
+    "id": "srd51:bolt",
+    "kind": "gear",
+    "name": "Crossbow bolt",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "69",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=69"
+    },
+    "description": "Ammunition for a crossbow.",
+    "costCp": 100,
+    "purchasable": true,
+    "purchaseQuantity": 20
+  },
+  {
+    "id": "srd51:bullet",
+    "kind": "gear",
+    "name": "Sling bullet",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "69",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=69"
+    },
+    "description": "Ammunition for a sling.",
+    "costCp": 4,
+    "purchasable": true,
+    "purchaseQuantity": 20
+  },
+  {
+    "id": "srd51:needle",
+    "kind": "gear",
+    "name": "Blowgun needle",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "69",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=69"
+    },
+    "description": "Ammunition for a blowgun.",
+    "costCp": 100,
+    "purchasable": true,
+    "purchaseQuantity": 50
+  },
+  {
+    "id": "srd51:dungeoneer-pack",
+    "kind": "gear",
+    "name": "Dungeoneer's pack",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "70",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=70"
+    },
+    "description": "Backpack, crowbar, hammer, 10 pitons, 10 torches, tinderbox, 10 days of rations, waterskin, and 50 feet of hempen rope.",
+    "costCp": 1200,
+    "purchasable": true,
+    "contentsSummary": "Backpack, crowbar, hammer, 10 pitons, 10 torches, tinderbox, 10 days of rations, waterskin, and 50 feet of hempen rope."
+  },
+  {
+    "id": "srd51:explorer-pack",
+    "kind": "gear",
+    "name": "Explorer's pack",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "70",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=70"
+    },
+    "description": "Backpack, bedroll, mess kit, tinderbox, 10 torches, 10 days of rations, waterskin, and 50 feet of hempen rope.",
+    "costCp": 1000,
+    "purchasable": true,
+    "contentsSummary": "Backpack, bedroll, mess kit, tinderbox, 10 torches, 10 days of rations, waterskin, and 50 feet of hempen rope."
+  },
+  {
+    "id": "srd51:holy-symbol",
+    "kind": "gear",
+    "name": "Holy symbol",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "A gift received upon entering the priesthood.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:prayer-book",
+    "kind": "gear",
+    "name": "Prayer book",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Devotional item from the Acolyte background.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:prayer-wheel",
+    "kind": "gear",
+    "name": "Prayer wheel",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Devotional item from the Acolyte background.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:incense",
+    "kind": "gear",
+    "name": "Stick of incense",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Acolyte starting equipment.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:vestments",
+    "kind": "gear",
+    "name": "Vestments",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Acolyte starting equipment.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:common-clothes",
+    "kind": "gear",
+    "name": "Common clothes",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Acolyte starting equipment.",
+    "costCp": 0,
+    "purchasable": false
+  },
+  {
+    "id": "srd51:pouch",
+    "kind": "gear",
+    "name": "Pouch",
+    "source": {
+      "publication": "System Reference Document 5.1",
+      "page": "61",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=61"
+    },
+    "description": "Contains the Acolyte starting coins.",
+    "costCp": 0,
+    "purchasable": false
+  }
+]

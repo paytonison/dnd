@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "id": "srd51-core",
+  "version": "1.0.0",
+  "edition": "srd51",
+  "moduleVersions": [
+    "1.0.0"
+  ],
+  "name": "5E (2014) / SRD 5.1 - Human Fighter 1-3",
+  "publisher": "Wizards of the Coast LLC",
+  "origin": "official",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "text": "This work includes material taken from the System Reference Document 5.1 (“SRD 5.1”) by Wizards of the Coast LLC and available at https://dnd.wizards.com/resources/systems-reference-document. The SRD 5.1 is licensed under the Creative Commons Attribution 4.0 International License available at https://creativecommons.org/licenses/by/4.0/legalcode.\n\nChanges: Selected mechanics are encoded as data and C++, with original summaries. Ability generation follows Basic Rules v0.3 pp. 7-8; 2014 HP/rest corrections follow Basic Rules (2018) pp. 12, 70. Basic Rules prose, artwork and PDFs are excluded. Code: BSD-3-Clause."
+  },
+  "sources": [
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "1",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=1"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "5",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=5"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "24-25",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=24"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "56",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=56"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "59-66",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=59"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "76-80",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=76"
+    },
+    {
+      "publication": "System Reference Document 5.1",
+      "page": "87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf#page=87"
+    },
+    {
+      "publication": "D&D Player's Basic Rules, version 0.3 (2015)",
+      "page": "7-8",
+      "url": "https://media.wizards.com/2015/downloads/dnd/BasicRules_Playerv3.4.pdf#page=7"
+    },
+    {
+      "publication": "D&D Basic Rules (2018), 2014 rules",
+      "page": "5, 12, 70",
+      "url": "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf#page=12"
+    }
+  ],
+  "dependencies": [],
+  "conflicts": [],
+  "dataFiles": [
+    "content.json"
+  ],
+  "coverage": {
+    "status": "experimental",
+    "classes": [
+      "Fighter"
+    ],
+    "races": [
+      "Human"
+    ],
+    "backgrounds": [
+      "Acolyte"
+    ],
+    "subclasses": [
+      "Champion"
+    ],
+    "levels": [
+      1,
+      3
+    ],
+    "notImplemented": [
+      "other classes and races",
+      "levels 4-20",
+      "spellcasting",
+      "multiclassing",
+      "feats and variant Human",
+      "custom backgrounds",
+      "exotic languages",
+      "starting-gold alternative",
+      "Lance and Net special weapon profiles",
+      "magic items",
+      "inventory transactions and encumbrance",
+      "combat adjudication"
+    ]
+  }
+}

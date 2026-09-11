@@ -659,5 +659,5 @@ std::vector<Message> validatePack(const ContentPack& pack) {
     return result;
 }
 } // namespace
-EditionModule srd55Module() { return {"srd55","5.5e / SRD 5.2.1 (experimental)","1.0.0",true,run,validatePack,validateResolved}; }
+EditionModule srd55Module() { return {"srd55","5.5E / SRD 5.2.1 (experimental)","1.0.0",true,run,validatePack,validateResolved}; }
 } // namespace dnd

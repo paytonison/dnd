@@ -210,11 +210,14 @@ info["LSMinimumSystemVersion"] = minimum
 info["NSHighResolutionCapable"] = True
 with plist_path.open("wb") as stream:
     plistlib.dump(info, stream)
-manifest = {"qtVersion": version, "minimumMacOS": minimum, "signing": "ad hoc; not notarized", "binaries": inventory, "dependencyProvenance": provenance,
+manifest = {"applicationVersion": info["CFBundleShortVersionString"], "qtVersion": version, "minimumMacOS": minimum, "signing": "ad hoc; not notarized", "binaries": inventory, "dependencyProvenance": provenance,
     "sourceCommit": output("git", "-C", str(repo), "rev-parse", "HEAD").strip(),
     "sourceWorkingTreeDirty": bool(output("git", "-C", str(repo), "status", "--porcelain").strip())}
 (contents / "Resources" / "package-inventory.json").write_text(json.dumps(manifest, indent=2) + "\n")
+shutil.copy2(repo / "docs" / "versioning.md", notices / "APPLICATION-VERSION-POLICY.md")
 (contents / "Resources" / "Notices" / "README.txt").write_text(
+    "Dungeoning a Dragon v" + info["CFBundleShortVersionString"] + "\n"
+    "Release policy: see APPLICATION-VERSION-POLICY.md.\n"
     "Application code: BSD-3-Clause; see APPLICATION-BSD-3-Clause.txt.\n"
     "Qt and its dependencies retain their own licenses and copyright notices.\n"
     "The bundled content packs each contain their own manifest license and source metadata.\n"

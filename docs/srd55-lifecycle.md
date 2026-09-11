@@ -1,5 +1,7 @@
 # SRD 5.2.1 lifecycle transactions
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The expanded `srd55` module, version `2.0.0`, exposes explicit actions through the same library, command-line tool, and desktop interface. A command takes a character, its exact resolved rules, an action ID, and structured inputs. It returns either a complete proposed document or the original document with explanations. Evaluation itself never spends, rolls, rests, copies, or advances a character.
 
 The GUI's **Character → Actions…** menu displays the currently available actions and their source references. Preview shows changes without modifying the live character. Apply accepts only the exact previewed candidate, provided the live document has not changed. Action inputs are validated again by the core against the currently announced fields and choices. Unknown inputs, stale options, missing sources, invalid costs, and failed rule validation cannot partially alter the character.

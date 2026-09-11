@@ -1,6 +1,8 @@
 # Full SRD 5.2.1 lifecycle: implementation handoff
 
-Prepared September 8, 2026 against the current `srd55` module and `srd55-core` version **1.0.0**. This document is an implementation checklist for the next part of the repository plan. It does not mark the expansion implemented or change the validated first release.
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Prepared September 8, 2026 against the current `srd55` module and `srd55-core` version **1.0.0**. This document is an implementation checklist for the next part of the repository plan. It does not mark the expansion implemented or change the historical validation evidence.
 
 The target is all **12 classes and the 12 subclasses actually contained in SRD 5.2.1**, levels **1–20**, with their creation choices, advancement, multiclassing, relevant equipment, spells, and character-sheet effects. Classes or subclasses found only in other publications need their own licensed source packs and coverage records. Do not silently import 2014 or other 2024 book rules to fill an SRD gap.
 

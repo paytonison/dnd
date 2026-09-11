@@ -1,5 +1,7 @@
 # Architecture
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The application is a C++20 rules engine with a Qt 6 Widgets desktop client. The rules targets do not link Qt. `dnd_engine` owns the public document/evaluation contract, `dnd_editions` supplies compiled rule implementations, `dnd_rules` links them, `dnd_content` loads packs and persists files, and the CLI and desktop client consume these interfaces.
 
 `CharacterDocument` stores an edition identifier and exact module version, pack pins, identity, campaign settings, JSON choices, advancement records, accepted rolls, current resources, and explicit overrides. JSON choices deliberately have no common race/class/level structure: B/X uses race-as-class, while the experimental SRD module uses independent species, background, and class choices. Future modules can represent multiclassing, dual-classing, prestige classes, and powers without changing the document envelope.

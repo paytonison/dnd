@@ -2226,7 +2226,7 @@ std::vector<Message> validateRuleset(const ResolvedRuleset &rules);
 namespace dnd {
 EditionModule srd55FullModule() {
     return {"srd55",
-            "5.5e / SRD 5.2.1 expanded lifecycle (experimental)",
+            "5.5E / SRD 5.2.1 expanded lifecycle (experimental)",
             "2.0.0",
             true,
             srd55v2::run,

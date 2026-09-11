@@ -1,6 +1,14 @@
 # Dungeoning a Dragon
 
-A local desktop D&D character builder with a C++20 rules engine and Qt 6 Widgets interface. Work is in progress against [the implementation plan](PLAN.md). The implementation includes original 1981 B/X, the preserved experimental SRD 5.2.1 fighter/wizard interface proof, and an expanded SRD module with all 12 classes through level 20 under continued validation; [the coverage ledger](docs/coverage.md) distinguishes implementation from future editions and verification.
+<img src="assets/branding/dragon-logo.png" alt="Dungeoning a Dragon ruby glass dragon logo" width="200">
+
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](docs/versioning.md).
+
+A local desktop D&D character builder with a C++20 rules engine and Qt 6 Widgets interface. Work is in progress against [the implementation plan](PLAN.md). The implementation includes original 1981 B/X, a separate experimental **5E (2014)** Human Fighter through level 3, the preserved **5.5E (2024)** SRD 5.2.1 Fighter/Wizard interface proof, and an expanded 5.5E module with all 12 classes through level 20 under continued validation. [The coverage ledger](docs/coverage.md) distinguishes implemented scope, future work, and verification.
+
+## Release policy
+
+**v1.0.0** is the basic, minimum app. Subsequent **vX.0.0** major releases represent full implementations of game systems; **v1.X.0** updates add content and new features; **v1.0.X** patches fix defects and make corrections. Module, content-pack, publication and save-format versions are independent. See [the complete version policy](docs/versioning.md).
 
 ## Build
 
@@ -28,16 +36,20 @@ Advanced mode exposes campaign options and DM overrides. Hiding Advanced mode pr
 
 Save characters as `.dnd.json` files. Exact edition-module and content-pack versions are stored with the choices. Recovery copies are separate `.autosave` files. Missing rules or unsupported versions open for inspection without silently rewriting or substituting the original.
 
-The app uses a transparent red Welsh dragon icon adapted from Sodacan’s artwork under CC BY-SA 3.0; credit and the artwork license are separate from the application code.
+Choose **5E (2014) / SRD 5.1** to create a Human Fighter with the Acolyte background, six Fighting Style options, and Champion at level 3. The first slice includes starting equipment and ammunition purchases, explicit level advancement, Second Wind, Action Surge, and short/long rests through **Character → Actions…**. [The 5E guide](docs/srd51.md) explains the workflow, supported source profile, and remaining scope. **5.5E** names the revised 2024 rules; the two editions keep distinct saves and content packs.
+
+The logo and app icon use the supplied dragon as a ruby glass emblem, with a pale frosted rounded tile for the macOS Golden Gate style app icon. The source is credited to Clker-Free-Vector-Images on Pixabay under its pre-2019 CC0 terms. [The branding guide](docs/branding.md) records the source, generated artwork, static PNG/ICNS/ICO integration, and validation; [the artwork notice](assets/icons/ATTRIBUTION.md) keeps its provenance separate from the application code.
 
 Use the source dialogs to select content packs, browse searchable options and their publications, and import structured pack folders. [Pack documentation and a template](docs/content-packs.md) describe the interface. PDF export and printing use the same evaluated sheet, including edition, sources, validation, and override annotations.
 
 ## CLI
 
 ```sh
+./build/dnd-cli --version
 ./build/dnd-cli editions
 ./build/dnd-cli validate-pack data/packs/bx-core
 ./build/dnd-cli new bx rook.dnd.json
+./build/dnd-cli new srd51 fighter-5e.dnd.json 1.0.0
 ./build/dnd-cli new srd55 modern.dnd.json 2.0.0
 ./build/dnd-cli migrate legacy.dnd.json 2.0.0 migrated-copy.dnd.json
 ./build/dnd-cli evaluate rook.dnd.json
@@ -46,7 +58,7 @@ Use the source dialogs to select content packs, browse searchable options and th
 
 Evaluation returns exit status `2` for an incomplete or invalid draft, `0` for a complete character, and `1` for a command or file error. It is expected that a newly created blank draft is incomplete. The optional final argument to `evaluate` and `sheet` selects an alternate pack directory. Installed CLI commands discover packs relative to the executable under `../share/dungeoning-a-dragon/packs`; an explicit directory takes precedence. Only the original development executable falls back to its configured checkout. See [installed CLI validation](docs/packaging.md#installed-command-line-tool).
 
-Application code retains the repository's BSD-3-Clause license. Content license and publisher metadata are separate. SRD 5.2.1 material is attributed under CC BY 4.0. B/X is independently encoded mechanical data with original explanatory text; book scans, artwork, and copied book prose are excluded from distributions.
+Application code retains the repository's BSD-3-Clause license. Content license and publisher metadata are separate. SRD 5.1 and SRD 5.2.1 material each retain their CC BY 4.0 attribution. Supplementary 2014-rule references and reuse boundaries are documented in [the 5E source ledger](docs/sources-srd51.md). B/X is independently encoded mechanical data with original explanatory text; book scans, artwork, and copied book prose are excluded from distributions.
 
 ## Local Mac package
 
@@ -54,4 +66,4 @@ Run `./scripts/package-macos.sh` to build a Release app, bundle Qt and its depen
 
 The expanded Wizard supports explicit physical spellbook tracking, backup, loss, reconstruction and recovery through **Character → Actions…**. Each book keeps its own contents and copying costs; [the lifecycle guide](docs/srd55-lifecycle.md#physical-wizard-spellbooks) explains activation and legacy limits. [The latest continuation checkpoint](docs/continuation-status.md) records current automated, native, PDF and package evidence and the remaining roadmap.
 
-The expanded SRD module uses version `2.0.0` and its matching pack. Version `1.0.0` remains compiled and available for exact legacy saves. Select the version in the New menu; upgrades are explicit copies with a comparison preview. See [current expanded-module progress and remaining lifecycle work](docs/v2-progress.md).
+The expanded 5.5E (`srd55`) module uses version `2.0.0` and its matching pack. Its version `1.0.0` remains compiled and available for exact legacy saves. Select the version in the New menu; upgrades are explicit copies with a comparison preview. See [current expanded-module progress and remaining lifecycle work](docs/v2-progress.md). The separate 5E (`srd51`) module starts at `1.0.0`; its new implementation and delivery evidence is recorded separately in [the September 11 checkpoint](docs/5e-validation-20260911.md).

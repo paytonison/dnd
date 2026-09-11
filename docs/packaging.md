@@ -1,5 +1,9 @@
 # Local macOS packaging
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Application package metadata is **v1.0.0**. New bundles derive both macOS version fields, `package-inventory.json`'s `applicationVersion`, and the packaged notice heading from the CMake application version. `Notices/APPLICATION-VERSION-POLICY.md` carries [the release policy](versioning.md). Dated archive hashes below remain historical and are not relabeled by this documentation update.
+
 ## Installed command-line tool
 
 The Qt-free CLI can be installed separately from the desktop bundle using the configured build:
@@ -21,6 +25,8 @@ The registered `installed-cli` CTest installs the CLI component, relocates the p
 Run `./scripts/package-macos.sh` from any directory on a Mac with CMake, a C++20 toolchain, Qt 6 (including `qmake` and `macdeployqt`), Python 3.9+, and nlohmann/json. The first run also needs network access to cache the license texts from the exact Qt release's source repository. The application itself remains offline and account-free.
 
 The script builds current sources in Release mode, copies the character content packs, runs `macdeployqt`, and inspects every deployed Mach-O file. It rejects unresolved library references, non-system absolute dependency paths, and mismatched architectures; removes redundant build-machine search paths; and checks the resulting code signature. It then extracts the actual ZIP into a temporary directory outside the checkout and runs the strict character/save/reopen/PDF smoke workflow with Qt and dynamic-linker overrides unset. Both Cocoa and the matching offscreen platform plugin are bundled.
+
+When changing artwork, run `./scripts/build-icons.sh` before building or packaging to regenerate the checked-in ICNS and ICO containers from `assets/icons/app-icon.png`. The app embeds that PNG for Qt, and the macOS bundle uses `app-icon.icns`. The [branding guide](branding.md) records the current Golden Gate style artwork and its separate asset, native, and packaging checks. The static icon containers do not provide Icon Composer's adaptive appearances.
 
 Successful output appears in:
 
@@ -50,7 +56,7 @@ Universal output requires universal versions of **every** linked library. Settin
 
 ## Notices and local trust
 
-`Contents/Resources/Notices` includes the application's BSD-3-Clause license, the exact Qt version's LGPL/GPL texts, installed Qt and dependency license notices, SPDX inventories where available, and Homebrew build receipts/recipes. The dragon icon's attribution and CC BY-SA terms appear in `APP-ICON-ATTRIBUTION.md`; the same credit is available in the application's About dialog. Each content pack retains its own license and publication references. Qt remains dynamically linked. Before public redistribution, review the exact selected dependency licenses and corresponding-source obligations for that release. This workflow produces a local validation artifact and performs no external upload.
+`Contents/Resources/Notices` includes the application's BSD-3-Clause license, the exact Qt version's LGPL/GPL texts, installed Qt and dependency license notices, SPDX inventories where available, and Homebrew build receipts/recipes. The current dragon artwork's provenance, source CC0 terms, and adaptation record appear in `APP-ICON-ATTRIBUTION.md`; the source credit is also available in the application's About dialog. Each content pack retains its own license and publication references. Qt remains dynamically linked. Before public redistribution, review the exact selected dependency licenses and corresponding-source obligations for that release. This workflow produces a local validation artifact and performs no external upload.
 
 The package uses a local **ad hoc signature**. It has no Developer ID identity, notarization ticket, or stapled Apple ticket. Local signature verification establishes bundle integrity; it does not establish Apple's distribution trust. A downloaded copy may therefore be stopped by Gatekeeper. Ordinary development and local testing do not require notarization. A public Developer ID release would require a separately authorized signing/notarization workflow and credentials.
 

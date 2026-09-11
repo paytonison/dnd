@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     try {
         if (argc < 2) {
             std::cout
-                << "Dungeoning a Dragon\n  dnd-cli editions\n  dnd-cli validate-pack DIRECTORY\n  "
+                << "Dungeoning a Dragon v" DND_APP_VERSION "\n  dnd-cli --version\n  dnd-cli editions\n  dnd-cli validate-pack DIRECTORY\n  "
                    "dnd-cli new EDITION FILE [MODULE_VERSION]\n  dnd-cli migrate FILE "
                    "MODULE_VERSION NEW_FILE\n  dnd-cli evaluate FILE [PACK_DIRECTORY]\n  dnd-cli "
                    "sheet FILE HTML_FILE [PACK_DIRECTORY]\n  dnd-cli preview FILE ACTION_ID "
@@ -18,6 +18,10 @@ int main(int argc, char **argv) {
             return 0;
         }
         const std::string command = argv[1];
+        if (command == "--version") {
+            std::cout << "Dungeoning a Dragon v" DND_APP_VERSION "\n";
+            return 0;
+        }
         if (command == "editions") {
             for (const auto &module : editions())
                 std::cout << module.id << "\t" << module.version << "\t" << module.name

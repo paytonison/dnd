@@ -1,5 +1,9 @@
 # Continuation checkpoint — September 8, 2026
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
+Dated results below retain their original tested snapshots; the current documentation version does not relabel or rerun those artifacts.
+
 This follows `plan-followthrough.md`. The complete roadmap remains open. The working base is `15a44da7d06125935afb2f8e04aef88282f254a4`; validation below distinguishes successive working-tree snapshots rather than treating them as one unchanged artifact.
 
 ## Scope decision

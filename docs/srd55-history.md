@@ -1,5 +1,7 @@
 # SRD 5.2.1 acquisition and replacement history
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](versioning.md).
+
 The expanded SRD module keeps character creation editable until the player explicitly chooses **Accept character and start history**. Acceptance requires a complete character under its exact module and content-pack versions. It does not convert an older character, silently accept a draft, or reinterpret a version-1 save.
 
 After acceptance, creation and advancement selections become read-only in the builder. The sheet and explanations remain live. Name, current resources, current equipment selection, and experience bookkeeping remain separate from those locked choices. The player changes a tracked selection through a source-specific action or begins a new level, fills its newly available choices, and commits it. This follows the separation between initial creation, later class levels, and class-specific replacement rules in [SRD pages 19–26](https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=19).

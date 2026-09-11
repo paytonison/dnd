@@ -1,12 +1,26 @@
 # Dungeoning a Dragon: C++ Character Builder
 
+Documentation for **Dungeoning a Dragon v1.0.0**, the basic, minimum application. See [the release policy](docs/versioning.md).
+
+## Application release baseline
+
+The current application is **v1.0.0**, the basic, minimum version. Subsequent major releases (**vX.0.0**) mark full system implementations; updates (**v1.X.0**) add content and new features; patches (**v1.0.X**) fix defects and make corrections. This baseline designation preserves every outstanding coverage and acceptance gate below. [The release policy](docs/versioning.md) keeps application, module, pack, publication and save versions distinct.
+
 ## Summary
 
 Build a desktop character builder with a **C++20 rules engine and a Qt 6 Widgets GUI**, supporting macOS, Windows, and Linux, with development and initial acceptance testing on the Mac. Qt’s C++ controls, model/view system, and desktop layouts suit the proposed interface. [Qt Widgets documentation](https://doc.qt.io/qt-6/qtwidgets-index.html)
 
-The first playable release will implement **original 1981 B/X character creation and advancement for all seven core classes through their normal level limits**. A small 5.5e implementation will then demonstrate that a substantially different edition works through the same engine and GUI interfaces.
+The first playable release will implement **original 1981 B/X character creation and advancement for all seven core classes through their normal level limits**. A small 5.5E implementation demonstrates that a substantially different edition works through the same engine and GUI interfaces.
 
 The long-term coverage target includes every requested D&D edition and both official and third-party supplements. Coverage will be recorded per publication and feature, distinguishing cataloged sources from implemented and verified rules.
+
+## Current priority - September 11, 2026
+
+The user explicitly requested work on **original 2014 5E as a separate edition**, and specified that the revised 2024 rules are called **5.5E**. This prioritizes the new 5E work ahead of the default expansion sequence below. It does not close the outstanding B/X, delivery, expanded 5.5E lifecycle, or other-edition gates.
+
+The initial 5E slice uses edition ID `srd51`, module version `1.0.0`, and exact pack `srd51-core@1.0.0`. It implements ordinary Human Fighter creation and advancement through level 3, Champion, Acolyte, standard/rolled/DM-enabled point-buy abilities, all six Fighting Styles, ordinary starting equipment and ammunition purchases, and explicit advancement/resource/rest actions. Its 98 content records include 35 weapons and 12 armor suits plus shield. Lance/Net, other classes/races/backgrounds, levels 4-20, feats, spellcasting, multiclassing, and the broader inventory lifecycle remain outside the slice. Record count is not a full-SRD coverage claim.
+
+The existing `srd55` modules and exact legacy versions remain 5.5E; source-publication versions, module versions, pack versions, and save versions remain distinct. The 5E source profile uses SRD 5.1 with separately cited 2014-rule creation and HP/rest corrections from the 2015/2018 Basic Rules. See [the source ledger](docs/sources-srd51.md), [the usage and implementation guide](docs/srd51.md), and [the current revision's validation checkpoint](docs/5e-validation-20260911.md). Source inspection and implemented code are distinct from automated, native, PDF and packaged acceptance.
 
 ## Current implementation review — September 8, 2026
 
@@ -17,7 +31,7 @@ The codebase is substantially on its way to fulfilling this specification. The s
 | Architecture | C++20/CMake targets, Qt-independent rules, edition-neutral document, deterministic evaluation, generic stages and actions | Ensure every accepted content definition has an executable, validated interpretation |
 | Original B/X | All seven classes, independent progression expectations, source ledger and original-page spot-checks | Fix invalid-input and campaign-option inconsistencies; reconcile the human level-14 coverage limit with the original maximum-level requirement |
 | Experimental SRD proof | Fighter and Wizard levels 1–3 use the same engine, GUI, save, and sheet contracts; exact legacy version remains available | Preserve these acceptance cases while expanding the newer module |
-| Expanded SRD 2.0.0 | All 12 classes through 20, 240 baseline single-class states, focused multiclass cases, inventory/history/resource/companion/action work | Complete remaining persistent lifecycle mechanics and validate combinations, imported profiles, and native workflows |
+| Expanded SRD module 2.0.0 | All 12 classes through 20, 240 baseline single-class states, focused multiclass cases, inventory/history/resource/companion/action work | Complete remaining persistent lifecycle mechanics and validate combinations, imported profiles, and native workflows |
 | Desktop and persistence | Three panes, explanations, reasoned overrides, sources, atomic saves, recovery, exact versions, PDF export | Improve calculation detail, fix inherited campaign-option behavior, and repeat native/PDF/package acceptance for the current implementation |
 | Platforms and distribution | Fresh local Mac build and automated suite pass; three-platform CI workflow exists | Verify hosted platform results and a new distributable; repair installed CLI content discovery |
 | Other editions and supplements | Coverage ledger and common pack interface exist | The remaining named editions and supplemental publication coverage are still unimplemented |
@@ -81,7 +95,7 @@ Retain the repository’s BSD-3-Clause license for application code. Track conte
 
 ## Next implementation steps
 
-Execute the following in order. Each step should retain the existing B/X and legacy SRD acceptance cases. Scope completion is determined by the requirements and source evidence, not by test totals or catalog size.
+Execute the following in order unless an explicit user priority changes the active work, as recorded in the September 11 decision above. Each step should retain the existing B/X and legacy SRD acceptance cases, plus the separate 5E acceptance cases as they are added. Scope completion is determined by the requirements and source evidence, not by test totals or catalog size.
 
 **Current scope decision — September 8, 2026:** The user explicitly requested that human B/X levels above 14 remain unavailable for now. The existing printed-table boundary is retained; the original human level-36 continuation requirement is deferred, not completed or redefined as a level-14 normal maximum. No continuation tables or campaign policy are inferred from another edition. Continue the independently verifiable foundation, delivery, and SRD lifecycle work within that boundary.
 
@@ -120,7 +134,9 @@ Acceptance: give each supported persistent workflow an independently sourced exa
 
 ### 5. Resume the original edition and supplement expansion sequence
 
-After the preceding gates, add **OD&D, Holmes Basic, AD&D 1e, BECMI/Rules Cyclopedia as distinct profiles, AD&D 2e, 3.0, 3.5, 4e, and 2014 5e**. Add supplemental publications alongside their applicable editions. Preserve the original long-term coverage goal.
+After the preceding gates, add **OD&D, Holmes Basic, AD&D 1e, BECMI/Rules Cyclopedia as distinct profiles, AD&D 2e, 3.0, 3.5, 4e, and 2014 5E**. Add supplemental publications alongside their applicable editions. Preserve the original long-term coverage goal.
+
+The September 11 user priority starts 2014 5E early with the bounded experimental slice above. Full 5E expansion and supplemental publications remain incomplete; all other editions in this sequence retain their scope and acceptance requirements.
 
 For each edition or publication, establish its original-source ledger and reuse terms, identify new mechanics before accepting content packs, implement its lifecycle through the shared contracts, and add independent progression and save/reopen examples. Exercise race-as-class, multiclassing, dual-classing, prestige classes, and powers only under the edition that defines them. Cataloged publications must remain distinct from implemented and verified rules. Keep the application offline, preserve saved edition identity, and avoid automatic cross-edition conversion.
 

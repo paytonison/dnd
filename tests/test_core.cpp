@@ -15,7 +15,7 @@ std::vector<ContentPack> bundled() {
     std::vector<Message> messages;
     auto packs = loadPackDirectory(DND_DATA_DIR, messages);
     for (const auto& m : messages) INFO(m.text);
-    REQUIRE(messages.empty()); REQUIRE(packs.size() == 3);
+    REQUIRE(messages.empty()); REQUIRE(packs.size() == 4);
     return packs;
 }
 ContentPack basePack() {
