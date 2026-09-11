@@ -8,7 +8,7 @@ Coverage is recorded by publication and feature. A catalog entry is not an imple
 | Cook/Marsh Expert (1981) | B/X progression through printed tables: humans 14, dwarf 12, elf 10, halfling 8 | Printed-page references and independent tests at every supported class level pass |
 | SRD 5.2.1 | Implemented experimental fighter and wizard levels 1–3, origins, equipment and spell choices | Official CC BY source; complete class/species/background acceptance passes; see `sources-srd55.md` |
 | SRD 5.2.1 expanded module 2.0.0 | All 12 classes/subclasses through 20, full spell catalog, ordered class gains, feat/feature capacities and current effects | Complete public fixtures for all 240 single-class states pass; physical Wizard book lifecycle has focused and native acceptance; full lifecycle still in progress, see `v2-progress.md` |
-| Original D&D | Planned | Not implemented or verified |
+| Original D&D (1974) | Planned: original Fighting-Man, Magic-User, and Cleric labels; Courier-style PDF sheets with ASCII lines and blocks, per [the OD&D roadmap requirements](../PLAN.md#odd-1974-original-class-names-and-typewritten-character-sheets) | Rules and typed PDF presentation not implemented or verified; limited naming evidence in [sources-odnd.md](sources-odnd.md) |
 | Holmes Basic | Planned | Not implemented or verified |
 | AD&D 1e | Planned | Not implemented or verified |
 | BECMI / Rules Cyclopedia | Planned, distinct profiles | Not implemented or verified |

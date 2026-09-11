@@ -129,6 +129,8 @@ Validate interactions among multiclass progression, feats, spellcasting, items, 
 
 After the earlier gates, proceed with OD&D, Holmes Basic, AD&D 1e, BECMI and Rules Cyclopedia as distinct profiles, AD&D 2e, 3.0, 3.5, 4e, and 2014 5e. Add official and third-party supplemental publications alongside their applicable editions.
 
+For the OD&D (1974) milestone, preserve the original class names **Fighting-Man**, **Magic-User**, and **Cleric**. Its default printed/PDF sheet must use the user-requested **Courier-style monospaced typewriter font** and **ASCII characters for lines, boxes, and section blocks**, with the appearance of a document typed in 1974. Follow the detailed requirements and every-page visual acceptance in `PLAN.md`; retain edition identity, sources, and override annotations. This sheet style is explicitly in the OD&D milestone's scope.
+
 For each edition/publication, establish the original-source ledger and reuse terms, identify and implement new mechanics before accepting their content, use the shared lifecycle contracts, and add independent progression and save/reopen examples. Preserve the long-term coverage goal without presenting a catalog as implemented rules.
 
 ## Validation and completion
@@ -148,4 +150,4 @@ A task is complete only when its requested behavior and applicable acceptance ch
 
 ## Scope boundaries
 
-Do not add account requirements, cloud dependencies, or automatic cross-edition conversion. In-app content authoring, PDF extraction, period-style sheets, full random-character generation, and NPC generation remain later features unless explicitly requested. Do not turn character-owned lifecycle mechanics into an unrequested combat adjudication system.
+Do not add account requirements, cloud dependencies, or automatic cross-edition conversion. The explicitly requested 1974 typewritten sheet belongs to the OD&D milestone. In-app content authoring, PDF extraction, period-style sheets for other editions, full random-character generation, and NPC generation remain later features unless explicitly requested. Do not turn character-owned lifecycle mechanics into an unrequested combat adjudication system.
